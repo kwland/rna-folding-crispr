@@ -19,6 +19,21 @@ classifiers = [
 [project.scripts]
 rna-fold = "nussinov:main"
 crispr-guide-features = "crispr_nussinov_analysis:main"
+crispr-fold-screen = "compute_features:main"
+crispr-run-study = "run_study:main"
 
 [tool.setuptools]
-py-modules = ["nussinov", "crispr_nussinov_analysis"]
+py-modules = [
+  "nussinov",
+  "energy_model",
+  "zuker",
+  "mccaskill",
+  "guide_features",
+  "crispr_nussinov_analysis",
+  "datasets",
+  "stats",
+  "model_features",
+  "compute_features",
+  "run_study",
+  "make_figures",
+]

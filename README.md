@@ -8,90 +8,128 @@
 
 This project asks a simple biological question: if a CRISPR guide RNA folds back on itself, does that make its targeting sequence less available to bind DNA?
 
-I built an explainable Nussinov folding implementation in Python, then extended the idea into an interactive browser lab that compares Nussinov with a simplified Zuker-style energy model. The goal is not to replace established tools such as ViennaRNA. It is to make the algorithm, assumptions, and failure modes easy to inspect.
-
-The early result is useful even though it is negative: seed accessibility by itself did not predict editing efficiency in the pooled dataset used by the website. That points toward a more realistic next question—whether structure adds information when it is combined with sequence and genomic context.
+The short answer, tested four different ways across two independent screens, is **no** — and the interesting part is how much work it took to be confident about that.
 
 ![Four-step Nussinov workflow](figures/nussinov_workflow.svg)
 
+## The problem with the first answer
+
+An early version of this project folded each 20 nt spacer on its own, took the single best structure, counted how many of the last 8 bases were unpaired, and correlated that with editing efficiency. The correlation was about 0.01 — nothing.
+
+That result had three obvious holes, and a reviewer would find all of them:
+
+1. **One structure is not the molecule.** RNA does not sit in a single conformation. Reading accessibility off one optimal structure gives every base a hard 0 or 1 that can flip on a tenth of a kcal/mol.
+2. **A bare spacer is not the molecule either.** In a real sgRNA the spacer is followed by a 76 nt scaffold it can pair with.
+3. **"The last 8 bases" was an assumption**, not something the data was asked about.
+
+And even if all three were fixed, correlating one feature against activity is the wrong question. The question a guide designer cares about is whether structure adds anything to what sequence already tells you.
+
+This repository closes all four gaps.
+
+## What was added
+
+### 1. Ensemble accessibility, not single-structure accessibility
+
+`mccaskill.py` implements the McCaskill (1990) partition function: the same O(n³) dynamic-programming family as Zuker, but with Boltzmann weights `exp(-E/RT)` instead of a minimum, plus the outside recursion that turns those into base-pair probabilities `p_ij`. Seed accessibility becomes the mean probability that each seed base is unpaired across the entire ensemble, which is what RNAplfold-style accessibility actually means.
+
+The multiloop term in the outside pass is the awkward part — written naively it is O(n⁴). The implementation factorises the enclosing-pair sum into two accumulator tables so the whole outside pass stays O(n³).
+
+It is verified, not just written. For sequences short enough to enumerate every pseudoknot-free structure, the partition function, every pair probability, and every unpaired probability match brute force to ~1e-15. Because the shipped parameters make multiloops carry under 0.1% of the ensemble weight, the tests also re-run the comparison with multiloops made artificially cheap, pushing them past 50% of the weight — the recursions still match exactly. Stochastic Boltzmann sampling, which uses only the inside matrices, converges to the probabilities the outside pass computes independently.
+
+The change of instrument is real: across 4,685 guides, single-structure seed accessibility takes only **9 distinct values** (it can only be a multiple of 1/8), while the ensemble measure takes **4,668**.
+
+![Accessibility measures versus activity](figures/accessibility_measures.svg)
+
+### 2. Folding in real molecular context
+
+`guide_features.py` folds every spacer twice: alone, and joined to the 76 nt sgRNA scaffold. Both are reported side by side for all 5,705 guides.
+
+This is not a detail. Mean seed accessibility falls from 0.84 folded alone to 0.42 folded in the sgRNA, and the two views correlate at only **r = 0.17** — folding a spacer on its own tells you almost nothing about the molecule that actually exists. It also exposes a problem with the original hypothesis: a bare 20 nt spacer has an ensemble free energy of just −0.78 kcal/mol, and **22% of them are essentially unstructured**. There was barely any structure there to correlate with anything.
+
+### 3. Position-resolved analysis
+
+Per-base unpaired probabilities make it possible to correlate accessibility with efficiency at *every* spacer position rather than collapsing positions 13–20 into one number, with Benjamini–Hochberg correction across the 20 tests.
+
+![Position-resolved accessibility](figures/position_accessibility.svg)
+
+### 4. Incremental value, cross-validated and replicated
+
+`run_study.py` builds a sequence-only baseline (position-specific bases, position-specific dinucleotides, G/C), evaluates it with **nested cross-validation that holds out whole genes**, then measures how much held-out Spearman changes when folding features are added. Confidence intervals come from resampling genes, not guides, because guides targeting the same gene are not independent.
+
+Everything is then re-run on an independent screen: **CRISPRscan** (Moreno-Mateos et al. 2015) — 1,020 guides, 111 genes, zebrafish embryos, in vivo, a different lab and a different readout.
+
+![Does structure add anything?](figures/incremental_value.svg)
+
+## Findings
+
+See [ANALYSIS.md](ANALYSIS.md) for the full account and [analysis_outputs/study_summary.md](analysis_outputs/study_summary.md) for every table.
+
 ## What is included
 
-- `nussinov.py` — a dependency-free Nussinov dynamic-programming implementation with FASTA and single-sequence command-line input.
-- `crispr_nussinov_analysis.py` — batch feature extraction for 20 nt spacer sequences, including G/C content, self-pairing, and seed accessibility.
-- `test_nussinov.py` — unit and small integration tests for folding, validation, FASTA parsing, and CSV analysis.
-- `examples/` — concrete FASTA and CSV inputs that run as written.
-- `make_figures.py` and `figures/` — reproducible, dependency-free SVG figures.
-- `docs/` — the static interactive site used for the fuller Nussinov/Zuker demonstration.
-- `ANALYSIS.md` — a concise account of the question, methods, current evidence, and limitations.
+Folding:
 
-One distinction matters: the **Python analysis folds the spacer alone**. The website's guide Analyzer can fold the spacer together with the standard sgRNA scaffold. Results from those two paths should not be treated as identical.
+- `nussinov.py` — Nussinov base-pair maximization, dependency-free.
+- `energy_model.py` — nearest-neighbour free energies, plus an independent loop-by-loop structure energy evaluator and an exhaustive structure enumerator used for testing.
+- `zuker.py` — minimum-free-energy folding.
+- `mccaskill.py` — partition function, base-pair probabilities, Boltzmann sampling.
+
+Analysis:
+
+- `crispr_nussinov_analysis.py` — per-guide features under all three models (`--context sgrna` adds the scaffold).
+- `guide_features.py` — spacer-alone and spacer-plus-scaffold feature extraction.
+- `datasets.py` — loaders for both screens.
+- `stats.py` — Spearman, ridge regression, grouped cross-validation, cluster bootstrap.
+- `model_features.py` — the sequence baseline and structure feature blocks.
+- `compute_features.py` — folds a whole screen in parallel and caches the result.
+- `run_study.py` — the four experiments.
+- `export_model.py` — fits the browser's efficiency model.
+
+Everything above uses **only the Python standard library**.
 
 ## Installation
 
-The core code uses only the Python standard library and requires Python 3.10 or newer.
-
-### Run directly from the repository
+Python 3.10 or newer. No dependencies.
 
 ```bash
 git clone https://github.com/kwland/nussinov-zuker-crispr.git
 cd nussinov-zuker-crispr
-
-python --version
 python nussinov.py --sequence GGGAAACCC
 ```
 
-No package installation is required for this route.
-
-### Optional editable install
-
-An editable install provides the `rna-fold` and `crispr-guide-features` commands:
+An editable install adds the `rna-fold`, `crispr-guide-features`, `crispr-fold-screen`, and `crispr-run-study` commands:
 
 ```bash
-python -m venv .venv
-
-# macOS or Linux
-source .venv/bin/activate
-
-# Windows PowerShell
-# .venv\Scripts\Activate.ps1
-
-python -m pip install --upgrade pip
 python -m pip install -e .
 ```
 
-Then run:
+## Reproduce the analysis
+
+Fold a few example guides under all three models:
 
 ```bash
-rna-fold --sequence GGGAAACCC
-crispr-guide-features --input examples/guides.csv --output guide_features.csv
+python crispr_nussinov_analysis.py --input examples/guides.csv --output analysis_outputs/example_guide_features.csv
 ```
 
-## Reproduce the examples
-
-Fold all sequences in the example FASTA file:
+Add the scaffold — slower, because the molecule becomes 96 nt instead of 20:
 
 ```bash
-python nussinov.py --fasta examples/sequences.fasta
+python crispr_nussinov_analysis.py --input examples/guides.csv --context sgrna --output analysis_outputs/example_sgrna_features.csv
 ```
 
-Analyze the example CRISPR spacers:
+Reproduce the whole study from scratch. The folding step is the expensive one (about 8 minutes for both screens on 11 cores) and is cached, so the analysis can be re-run without re-folding:
 
 ```bash
-python crispr_nussinov_analysis.py \
-  --input examples/guides.csv \
-  --output analysis_outputs/example_guide_features.csv
-```
-
-Regenerate the repository's batch output and figures:
-
-```bash
-python crispr_nussinov_analysis.py
+python compute_features.py --dataset doench
+python compute_features.py --dataset crisprscan
+python run_study.py
 python make_figures.py
 ```
 
-The committed guide examples are synthetic demonstrations. They are useful for checking the pipeline and its warning flags, but they do not carry measured editing-efficiency labels.
+Refit the model used by the website:
 
-![Synthetic guide feature comparison](figures/guide_feature_summary.svg)
+```bash
+python export_model.py
+```
 
 ## Run the tests
 
@@ -99,102 +137,76 @@ The committed guide examples are synthetic demonstrations. They are useful for c
 python -m unittest discover -v
 ```
 
-The test suite checks:
+The suite covers three layers:
 
-- DNA-to-RNA normalization and invalid character handling;
-- canonical and G–U wobble pairing rules;
-- a hand-checkable hairpin and a wobble-sensitive fold;
-- empty inputs and invalid parameter values;
-- multi-record FASTA parsing and malformed FASTA rejection;
-- CRISPR seed accessibility; and
-- end-to-end CSV feature generation.
+- **Folding correctness by brute force** — the partition function, every pair probability, and the MFE are checked against exhaustive enumeration of every pseudoknot-free structure on short sequences, including under stressed multiloop parameters. The Zuker folder reproduces the accepted yeast tRNA-Phe cloverleaf exactly.
+- **Statistics** — ranking with ties, Benjamini–Hochberg monotonicity, permutation-test calibration under the null, Cholesky against known systems, and that grouped folds never split a gene.
+- **The guard against fooling yourself** — nested cross-validation given pure noise must report no signal.
 
-GitHub Actions runs the same suite on Python 3.10 and 3.12 and exercises both documented example commands.
+## How the three models differ
 
-## Preview the interactive site
+For an interval `(i, j)`:
 
-The site is static and needs no JavaScript build step:
+- **Nussinov** stores the largest number of non-crossing pairs. Every allowed pair is worth +1. Transparent, but not physical: it over-pairs, and it cannot tell a stable helix from a weak one with the same pair count.
+- **Zuker** stores the lowest free energy, using stacking, loop, and multiloop terms. One structure out.
+- **McCaskill** stores the sum of `exp(-E/RT)` over all structures. Running the recursion outward as well as inward gives the probability of every pair, and hence of every base being unpaired.
 
-```bash
-python -m http.server 8000 -d docs
-```
-
-Open <http://127.0.0.1:8000/>. The site includes:
-
-- side-by-side Nussinov and simplified Zuker-style folding;
-- arc diagrams, dynamic-programming grids, and a schematic 3D view;
-- spacer-plus-scaffold guide analysis;
-- an NGG PAM guide finder;
-- a view of the pooled guide dataset; and
-- small reference comparisons against known structures and precomputed ViennaRNA results.
-
-## How the Python model works
-
-For a sequence interval `(i, j)`, Nussinov dynamic programming considers four possibilities: leave the left base unpaired, leave the right base unpaired, pair the two ends when allowed, or split the interval. It stores the largest achievable number of non-crossing pairs, then traces back one optimal structure.
-
-This gives an interpretable baseline rather than a thermodynamic prediction. Every allowed A–U, G–C, or optional G–U pair contributes the same score.
-
-## Current findings
-
-The browser demonstration reports three kinds of checks:
-
-1. Small structural comparisons against hand-selected reference structures.
-2. Energy and base-pair agreement with precomputed ViennaRNA results for a limited sgRNA panel.
-3. Seed-accessibility comparisons against a pooled set of 4,685 guide measurements.
-
-In that pooled set, seed accessibility alone was essentially uncorrelated with editing efficiency, while G/C content had only a weak association. These are exploratory results, not a validated predictive model. See [ANALYSIS.md](ANALYSIS.md) for the interpretation and scope.
+The first two answer "what is the best structure?". Only the third answers "how often is this base free?", which is the question guide accessibility actually asks.
 
 ## Limitations
 
-- **Nussinov optimizes pair count, not free energy.** It often over-pairs and cannot distinguish a plausible stable structure from a structure with the same number of weaker pairs.
-- **The Python feature path folds only the spacer.** It omits the sgRNA scaffold, even though spacer–scaffold interactions can matter.
-- **The browser energy model is simplified.** Its loop, wobble, and multiloop terms are approximations, so its energies should be used for explanation and ranking—not as replacements for ViennaRNA values.
-- **Only pseudoknot-free secondary structures are represented.** Tertiary interactions, kinetics, alternative conformations, and RNA–protein interactions are outside the model.
-- **Guide activity is not structure alone.** Chromatin accessibility, target context, nuclease choice, expression, off-target binding, and DNA repair all contribute.
-- **The pooled activity labels come from different screens.** Within-dataset normalization helps comparison but does not make the experiments identical.
-- **The validation set is small.** Strong agreement on a few chosen structures is a useful smoke test, not evidence of broad structural accuracy.
-- **The 3D view is illustrative.** It is a layout of the predicted secondary structure, not a molecular or atomistic model.
-- **The included Python example guides are synthetic.** They demonstrate reproducibility and warnings; they do not establish biological performance.
+- **The energy parameters are partly simplified.** The ten Watson–Crick stacking values are the published Turner/Xia numbers. The G–U wobble terms, loop initiation tables, and multiloop model are documented approximations, so absolute kcal/mol will not match ViennaRNA exactly. Every approximation is flagged in `energy_model.py`.
+- **Only pseudoknot-free secondary structure is modelled.** Tertiary contacts, kinetics, co-transcriptional folding, and Cas9 protein binding are all outside it. Cas9 actively unwinds and reshapes the guide, which may be why in-solution accessibility predicts so little.
+- **Guide activity is not structure.** Chromatin, target context, repair pathway, expression, off-target binding, and nuclease behaviour all contribute and none are modelled.
+- **The pooled Doench labels come from two screens** normalised within each source. That helps comparison but does not make the experiments identical.
+- **Only 18 genes in the main screen.** Holding out whole genes is the right thing to do, but it leaves few independent units, which is why the confidence intervals are wide.
+- **Every CRISPRscan spacer starts with GG** because of the T7/SP6 promoter, so positions 1–2 carry no information in that screen.
+- **The 3D view is schematic**, a layout of the predicted secondary structure rather than a molecular model.
+- **The committed Python example guides are synthetic** and carry no measured activity.
+- **Correlation is not causation**, and a null result is evidence of absence only within the range these screens actually cover.
 
 ## Repository layout
 
 ```text
 .
-├── nussinov.py
-├── crispr_nussinov_analysis.py
-├── make_figures.py
-├── test_nussinov.py
-├── pyproject.toml
-├── examples/
-│   ├── sequences.fasta
-│   └── guides.csv
+├── nussinov.py                  energy_model.py    zuker.py      mccaskill.py
+├── guide_features.py            datasets.py        stats.py      model_features.py
+├── crispr_nussinov_analysis.py  compute_features.py
+├── run_study.py                 export_model.py    make_figures.py
+├── test_nussinov.py             test_mccaskill.py  test_study.py
 ├── data/
-│   └── crispr_guide_examples.csv
-├── analysis_outputs/
-│   └── crispr_guide_nussinov_features.csv
-├── figures/
-│   ├── nussinov_workflow.svg
-│   └── guide_feature_summary.svg
-├── docs/
-│   ├── index.html
-│   ├── styles.css
-│   ├── js/
-│   └── data/
+│   ├── crispr_guide_examples.csv
+│   └── crisprscan_moreno_mateos_2015.csv
+├── analysis_outputs/            cached features, study_results.json, study_summary.md
+├── figures/                     generated SVGs
+├── docs/                        the static interactive site
 └── notes/
 ```
 
-## Data and credit
+## Data sources
 
-The website's pooled guide dataset, compact efficiency model, and precomputed ViennaRNA comparison data were contributed by Thomas Yu for the group project. The guide activity measurements originate from Doench et al. (2014, 2016) and were pooled through CRISPOR / Haeussler et al. (2016). The folding and interface code in this repository were written by Linus Tan.
+Guide activity measurements come from published screens:
+
+- Doench et al. (2014, 2016), pooled through CRISPOR / Haeussler et al. (2016) — `docs/data/guides.json`.
+- Moreno-Mateos et al. (2015), CRISPRscan — `data/crisprscan_moreno_mateos_2015.csv`, reduced from the public CRISPOR paper dataset collection.
+
+The ViennaRNA comparison values in the site's chapter 05 are output of the ViennaRNA package, precomputed because ViennaRNA does not run in a browser. Every folding result, accessibility value, energy, and model weight in this repository is computed by the code in it.
 
 Key references:
 
-- Nussinov and Jacobson (1980), *PNAS* — base-pair maximization.
-- Zuker and Stiegler (1981), *Nucleic Acids Research* — minimum-free-energy folding.
-- Xia et al. (1998), *Biochemistry* — nearest-neighbor parameters.
+- Nussinov & Jacobson (1980), *PNAS* — base-pair maximization.
+- Zuker & Stiegler (1981), *Nucleic Acids Research* — minimum-free-energy folding.
+- McCaskill (1990), *Biopolymers* — the partition function and base-pair probabilities.
+- Ding & Lawrence (2003), *Nucleic Acids Research* — statistical sampling of RNA structures.
+- Xia et al. (1998), *Biochemistry* — nearest-neighbour parameters.
 - Doench et al. (2016), *Nature Biotechnology* — Rule Set 2 guide activity.
+- Moreno-Mateos et al. (2015), *Nature Methods* — CRISPRscan.
 - Haeussler et al. (2016), *Genome Biology* — CRISPOR.
 - [ViennaRNA Package](https://www.tbi.univie.ac.at/RNA/).
+
+## Author
+
+Linus Tan.
 
 ## License
 
@@ -202,4 +214,4 @@ MIT. See [LICENSE](LICENSE).
 
 ---
 
-I built this as an explainable research prototype: small enough to inspect, honest about where it fails, and useful as a starting point for a stronger model. Questions, corrections, and collaboration are welcome.
+Built as an explainable research prototype: small enough to inspect, verified against brute force where that is possible, and honest about a negative result. Questions, corrections, and collaboration are welcome.
