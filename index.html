@@ -6,7 +6,7 @@
     <title>RNA Fold Lab: folding and CRISPR guides</title>
     <meta
       name="description"
-      content="Fold RNA with Nussinov and Zuker in the browser, check a CRISPR guide's seed, design guides against a target, and see how these folders score against ViennaRNA."
+      content="RNA folding with the Nussinov, Zuker, and McCaskill models, CRISPR guide seed analysis, and reference checks against ViennaRNA."
     />
     <meta name="color-scheme" content="dark" />
     <link
@@ -48,6 +48,7 @@
           <a class="navlink" href="#analyzer" data-nav="analyzer">Analyzer</a>
           <a class="navlink" href="#designer" data-nav="designer">Designer</a>
           <a class="navlink" href="#dataset" data-nav="dataset">Dataset</a>
+          <a class="navlink" href="#findings" data-nav="findings">Findings</a>
           <a class="navlink" href="#check" data-nav="check">Check</a>
           <a class="navlink" href="#learn" data-nav="learn">Learn</a>
           <a class="nav-cta" href="https://github.com/kwland/nussinov-zuker-crispr" rel="noopener">GitHub</a>
@@ -66,10 +67,11 @@
       <a class="chapter-dot" href="#analyzer" data-nav="analyzer"><span>02</span></a>
       <a class="chapter-dot" href="#designer" data-nav="designer"><span>03</span></a>
       <a class="chapter-dot" href="#dataset" data-nav="dataset"><span>04</span></a>
-      <a class="chapter-dot" href="#check" data-nav="check"><span>05</span></a>
-      <a class="chapter-dot" href="#learn" data-nav="learn"><span>06</span></a>
-      <a class="chapter-dot" href="#method" data-nav="method"><span>07</span></a>
-      <a class="chapter-dot" href="#about" data-nav="about"><span>08</span></a>
+      <a class="chapter-dot" href="#findings" data-nav="findings"><span>05</span></a>
+      <a class="chapter-dot" href="#check" data-nav="check"><span>06</span></a>
+      <a class="chapter-dot" href="#learn" data-nav="learn"><span>07</span></a>
+      <a class="chapter-dot" href="#method" data-nav="method"><span>08</span></a>
+      <a class="chapter-dot" href="#about" data-nav="about"><span>09</span></a>
     </nav>
 
     <!-- ================================================== HERO -->
@@ -78,12 +80,12 @@
       <div class="hero-veil" aria-hidden="true"></div>
 
       <div class="shell hero-content">
-        <p class="eyebrow"><span class="eyebrow-dash" aria-hidden="true"></span>A computational biology guide</p>
-        <h1 class="hero-title">RNA Folding for<br /> CRISPR Guides</h1>
+        <p class="eyebrow"><span class="eyebrow-dash" aria-hidden="true"></span>Computational biology project</p>
+        <h1 class="hero-title">RNA Folding for <br />CRISPR Guides</h1>
         <p class="hero-sub">
-          A CRISPR guide has to reach out and grab DNA. Fold up on itself first, and it grabs badly. So I
-          wrote two folders from scratch to predict that shape, then ran them against 4,685 real guides to
-          see if the idea holds up.
+          This project asks whether RNA secondary structure helps explain how well a CRISPR guide works.
+          Three folding models are implemented from scratch, then tested against known structures and
+          5,705 measured guides drawn from two independent screens.
         </p>
         <a class="scroll-cue" href="#lab">
           <span>scroll down</span>
@@ -100,11 +102,10 @@
             <span class="ghost-num" aria-hidden="true">01</span>
             <div class="chapter-intro">
               <p class="eyebrow"><span class="eyebrow-dash" aria-hidden="true"></span>Get started</p>
-              <h2>Type a strand,<br />watch it fold</h2>
+              <h2>Explore an <br />RNA structure</h2>
               <p class="lead">
-                Type any RNA and both folders go to work. DNA's fine too, I just swap the T's for U's. The
-                two follow different rules, and that's the whole point of watching them side by side. It all
-                runs on your machine, so nothing you type ever leaves it.
+                The field below takes an RNA sequence and folds it with both models for comparison. DNA
+                input works as well, since T is read as U. All folding happens locally in the browser.
               </p>
             </div>
           </div>
@@ -263,9 +264,8 @@
                 <span class="legend-seed"><i></i>seed (last 8)</span>
               </div>
               <p class="note">
-                This lays the flat 2D structure out in space so you've got something to look at. It shows the
-                stems and loops I predict, nothing more. It's not a physics based model of the real molecule,
-                and it definitely isn't AlphaFold.
+                This view arranges the predicted base pairs in three dimensions to make stems and loops easier
+                to inspect. It is a visual aid, not a physical model of the molecule.
               </p>
             </div>
           </div>
@@ -273,8 +273,8 @@
           <div class="card compare-card" id="compareCard">
             <div class="card-head">
               <div>
-                <p class="kicker">How much they agree</p>
-                <h3>Where Nussinov and Zuker part ways</h3>
+                <p class="kicker">Model comparison</p>
+                <h3>Where the models agree</h3>
               </div>
               <span class="status-pill" id="agreementPill">compare</span>
             </div>
@@ -291,11 +291,11 @@
             <span class="ghost-num" aria-hidden="true">02</span>
             <div class="chapter-intro">
               <p class="eyebrow"><span class="eyebrow-dash" aria-hidden="true"></span>Guide analyzer</p>
-              <h2>Does your guide<br />hide its own seed?</h2>
+              <h2>Analyze a <br />CRISPR guide</h2>
               <p class="lead">
-                Paste the 20 letter targeting part of a guide. I fold it along with the scaffold tail it's
-                actually attached to, then check the seed. That's the end that touches DNA first. When the
-                seed folds up, it can't reach, and the guide usually works worse.
+                A 20-letter guide spacer can be inspected here for its predicted fold, G/C content, and
+                PAM-proximal seed. The scaffold can be folded along with it, since the two can pair and
+                change the answer.
               </p>
             </div>
           </div>
@@ -315,8 +315,8 @@
               <p class="field-hint"><span id="spacerCount">20</span> letters</p>
 
               <fieldset class="model-select">
-                <legend class="field-label">Folder</legend>
-                <div class="segmented" role="radiogroup" aria-label="Folder for the analyzer">
+                <legend class="field-label">Folding model</legend>
+                <div class="segmented" role="radiogroup" aria-label="Folding model for the analyzer">
                   <label><input type="radio" name="analyzerModel" value="zuker" checked /><span>Zuker</span></label>
                   <label><input type="radio" name="analyzerModel" value="nussinov" /><span>Nussinov</span></label>
                 </div>
@@ -327,14 +327,14 @@
                 <span>Add the scaffold tail</span>
               </label>
               <p class="field-hint subtle">
-                The scaffold is the 76 letter tail that grips Cas9. It's part of the real molecule, and it
-                can pair with your spacer, so leaving it out makes the guide look better than it is.
+                This standard scaffold is the 76-letter tail that binds Cas9. It can pair with the spacer,
+                so including it may change the predicted structure.
               </p>
 
               <p class="field-label examples-label">Examples</p>
               <div class="chip-row">
-                <button class="chip" type="button" data-spacer="CTTAAGGGTTAAGTAAGTGT">Stays open</button>
-                <button class="chip" type="button" data-spacer="GCGCGATACGCGTATCGCGC">Folds up</button>
+                <button class="chip" type="button" data-spacer="CTTAAGGGTTAAGTAAGTGT">More open seed</button>
+                <button class="chip" type="button" data-spacer="GCGCGATACGCGTATCGCGC">More paired seed</button>
                 <button class="chip" type="button" data-spacer="ATTAAATTAAATAAATTAAA">Low G/C</button>
                 <button class="chip" type="button" data-spacer="GACTTTTACGTTAGCATGAA">Has TTTT</button>
                 <button class="chip" type="button" data-spacer="TCCCTGGCCAGGCTTTGGGG">Best from EMX1</button>
@@ -346,7 +346,7 @@
             <div class="card result-card">
               <div class="card-head">
                 <div>
-                  <p class="kicker">The key number</p>
+                  <p class="kicker">Structure summary</p>
                   <h3>Seed check</h3>
                 </div>
               </div>
@@ -393,8 +393,8 @@
               <p class="interpretation" id="analyzerInterpretation"></p>
               <div class="warning-list" id="analyzerFlags"></div>
               <p class="note">
-                Openness just counts how many of the 8 seed letters are free, meaning a dot rather than a
-                bracket. Higher is better. A free seed can actually reach the DNA.
+                Openness counts how many of the eight seed positions are unpaired in this predicted structure.
+                A higher value means a more exposed seed in the model, not a guarantee of stronger editing.
               </p>
             </div>
           </div>
@@ -402,8 +402,55 @@
           <div class="card model-note-card">
             <div class="card-head">
               <div>
-                <p class="kicker">The efficiency number</p>
-                <h3>A small neural net, and how much to trust it</h3>
+                <p class="kicker">Ensemble view</p>
+                <h3>Unpaired probability per position</h3>
+              </div>
+              <span class="status-pill" id="ensembleStatus">ready</span>
+            </div>
+
+            <p class="note">
+              The fold above is one structure, so every base is scored either paired or unpaired. A real
+              RNA moves through many structures at once. The McCaskill partition function sums over all of
+              them, weighted by energy, and reports the probability that each base is left unpaired. The
+              two views often disagree, and the difference is largest exactly where a single structure is
+              close to a tie.
+            </p>
+
+            <div class="metric-grid">
+              <div class="metric accent-a">
+                <span class="metric-label">Seed open, ensemble</span>
+                <strong id="ensembleSeed">0%</strong>
+                <span class="metric-foot">mean over the last 8</span>
+              </div>
+              <div class="metric">
+                <span class="metric-label">Seed open, one structure</span>
+                <strong id="ensembleSingle">0%</strong>
+                <span class="metric-foot">for comparison</span>
+              </div>
+              <div class="metric">
+                <span class="metric-label">Spacer open</span>
+                <strong id="ensembleMean">0%</strong>
+                <span class="metric-foot">mean over all 20</span>
+              </div>
+              <div class="metric accent-b">
+                <span class="metric-label">Ensemble energy</span>
+                <strong id="ensembleEnergy">0.0</strong>
+                <span class="metric-foot">kcal/mol</span>
+              </div>
+            </div>
+
+            <div class="arc-wrap">
+              <canvas id="ensembleCanvas" aria-label="Probability that each spacer position is unpaired"></canvas>
+            </div>
+            <div class="arc-legend" id="ensembleLegend"></div>
+            <p class="interpretation" id="ensembleInterpretation"></p>
+          </div>
+
+          <div class="card model-note-card">
+            <div class="card-head">
+              <div>
+                <p class="kicker">Efficiency estimate</p>
+                <h3>About the prediction</h3>
               </div>
               <span class="status-pill" id="modelStatus">loading</span>
             </div>
@@ -420,11 +467,10 @@
             <span class="ghost-num" aria-hidden="true">03</span>
             <div class="chapter-intro">
               <p class="eyebrow"><span class="eyebrow-dash" aria-hidden="true"></span>Guide designer</p>
-              <h2>Give it a target,<br />get a shortlist</h2>
+              <h2>Find guide <br />candidates</h2>
               <p class="lead">
-                Paste a stretch of target DNA. I find every spot Cas9 could cut, which means a 20 letter guide
-                sitting next to an NGG PAM on either strand, fold each one with its scaffold, and rank them by
-                predicted efficiency. That's the real design workflow, start to finish.
+                A target DNA sequence yields every 20-letter spacer that sits next to an NGG PAM on either
+                strand. Each candidate is folded together with the scaffold and given a preliminary ranking.
               </p>
             </div>
           </div>
@@ -439,7 +485,7 @@
                 <span class="status-pill" id="designerStatus">ready</span>
               </div>
 
-              <label class="field-label" for="targetInput">Paste a target sequence</label>
+              <label class="field-label" for="targetInput">Target sequence</label>
               <textarea id="targetInput" spellcheck="false" rows="6"></textarea>
               <p class="field-hint"><span id="targetCount">0</span> bp · up to 5,000</p>
 
@@ -455,7 +501,7 @@
               <div class="card-head">
                 <div>
                   <p class="kicker">Results</p>
-                  <h3>What I found</h3>
+                  <h3>Candidate guides</h3>
                 </div>
                 <button class="btn btn-ghost btn-sm" type="button" id="designerCsv">CSV</button>
               </div>
@@ -477,14 +523,14 @@
                   </thead>
                   <tbody id="designerBody">
                     <tr>
-                      <td colspan="9" class="table-empty">Paste a target and press Find guides.</td>
+                      <td colspan="9" class="table-empty">No target sequence entered yet.</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
               <p class="note">
-                Predicted efficiency comes from the small neural net, so treat it as rough. Use it to
-                shortlist. Then check the top few yourself against whatever your experiment actually needs.
+                The efficiency score comes from a small exploratory model. Use it to compare candidates, not
+                as a substitute for established design tools or experimental validation.
               </p>
             </div>
           </div>
@@ -497,12 +543,12 @@
           <div class="chapter-head">
             <span class="ghost-num" aria-hidden="true">04</span>
             <div class="chapter-intro">
-              <p class="eyebrow"><span class="eyebrow-dash" aria-hidden="true"></span>Real data</p>
-              <h2>Does an open seed<br />actually mean better editing?</h2>
+              <p class="eyebrow"><span class="eyebrow-dash" aria-hidden="true"></span>Measured guide data</p>
+              <h2>What the guide <br />data shows</h2>
               <p class="lead">
-                Here's the real question, on real data. Across thousands of guides measured in a lab, do the
-                ones with a more open seed edit better? I expected yes. The honest answer came back no, and
-                that's worth showing too.
+                This chapter tests whether guides with a more open predicted seed also show higher measured
+                editing efficiency. Across the pooled dataset, seed openness on its own has almost no
+                relationship with activity.
               </p>
             </div>
           </div>
@@ -553,19 +599,209 @@
         </div>
       </section>
 
-      <!-- ================================================== 05 CHECK OUR WORK -->
-      <section class="chapter" id="check">
+      <!-- ================================================== 05 FINDINGS -->
+      <section class="chapter" id="findings">
         <div class="shell">
           <div class="chapter-head">
             <span class="ghost-num" aria-hidden="true">05</span>
             <div class="chapter-intro">
-              <p class="eyebrow"><span class="eyebrow-dash" aria-hidden="true"></span>Check my work</p>
-              <h2>How close do my<br />folders actually get?</h2>
+              <p class="eyebrow"><span class="eyebrow-dash" aria-hidden="true"></span>The study</p>
+              <h2>Four tests of <br />the same idea</h2>
               <p class="lead">
-                Writing a folder is easy. Writing one that's actually right is the hard part. So I line mine
-                up against RNA shapes that were solved in a lab, and against ViennaRNA, the trusted standard
-                tool that uses a third method entirely. When all three land in the same place, that's real
-                evidence I got it right.
+                A flat correlation is easy to dismiss. Chapter 04 measured seed openness one way, on one
+                molecule, at one assumed position, and found nothing. Four objections to that result are
+                answered below, each with a different measurement, and both screens are analyzed the same
+                way so that a result appearing in only one of them is visible as such.
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <p class="kicker">Experiment 01</p>
+                <h3>Five ways to measure accessibility</h3>
+              </div>
+              <span class="status-pill" id="findingsStatus">loading</span>
+            </div>
+            <p class="note">
+              Counting unpaired bases in one predicted structure gives a value that can only be a multiple
+              of one eighth. Across 4,685 guides that produces 9 distinct numbers. The partition function
+              produces 4,668. The table reports the correlation with measured editing efficiency under both
+              instruments, folded both as a bare spacer and as the full sgRNA.
+            </p>
+            <p class="note subtle">
+              Two correlations are given for each measure. The pooled value compares every guide against
+              every other, including guides targeting different genes. The within-gene value compares
+              guides only against others aimed at the same gene, which is the comparison a designer makes.
+              Genes differ widely in how editable they are, so the two can disagree sharply.
+            </p>
+            <div class="table-wrap">
+              <table class="data-table" id="measuresTable">
+                <thead>
+                  <tr>
+                    <th scope="col">Accessibility measure</th>
+                    <th scope="col">Pooled</th>
+                    <th scope="col">Within gene</th>
+                    <th scope="col">95% interval</th>
+                  </tr>
+                </thead>
+                <tbody id="measuresBody">
+                  <tr><td colspan="4" class="table-empty">Loading results…</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="interpretation" id="measuresFinding"></p>
+          </div>
+
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <p class="kicker">Experiment 02</p>
+                <h3>Every position, not an assumed window</h3>
+              </div>
+            </div>
+            <p class="note">
+              The seed is conventionally the last eight bases. That is an assumption rather than a
+              measurement. Per-base unpaired probabilities allow the correlation with efficiency to be
+              computed separately at each of the 20 spacer positions, so the assumption can be tested
+              instead of imposed. The shaded band marks the conventional seed.
+            </p>
+            <div class="segmented-wrap">
+              <div class="segmented" role="radiogroup" aria-label="Screen for the position chart">
+                <label><input type="radio" name="positionScreen" value="doench" checked /><span>Human cells</span></label>
+                <label><input type="radio" name="positionScreen" value="crisprscan" /><span>Zebrafish</span></label>
+              </div>
+            </div>
+            <div class="arc-wrap tall">
+              <canvas id="positionCanvas" aria-label="Correlation between unpaired probability and editing efficiency at each spacer position"></canvas>
+            </div>
+            <div class="arc-legend" id="positionLegend"></div>
+            <p class="interpretation" id="positionFinding"></p>
+          </div>
+
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <p class="kicker">Experiment 03</p>
+                <h3>Whether structure adds anything</h3>
+              </div>
+            </div>
+            <p class="note">
+              Whether a feature correlates with activity on its own is the wrong question, because sequence
+              composition already predicts a great deal. The useful question is whether folding adds
+              anything on top. A sequence-only model using position-specific bases, neighbouring pairs, and
+              G/C content sets the baseline. Folding features are then added and the change in accuracy is
+              measured on guides the model never saw, holding out whole genes at a time.
+            </p>
+            <div class="table-wrap">
+              <table class="data-table" id="incrementalTable">
+                <thead>
+                  <tr>
+                    <th scope="col">Screen</th>
+                    <th scope="col">Sequence only</th>
+                    <th scope="col">With folding</th>
+                    <th scope="col">Change</th>
+                    <th scope="col">95% interval</th>
+                  </tr>
+                </thead>
+                <tbody id="incrementalBody">
+                  <tr><td colspan="5" class="table-empty">Loading results…</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="interpretation" id="incrementalFinding"></p>
+          </div>
+
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <p class="kicker">Experiment 04</p>
+                <h3>Whether it holds in another laboratory</h3>
+              </div>
+            </div>
+            <p class="note">
+              A result that appears in only the screen it was found in is not a result. Each model is
+              trained on one screen and applied unchanged to another. The two Doench screens share no
+              genes, and CRISPRscan differs in organism, delivery, and readout, so both directions are
+              genuine tests rather than reshuffles of one experiment.
+            </p>
+            <div class="table-wrap">
+              <table class="data-table" id="transferTable">
+                <thead>
+                  <tr>
+                    <th scope="col">Trained on</th>
+                    <th scope="col">Applied to</th>
+                    <th scope="col">Sequence only</th>
+                    <th scope="col">With folding</th>
+                    <th scope="col">Change</th>
+                  </tr>
+                </thead>
+                <tbody id="transferBody">
+                  <tr><td colspan="5" class="table-empty">Loading results…</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="interpretation" id="transferFinding"></p>
+          </div>
+
+          <div class="card soft">
+            <div class="card-head">
+              <div>
+                <p class="kicker">Summary</p>
+                <h3>What the four experiments settle</h3>
+              </div>
+            </div>
+            <div class="finding-grid">
+              <div class="finding">
+                <span class="finding-tag">Measurement</span>
+                <p>
+                  The sharper instrument recovers slightly more than the coarse one, in the direction the
+                  hypothesis predicts, but the largest value found anywhere accounts for under half a
+                  percent of the variation in activity.
+                </p>
+              </div>
+              <div class="finding">
+                <span class="finding-tag">Context</span>
+                <p>
+                  Folding a spacer alone and folding it inside the sgRNA give different answers, correlated
+                  at only 0.17. A bare 20-letter spacer has almost no structure to speak of, so the original
+                  premise rested on a quantity that barely varies.
+                </p>
+              </div>
+              <div class="finding">
+                <span class="finding-tag">Position</span>
+                <p>
+                  The two screens place their strongest positions at opposite ends of the spacer. Effects
+                  localized to different places in different experiments are not describing one mechanism.
+                </p>
+              </div>
+              <div class="finding">
+                <span class="finding-tag">Value</span>
+                <p>
+                  In human cells folding adds nothing to a sequence-only model. In zebrafish it adds a small
+                  amount, in the direction opposite to the hypothesis, and that gain does not transfer.
+                </p>
+              </div>
+            </div>
+            <p class="note" id="studySource"></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================== 06 CHECK THE MODELS -->
+      <section class="chapter" id="check">
+        <div class="shell">
+          <div class="chapter-head">
+            <span class="ghost-num" aria-hidden="true">06</span>
+            <div class="chapter-intro">
+              <p class="eyebrow"><span class="eyebrow-dash" aria-hidden="true"></span>Reference checks</p>
+              <h2>Compare with <br />reference results</h2>
+              <p class="lead">
+                A model is only useful if its output can be checked. This chapter measures the folding
+                models against a small set of known structures and precomputed ViennaRNA results.
+                Agreement is encouraging, though the reference set is deliberately small and reads as a
+                smoke test rather than broad validation.
               </p>
             </div>
           </div>
@@ -577,123 +813,122 @@
           <div class="card chart-card">
             <div class="card-head">
               <div>
-                <p class="kicker">My Zuker against ViennaRNA</p>
-                <h3>30 real guides, folded by both</h3>
+                <p class="kicker">Zuker-style model and ViennaRNA</p>
+                <h3>Energy comparison across 30 guides</h3>
               </div>
               <span class="matrix-hint" id="viennaCorr">computing</span>
             </div>
             <div class="chart-wrap">
-              <canvas id="viennaScatter" aria-label="Scatter plot of my predicted energy against ViennaRNA's"></canvas>
+              <canvas id="viennaScatter" aria-label="Scatter plot comparing predicted energy with ViennaRNA"></canvas>
             </div>
             <p class="note" id="viennaNote"></p>
           </div>
         </div>
       </section>
 
-      <!-- ================================================== 06 LEARN -->
+      <!-- ================================================== 07 LEARN -->
       <section class="chapter" id="learn">
         <div class="shell">
           <div class="chapter-head">
-            <span class="ghost-num" aria-hidden="true">06</span>
+            <span class="ghost-num" aria-hidden="true">07</span>
             <div class="chapter-intro">
               <p class="eyebrow"><span class="eyebrow-dash" aria-hidden="true"></span>Learn</p>
-              <h2>The whole idea,<br />in plain steps</h2>
-              <p class="lead">No background needed. Seven short steps, start to finish.</p>
+              <h2>RNA folding, <br />explained</h2>
+              <p class="lead">A short introduction to the biology, the algorithms, and the site.</p>
             </div>
           </div>
 
           <div class="learn-list">
             <article class="card soft learn-step">
               <span class="step-num">1</span>
-              <h3>What is RNA?</h3>
-              <p>RNA is a long strand spelled out in just four letters: A, C, G and U.</p>
-              <p>It won't sit in a straight line. It bends back, sticks to itself, and makes shapes.</p>
+              <h3>The molecule</h3>
+              <p>RNA is a sequence built from four bases: A, C, G, and U.</p>
+              <p>Complementary bases can pair, causing the strand to form stems, loops, and other structures.</p>
             </article>
 
             <article class="card soft learn-step">
               <span class="step-num">2</span>
-              <h3>How does it fold?</h3>
-              <p>Some letters stick to each other. A grabs U, G grabs C. G will also hold onto U, just more weakly.</p>
+              <h3>Base pairing</h3>
+              <p>A pairs with U, G pairs with C, and G can also form a weaker wobble pair with U.</p>
               <p>
-                When two letters far apart on the strand stick, they drag it into loops and stems. That shape
-                is the thing I'm predicting.
+                Pairing between distant positions brings the strand together. The models predict this
+                secondary structure: which bases pair, rather than the full molecular shape.
               </p>
             </article>
 
             <article class="card soft learn-step">
               <span class="step-num">3</span>
-              <h3>Two ways to guess the shape</h3>
-              <p>A strand can fold plenty of ways. I wrote two programs that each pick a best fold, using different rules:</p>
+              <h3>Two models, two objectives</h3>
+              <p>A sequence can support many possible folds. The two models choose among them differently:</p>
               <ul class="tick-list">
-                <li><strong>Nussinov:</strong> the fold with the most sticky pairs.</li>
-                <li><strong>Zuker:</strong> the most stable fold, the one that holds together best.</li>
+                <li><strong>Nussinov:</strong> maximizes the number of allowed base pairs.</li>
+                <li><strong>Zuker-style:</strong> searches for a lower-energy structure.</li>
               </ul>
             </article>
 
             <article class="card soft learn-step">
               <span class="step-num">4</span>
-              <h3>Why bother writing two?</h3>
-              <p>If I'd just called a program that already exists, matching it would prove nothing.</p>
+              <h3>The value of two models</h3>
+              <p>The models make different assumptions, so comparing them shows when a result depends on the scoring method.</p>
               <p>
-                Mine work in completely different ways. So when they land on the same pairs, that agreement
-                actually means something. I also test them against shapes scientists already solved, which
-                gives me an answer key.
+                Agreement can be a useful consistency check, but it is not proof of the true structure. The
+                reference section also compares selected outputs with known structures and ViennaRNA results.
               </p>
             </article>
 
             <article class="card soft learn-step">
               <span class="step-num">5</span>
-              <h3>What has this got to do with CRISPR?</h3>
+              <h3>How this connects to CRISPR</h3>
               <p>CRISPR uses a short piece of RNA, the guide, to find one exact spot in a whole genome of DNA.</p>
               <p>That guide has to be free to stick to the DNA. The tip that touches first is the seed.</p>
               <p>
-                Fold the guide up so it hides its own seed, and it can't grab the DNA well, so it works worse.
-                Predicting the fold lets me catch the weak guides early, before anyone spends money on them.
+                The motivating idea was that folding might hide the seed and weaken targeting. The larger
+                dataset on this page does not show that relationship when seed openness is used alone, so the
+                feature should not be used as a standalone filter.
               </p>
             </article>
 
             <article class="card soft learn-step">
               <span class="step-num">6</span>
-              <h3>Is this AlphaFold?</h3>
-              <p>No, and the difference is worth knowing.</p>
+              <h3>What this model predicts</h3>
+              <p>This project predicts RNA secondary structure, not an atom-level 3D structure.</p>
               <p>
-                AlphaFold predicts the full 3D shape of a protein with a giant trained model. That's a genuinely
-                hard problem. It needs serious hardware and takes minutes.
+                Secondary structure records which bases pair. Dynamic programming can compute that
+                representation quickly for the sequence lengths used here.
               </p>
               <p>
-                I predict secondary structure, which is just which letters pair with which. That one's been
-                solved since the 1980s with fast, exact algorithms, and that's why my folds finish in a few
-                milliseconds. The 3D view here only arranges that flat answer in space so you've got something
-                to look at.
+                The 3D viewer simply lays out the predicted base pairs in space. It should be read as a
+                diagram, not as a molecular structure prediction.
               </p>
             </article>
 
             <article class="card soft learn-step">
               <span class="step-num">7</span>
-              <h3>How to use this site</h3>
+              <h3>What each chapter covers</h3>
               <ul class="tick-list">
-                <li><strong>Fold Lab:</strong> type any strand and watch both programs fold it.</li>
-                <li><strong>Analyzer:</strong> paste a guide and see whether its seed stays open.</li>
-                <li><strong>Designer:</strong> paste target DNA and get a ranked list of guide options.</li>
-                <li><strong>Dataset:</strong> check the open seed idea against thousands of measured guides.</li>
-                <li><strong>Check:</strong> see how close my programs get to real, known shapes.</li>
+                <li><strong>Fold Lab:</strong> any strand folded by both models side by side.</li>
+                <li><strong>Analyzer:</strong> one guide, with the seed measured as a single structure and across the ensemble.</li>
+                <li><strong>Designer:</strong> target DNA turned into a ranked list of guide candidates.</li>
+                <li><strong>Dataset:</strong> the open seed idea set against thousands of measured guides.</li>
+                <li><strong>Findings:</strong> the four experiments that test the idea properly.</li>
+                <li><strong>Check:</strong> the models measured against selected reference structures.</li>
               </ul>
             </article>
           </div>
         </div>
       </section>
 
-      <!-- ================================================== 07 METHOD -->
+      <!-- ================================================== 08 METHOD -->
       <section class="chapter" id="method">
         <div class="shell">
           <div class="chapter-head">
-            <span class="ghost-num" aria-hidden="true">07</span>
+            <span class="ghost-num" aria-hidden="true">08</span>
             <div class="chapter-intro">
               <p class="eyebrow"><span class="eyebrow-dash" aria-hidden="true"></span>How it works</p>
-              <h2>Two ways to fold<br />the same molecule</h2>
+              <h2>How the <br />models work</h2>
               <p class="lead">
-                Both are dynamic programming. Solve every short piece, remember the answer, then build the big
-                answer out of the small ones. The only thing they disagree on is what counts as a good answer.
+                Both methods use dynamic programming: solve smaller intervals, store those results, and combine
+                them to solve the full sequence. Their main difference is how they score a structure.
               </p>
             </div>
           </div>
@@ -714,7 +949,7 @@
               </div>
               <ul class="tick-list">
                 <li>Every allowed pair is worth exactly +1</li>
-                <li>Runs in n³ time and is easy to trace by hand</li>
+                <li>Runs in O(n<sup>3</sup>) time and is easy to trace by hand</li>
                 <li>Ignores physics, so a stack and a lone pair count the same</li>
                 <li>Over pairs in practice, inventing pairs that would not hold</li>
               </ul>
@@ -746,57 +981,61 @@
             <div class="card-head">
               <div>
                 <p class="kicker">Energy model</p>
-                <h3>What actually holds RNA together</h3>
+                <h3>Nearest-neighbor stacking energies</h3>
               </div>
             </div>
             <p class="card-lead">
-              This is Zuker's stabilising term. Each number is the energy of stacking one pair right on top of
-              another, in kcal/mol at 37&nbsp;°C. More negative means more stable. G and C rich stacks are the
-              strongest of the lot, and that's the real reason G/C content predicts guide behaviour at all.
+              These values describe the energy of stacking one base pair above another, in kcal/mol at
+              37&nbsp;°C. More negative values are more stabilizing. G/C-rich stacks are often among the
+              strongest.
             </p>
             <div class="stack-table" id="stackTable"></div>
             <p class="note">
-              These ten values are the published Turner and Xia nearest neighbour parameters. The G·U wobble
-              stacks, loop tables and multiloop term are simplified on purpose, and the code says so plainly.
-              So read my kcal/mol as a ranking, not a lab measurement. ViennaRNA is the real reference, and
-              chapter 05 shows how close I get to it.
+              These ten values come from published Turner and Xia nearest-neighbor parameters. The G·U wobble,
+              loop, and multiloop terms in this project are simplified. Treat the reported energies as
+              approximate rankings; ViennaRNA remains the reference implementation.
             </p>
           </div>
 
           <div class="card honest-card">
-            <h3>What this project shows, and what it does not</h3>
+            <h3>Main results and limitations</h3>
             <div class="honest-grid">
               <div>
-                <p class="honest-tag good">Holds up</p>
+                <p class="honest-tag good">What worked</p>
                 <ul>
                   <li>
-                    I wrote both recurrences from scratch. On <strong>GGGAAACCC</strong> my Zuker returns
-                    −1.12 kcal/mol, the same number you get working it out by hand from the stacking table.
+                    Both recurrences are implemented from scratch. On <strong>GGGAAACCC</strong> the
+                    Zuker-style model returns
+                    −1.12 kcal/mol, the same value obtained by working the stacking table through by hand.
                   </li>
                   <li>
-                    On the three answer key shapes, my Zuker scores a perfect F1 of 1.00, tRNA cloverleaf
-                    included. My Nussinov mangles that cloverleaf, which is exactly the point of running both.
+                    On three selected reference shapes, the Zuker-style model reaches F1 = 1.00, including
+                    the tRNA cloverleaf. Nussinov misses that branched structure, as a pair-counting model can.
                   </li>
                   <li>
-                    Against ViennaRNA on 30 real guides, my energies correlate at about r = 0.87. Different
-                    method, same answer.
+                    Against precomputed ViennaRNA results for 30 guides, the energy ranking correlates at
+                    about r = 0.87, while the absolute values remain systematically different.
                   </li>
                 </ul>
               </div>
               <div>
-                <p class="honest-tag warn">Does not</p>
+                <p class="honest-tag warn">Important limits</p>
                 <ul>
                   <li>
-                    Seed openness doesn't predict editing efficiency on the full dataset (Spearman ≈ 0.01). I
-                    went looking for that link and it just isn't there. Chapter 04 has the plot.
+                    Seed openness does not predict editing efficiency in the pooled dataset
+                    (Spearman ρ ≈ 0.01). Chapters 04 and 05 show the result.
                   </li>
                   <li>
-                    My kcal/mol won't match ViennaRNA exactly, since my loop and wobble terms are simplified.
-                    My energies come out a little less negative every time.
+                    The reported energies do not match ViennaRNA exactly because the loop and wobble terms are
+                    simplified. They are systematically less negative.
                   </li>
                   <li>
-                    Editing also rides on chromatin, repair, off target effects and Cas9 itself. None of
-                    those elements live here.
+                    Real editing also depends on chromatin, repair, target context, off-target effects, and
+                    Cas9 behavior. None of those factors is modeled here.
+                  </li>
+                  <li>
+                    The models exclude pseudoknots, folding kinetics, alternative conformations, tertiary
+                    interactions, and RNA-protein binding. The 3D view is a schematic, not a molecular model.
                   </li>
                 </ul>
               </div>
@@ -805,40 +1044,44 @@
         </div>
       </section>
 
-      <!-- ================================================== 08 ABOUT -->
+      <!-- ================================================== 09 ABOUT -->
       <section class="chapter" id="about">
         <div class="shell">
           <div class="chapter-head">
-            <span class="ghost-num" aria-hidden="true">08</span>
+            <span class="ghost-num" aria-hidden="true">09</span>
             <div class="chapter-intro">
-              <p class="eyebrow"><span class="eyebrow-dash" aria-hidden="true"></span>The team</p>
-              <h2>Who built this,<br />and what is next</h2>
+              <p class="eyebrow"><span class="eyebrow-dash" aria-hidden="true"></span>Project background</p>
+              <h2>About the <br />project</h2>
               <p class="lead">
-                I am Linus Tan, and I built this. Every folder here runs on code I wrote from scratch,
-                without libraries. The whole point was to actually understand the
-                algorithms rather than use someone else's and hope for the best.
+                Linus Tan built the folding algorithms and this interface in order to follow every step from
+                the recurrence to the result, then tested the idea against published guide-activity
+                measurements to establish where it holds up and where it does not.
               </p>
             </div>
           </div>
 
           <div class="about-grid">
             <div class="card soft">
-              <h3>Who did what</h3>
+              <h3>What this project contains</h3>
               <ul class="team-list">
-                <li><strong>Linus Tan</strong> · I built the whole site. I wrote both folders from scratch, first in Python and then again in the JavaScript running this page, plus the guide tools on top: the seed analysis, the PAM scanner behind the Designer, the CRISPR features, and the accuracy scoring in chapter 05. The 3D view, the DP grids, the design, all mine too.</li>
-                <li><strong>Thomas Yu</strong> · trained the efficiency network and assembled the guide dataset and ViennaRNA numbers I borrow for chapters 02 through 05.</li>
-                <li><strong>Henry Zhang</strong> · dug into how to compare our folds against ViennaRNA and RNAfold.</li>
-                <li><strong>Brady Lambert</strong> · the CRISPR side, and the case for why a guide's own fold should matter at all.</li>
+                <li><strong>Folding algorithms</strong> · Nussinov base-pair maximization, Zuker minimum free energy, and the McCaskill partition function, in both Python and JavaScript.</li>
+                <li><strong>Ensemble accessibility</strong> · base-pair probabilities from the inside and outside recursions, checked against exhaustive enumeration of every structure for short sequences.</li>
+                <li><strong>The study</strong> · folding features for 5,705 measured guides across two screens, a sequence-only baseline, and cross-validation that holds out whole genes.</li>
+                <li><strong>This site</strong> · the guide tools, arc diagrams, dynamic-programming grids, 3D view, and accuracy scoring.</li>
               </ul>
             </div>
             <div class="card soft">
-              <h3>One borrowed piece</h3>
+              <h3>Where the data comes from</h3>
               <p>
-                The trained network, the 4,685 guide dataset and the ViennaRNA
-                reference numbers are not mine. They come from Thomas's build at
-                <a href="https://tomas-1226.github.io/rna-fold-lab/" rel="noopener">rna-fold-lab</a>. The
-                folding on this page is my own code, and chapter 05 puts it up against his reference data
-                without fudging the score.
+                Guide activity is from Doench et al. 2014 and 2016, pooled through
+                <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1012-2" rel="noopener">CRISPOR</a>,
+                and from
+                <a href="https://www.nature.com/articles/nmeth.3543" rel="noopener">CRISPRscan</a>
+                (Moreno-Mateos et al. 2015) for the zebrafish replication. Every accessibility value, energy,
+                and model weight on this page is computed by this project's own code. The ViennaRNA
+                comparison values in chapter 06 are output of the
+                <a href="https://www.tbi.univie.ac.at/RNA/" rel="noopener">ViennaRNA package</a>,
+                precomputed because it does not run in a browser.
               </p>
             </div>
           </div>
@@ -862,6 +1105,9 @@
       <div class="shell footer-inner">
         <div class="footer-brand-col">
           <p class="footer-brand">RNA<em>Fold</em></p>
+          <p class="footer-note">
+            Built for the Pre-College computational biology project. All folding runs in the browser, and
+            no sequence data is transmitted anywhere.
           </p>
         </div>
         <div class="footer-col">
@@ -875,15 +1121,12 @@
           <p class="footer-head">Data</p>
           <a href="https://www.nature.com/articles/nbt.3437" rel="noopener">Doench 2016</a>
           <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1012-2" rel="noopener">CRISPOR</a>
-          <a href="https://tomas-1226.github.io/rna-fold-lab/" rel="noopener">rna-fold-lab</a>
+          <a href="https://www.nature.com/articles/nmeth.3543" rel="noopener">CRISPRscan</a>
           <a href="https://github.com/kwland/nussinov-zuker-crispr" rel="noopener">Source</a>
         </div>
         <div class="footer-col">
-          <p class="footer-head">Team</p>
-          <span>Thomas Yu</span>
+          <p class="footer-head">Author</p>
           <span>Linus Tan</span>
-          <span>Henry Zhang</span>
-          <span>Brady Lambert</span>
         </div>
       </div>
     </footer>

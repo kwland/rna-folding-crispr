@@ -878,6 +878,50 @@ main {
 .arc-wrap {
   height: 240px;
 }
+/* The position chart carries twenty labelled points and error bars. */
+.arc-wrap.tall {
+  height: 330px;
+}
+
+/* ------------------------------------------------------------- findings */
+
+.segmented-wrap {
+  margin-top: 18px;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: flex-start;
+}
+.segmented-wrap .segmented {
+  grid-template-columns: repeat(2, 1fr);
+  width: fit-content;
+}
+
+.finding-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-top: 18px;
+}
+.finding {
+  padding: 16px 18px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--radius);
+  background: rgba(0, 0, 0, 0.16);
+}
+.finding p {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--muted);
+}
+.finding-tag {
+  display: inline-block;
+  margin-bottom: 9px;
+  font-size: 9.5px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
 
 .arc-legend {
   display: flex;
@@ -1855,6 +1899,9 @@ footer {
   .dot-tag {
     width: 54px;
   }
+  .finding-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 520px) {
@@ -1863,6 +1910,9 @@ footer {
   }
   .arc-wrap {
     height: 190px;
+  }
+  .arc-wrap.tall {
+    height: 260px;
   }
   .viewer-wrap {
     height: 290px;
