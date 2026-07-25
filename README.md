@@ -98,8 +98,15 @@ Analysis:
 - `compute_features.py` — folds a whole screen in parallel and caches the result.
 - `run_study.py` — the four experiments.
 - `export_model.py` — fits the browser's efficiency model.
+- `export_site_data.py` — reduces the study results to the file the website reads.
 
 Everything above uses **only the Python standard library**.
+
+The interactive site in `docs/` carries its own JavaScript implementations of all three
+folding models, so the partition function runs live in the browser: the Analyzer reports
+the probability that each spacer position is unpaired, alongside the single-structure
+answer, and chapter 05 presents the four experiments below. The Python and JavaScript
+folders agree to the last decimal on the same sequences.
 
 ## Installation
 
@@ -140,10 +147,11 @@ python run_study.py
 python make_figures.py
 ```
 
-Refit the model used by the website:
+Refit the model used by the website and rebuild its data file:
 
 ```bash
 python export_model.py
+python export_site_data.py
 ```
 
 ## Run the tests

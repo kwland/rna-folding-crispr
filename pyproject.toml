@@ -35,5 +35,7 @@ py-modules = [
   "model_features",
   "compute_features",
   "run_study",
+  "export_model",
+  "export_site_data",
   "make_figures",
 ]
