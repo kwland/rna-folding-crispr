@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="877" viewBox="0 0 1080 877" role="img" aria-labelledby="title desc">
+<title id="title">How you measure structure barely changes the answer</title>
+<desc id="desc">Forest plot of Spearman correlations between several accessibility measures and editing efficiency across two screens.</desc>
+<rect width="1080" height="877" fill="#f7f4ec" rx="24"/>
+<text x="45" y="54" fill="#16211d" font-size="28" font-weight="700" font-family="Arial, sans-serif">How you measure structure barely changes the answer</text>
+<text x="45" y="82" fill="#61706a" font-size="15" font-family="Arial, sans-serif">Spearman correlation with measured editing efficiency. Bars are 95% intervals from resampling whole genes; grey means the interval includes zero.</text>
+<line x1="470.0" y1="157" x2="470.0" y2="787" stroke="#d8ded8" stroke-width="1"/>
+<text x="470.0" y="149" fill="#61706a" font-size="12" text-anchor="middle" font-family="Arial, sans-serif">-0.40</text>
+<line x1="538.8" y1="157" x2="538.8" y2="787" stroke="#d8ded8" stroke-width="1"/>
+<text x="538.75" y="149" fill="#61706a" font-size="12" text-anchor="middle" font-family="Arial, sans-serif">-0.30</text>
+<line x1="607.5" y1="157" x2="607.5" y2="787" stroke="#d8ded8" stroke-width="1"/>
+<text x="607.5" y="149" fill="#61706a" font-size="12" text-anchor="middle" font-family="Arial, sans-serif">-0.20</text>
+<line x1="676.2" y1="157" x2="676.2" y2="787" stroke="#d8ded8" stroke-width="1"/>
+<text x="676.25" y="149" fill="#61706a" font-size="12" text-anchor="middle" font-family="Arial, sans-serif">-0.10</text>
+<line x1="745.0" y1="157" x2="745.0" y2="787" stroke="#16211d" stroke-width="2"/>
+<text x="745.0" y="149" fill="#61706a" font-size="12" text-anchor="middle" font-family="Arial, sans-serif">+0.00</text>
+<line x1="813.8" y1="157" x2="813.8" y2="787" stroke="#d8ded8" stroke-width="1"/>
+<text x="813.75" y="149" fill="#61706a" font-size="12" text-anchor="middle" font-family="Arial, sans-serif">+0.10</text>
+<line x1="882.5" y1="157" x2="882.5" y2="787" stroke="#d8ded8" stroke-width="1"/>
+<text x="882.5" y="149" fill="#61706a" font-size="12" text-anchor="middle" font-family="Arial, sans-serif">+0.20</text>
+<line x1="951.2" y1="157" x2="951.2" y2="787" stroke="#d8ded8" stroke-width="1"/>
+<text x="951.25" y="149" fill="#61706a" font-size="12" text-anchor="middle" font-family="Arial, sans-serif">+0.30</text>
+<line x1="1020.0" y1="157" x2="1020.0" y2="787" stroke="#d8ded8" stroke-width="1"/>
+<text x="1020.0" y="149" fill="#61706a" font-size="12" text-anchor="middle" font-family="Arial, sans-serif">+0.40</text>
+<text x="745.0" y="847" fill="#61706a" font-size="12" text-anchor="middle" font-family="Arial, sans-serif">no correlation</text>
+<rect x="45" y="175.0" width="995" height="34" fill="#ffffff" opacity="0.55"/>
+<text x="55" y="196.0" fill="#16211d" font-size="13" font-family="Arial, sans-serif">Nussinov seed accessibility (spacer alone)  (human cells)</text>
+<line x1="727.1" y1="192.0" x2="772.1" y2="192.0" stroke="#61706a" stroke-width="3" opacity="0.55" stroke-linecap="round"/>
+<circle cx="752.5" cy="192.0" r="6" fill="#61706a"/>
+<text x="1036" y="196.0" fill="#61706a" font-size="12" font-weight="700" font-family="Arial, sans-serif">+0.011</text>
+<text x="55" y="230.0" fill="#16211d" font-size="13" font-family="Arial, sans-serif">MFE seed accessibility (spacer alone)  (human cells)</text>
+<line x1="715.5" y1="226.0" x2="806.0" y2="226.0" stroke="#61706a" stroke-width="3" opacity="0.55" stroke-linecap="round"/>
+<circle cx="759.7" cy="226.0" r="6" fill="#61706a"/>
+<text x="1036" y="230.0" fill="#61706a" font-size="12" font-weight="700" font-family="Arial, sans-serif">+0.021</text>
+<rect x="45" y="243.0" width="995" height="34" fill="#ffffff" opacity="0.55"/>
+<text x="55" y="264.0" fill="#16211d" font-size="13" font-family="Arial, sans-serif">Ensemble seed accessibility (spacer alone)  (human cells)</text>
+<line x1="689.1" y1="260.0" x2="774.1" y2="260.0" stroke="#61706a" stroke-width="3" opacity="0.55" stroke-linecap="round"/>
+<circle cx="729.3" cy="260.0" r="6" fill="#61706a"/>
+<text x="1036" y="264.0" fill="#61706a" font-size="12" font-weight="700" font-family="Arial, sans-serif">-0.023</text>
+<text x="55" y="298.0" fill="#16211d" font-size="13" font-family="Arial, sans-serif">MFE seed accessibility (spacer + scaffold)  (human cells)</text>
+<line x1="726.0" y1="294.0" x2="803.4" y2="294.0" stroke="#61706a" stroke-width="3" opacity="0.55" stroke-linecap="round"/>
+<circle cx="766.1" cy="294.0" r="6" fill="#61706a"/>
+<text x="1036" y="298.0" fill="#61706a" font-size="12" font-weight="700" font-family="Arial, sans-serif">+0.031</text>
+<rect x="45" y="311.0" width="995" height="34" fill="#ffffff" opacity="0.55"/>
+<text x="55" y="332.0" fill="#16211d" font-size="13" font-family="Arial, sans-serif">Ensemble seed accessibility (spacer + scaffold)  (human cells)</text>
+<line x1="733.1" y1="328.0" x2="814.9" y2="328.0" stroke="#61706a" stroke-width="3" opacity="0.55" stroke-linecap="round"/>
+<circle cx="771.4" cy="328.0" r="6" fill="#61706a"/>
+<text x="1036" y="332.0" fill="#61706a" font-size="12" font-weight="700" font-family="Arial, sans-serif">+0.038</text>
+<text x="55" y="366.0" fill="#16211d" font-size="13" font-family="Arial, sans-serif">Mean unpaired probability, whole spacer (alone)  (human cells)</text>
+<line x1="693.9" y1="362.0" x2="792.9" y2="362.0" stroke="#61706a" stroke-width="3" opacity="0.55" stroke-linecap="round"/>
+<circle cx="740.9" cy="362.0" r="6" fill="#61706a"/>
+<text x="1036" y="366.0" fill="#61706a" font-size="12" font-weight="700" font-family="Arial, sans-serif">-0.006</text>
+<rect x="45" y="379.0" width="995" height="34" fill="#ffffff" opacity="0.55"/>
+<text x="55" y="400.0" fill="#16211d" font-size="13" font-family="Arial, sans-serif">Mean unpaired probability, whole spacer (in sgRNA)  (human cells)</text>
+<line x1="717.8" y1="396.0" x2="809.4" y2="396.0" stroke="#61706a" stroke-width="3" opacity="0.55" stroke-linecap="round"/>
+<circle cx="761.3" cy="396.0" r="6" fill="#61706a"/>
+<text x="1036" y="400.0" fill="#61706a" font-size="12" font-weight="700" font-family="Arial, sans-serif">+0.024</text>
+<text x="55" y="434.0" fill="#16211d" font-size="13" font-family="Arial, sans-serif">Ensemble free energy (spacer + scaffold)  (human cells)</text>
+<line x1="712.8" y1="430.0" x2="823.6" y2="430.0" stroke="#61706a" stroke-width="3" opacity="0.55" stroke-linecap="round"/>
+<circle cx="767.2" cy="430.0" r="6" fill="#61706a"/>
+<text x="1036" y="434.0" fill="#61706a" font-size="12" font-weight="700" font-family="Arial, sans-serif">+0.032</text>
+<rect x="45" y="447.0" width="995" height="34" fill="#ffffff" opacity="0.55"/>
+<text x="55" y="468.0" fill="#16211d" font-size="13" font-family="Arial, sans-serif">G/C percent  (human cells)</text>
+<line x1="726.2" y1="464.0" x2="907.8" y2="464.0" stroke="#61706a" stroke-width="3" opacity="0.55" stroke-linecap="round"/>
+<circle cx="837.1" cy="464.0" r="6" fill="#61706a"/>
+<text x="1036" y="468.0" fill="#61706a" font-size="12" font-weight="700" font-family="Arial, sans-serif">+0.134</text>
+<text x="55" y="502.0" fill="#16211d" font-size="13" font-family="Arial, sans-serif">Nussinov seed accessibility (spacer alone)  (zebrafish)</text>
+<line x1="710.7" y1="498.0" x2="791.2" y2="498.0" stroke="#61706a" stroke-width="3" opacity="0.55" stroke-linecap="round"/>
+<circle cx="751.8" cy="498.0" r="6" fill="#61706a"/>
+<text x="1036" y="502.0" fill="#61706a" font-size="12" font-weight="700" font-family="Arial, sans-serif">+0.010</text>
+<rect x="45" y="515.0" width="995" height="34" fill="#ffffff" opacity="0.55"/>
+<text x="55" y="536.0" fill="#16211d" font-size="13" font-family="Arial, sans-serif">MFE seed accessibility (spacer alone)  (zebrafish)</text>
+<line x1="690.1" y1="532.0" x2="764.4" y2="532.0" stroke="#61706a" stroke-width="3" opacity="0.55" stroke-linecap="round"/>
+<circle cx="727.3" cy="532.0" r="6" fill="#61706a"/>
+<text x="1036" y="536.0" fill="#61706a" font-size="12" font-weight="700" font-family="Arial, sans-serif">-0.026</text>
+<text x="55" y="570.0" fill="#16211d" font-size="13" font-family="Arial, sans-serif">Ensemble seed accessibility (spacer alone)  (zebrafish)</text>
+<line x1="678.0" y1="566.0" x2="751.3" y2="566.0" stroke="#61706a" stroke-width="3" opacity="0.55" stroke-linecap="round"/>
+<circle cx="713.9" cy="566.0" r="6" fill="#61706a"/>
+<text x="1036" y="570.0" fill="#61706a" font-size="12" font-weight="700" font-family="Arial, sans-serif">-0.045</text>
+<rect x="45" y="583.0" width="995" height="34" fill="#ffffff" opacity="0.55"/>
+<text x="55" y="604.0" fill="#16211d" font-size="13" font-family="Arial, sans-serif">MFE seed accessibility (spacer + scaffold)  (zebrafish)</text>
+<line x1="732.9" y1="600.0" x2="805.9" y2="600.0" stroke="#61706a" stroke-width="3" opacity="0.55" stroke-linecap="round"/>
+<circle cx="769.3" cy="600.0" r="6" fill="#61706a"/>
+<text x="1036" y="604.0" fill="#61706a" font-size="12" font-weight="700" font-family="Arial, sans-serif">+0.035</text>
+<text x="55" y="638.0" fill="#16211d" font-size="13" font-family="Arial, sans-serif">Ensemble seed accessibility (spacer + scaffold)  (zebrafish)</text>
+<line x1="733.0" y1="634.0" x2="805.9" y2="634.0" stroke="#61706a" stroke-width="3" opacity="0.55" stroke-linecap="round"/>
+<circle cx="769.1" cy="634.0" r="6" fill="#61706a"/>
+<text x="1036" y="638.0" fill="#61706a" font-size="12" font-weight="700" font-family="Arial, sans-serif">+0.035</text>
+<rect x="45" y="651.0" width="995" height="34" fill="#ffffff" opacity="0.55"/>
+<text x="55" y="672.0" fill="#16211d" font-size="13" font-family="Arial, sans-serif">Mean unpaired probability, whole spacer (alone)  (zebrafish)</text>
+<line x1="680.0" y1="668.0" x2="755.5" y2="668.0" stroke="#61706a" stroke-width="3" opacity="0.55" stroke-linecap="round"/>
+<circle cx="718.0" cy="668.0" r="6" fill="#61706a"/>
+<text x="1036" y="672.0" fill="#61706a" font-size="12" font-weight="700" font-family="Arial, sans-serif">-0.039</text>
+<text x="55" y="706.0" fill="#16211d" font-size="13" font-family="Arial, sans-serif">Mean unpaired probability, whole spacer (in sgRNA)  (zebrafish)</text>
+<line x1="615.4" y1="702.0" x2="694.7" y2="702.0" stroke="#2f7d62" stroke-width="3" opacity="0.55" stroke-linecap="round"/>
+<circle cx="656.0" cy="702.0" r="6" fill="#2f7d62"/>
+<text x="1036" y="706.0" fill="#2f7d62" font-size="12" font-weight="700" font-family="Arial, sans-serif">-0.129</text>
+<rect x="45" y="719.0" width="995" height="34" fill="#ffffff" opacity="0.55"/>
+<text x="55" y="740.0" fill="#16211d" font-size="13" font-family="Arial, sans-serif">Ensemble free energy (spacer + scaffold)  (zebrafish)</text>
+<line x1="582.6" y1="736.0" x2="664.7" y2="736.0" stroke="#2f7d62" stroke-width="3" opacity="0.55" stroke-linecap="round"/>
+<circle cx="623.5" cy="736.0" r="6" fill="#2f7d62"/>
+<text x="1036" y="740.0" fill="#2f7d62" font-size="12" font-weight="700" font-family="Arial, sans-serif">-0.177</text>
+<text x="55" y="774.0" fill="#16211d" font-size="13" font-family="Arial, sans-serif">G/C percent  (zebrafish)</text>
+<line x1="888.8" y1="770.0" x2="985.0" y2="770.0" stroke="#2f7d62" stroke-width="3" opacity="0.55" stroke-linecap="round"/>
+<circle cx="939.9" cy="770.0" r="6" fill="#2f7d62"/>
+<text x="1036" y="774.0" fill="#2f7d62" font-size="12" font-weight="700" font-family="Arial, sans-serif">+0.283</text>
+</svg>
