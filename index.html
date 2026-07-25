@@ -6,7 +6,7 @@
     <title>RNA Fold Lab: folding and CRISPR guides</title>
     <meta
       name="description"
-      content="Fold RNA with Nussinov and Zuker in your browser, check a CRISPR guide's seed, design guides against a target, and see how my folders score against ViennaRNA."
+      content="Fold RNA with Nussinov and Zuker in the browser, check a CRISPR guide's seed, design guides against a target, and see how these folders score against ViennaRNA."
     />
     <meta name="color-scheme" content="dark" />
     <link
@@ -795,8 +795,8 @@
                     My energies come out a little less negative every time.
                   </li>
                   <li>
-                    Real editing also rides on chromatin, repair, off target effects and Cas9 itself. None of
-                    that lives here.
+                    Editing also rides on chromatin, repair, off target effects and Cas9 itself. None of
+                    those elements live here.
                   </li>
                 </ul>
               </div>
@@ -814,9 +814,9 @@
               <p class="eyebrow"><span class="eyebrow-dash" aria-hidden="true"></span>The team</p>
               <h2>Who built this,<br />and what is next</h2>
               <p class="lead">
-                I'm Linus Tan, and I built this. Every folder here runs on code I wrote from scratch, no
-                libraries doing the hard part for me. The whole point was to actually understand the
-                algorithms rather than call someone else's and hope for the best.
+                I am Linus Tan, and I built this. Every folder here runs on code I wrote from scratch,
+                without libraries. The whole point was to actually understand the
+                algorithms rather than use someone else's and hope for the best.
               </p>
             </div>
           </div>
@@ -825,7 +825,7 @@
             <div class="card soft">
               <h3>Who did what</h3>
               <ul class="team-list">
-                <li><strong>Linus Tan</strong> · I built the whole site, eight chapters. I wrote both folders from scratch, first in Python and then again in the JavaScript running this page, plus the guide tools on top: the seed analysis, the PAM scanner behind the Designer, the CRISPR features, and the accuracy scoring in chapter 05. The 3D view, the DP grids, the design, all mine too.</li>
+                <li><strong>Linus Tan</strong> · I built the whole site. I wrote both folders from scratch, first in Python and then again in the JavaScript running this page, plus the guide tools on top: the seed analysis, the PAM scanner behind the Designer, the CRISPR features, and the accuracy scoring in chapter 05. The 3D view, the DP grids, the design, all mine too.</li>
                 <li><strong>Thomas Yu</strong> · trained the efficiency network and assembled the guide dataset and ViennaRNA numbers I borrow for chapters 02 through 05.</li>
                 <li><strong>Henry Zhang</strong> · dug into how to compare our folds against ViennaRNA and RNAfold.</li>
                 <li><strong>Brady Lambert</strong> · the CRISPR side, and the case for why a guide's own fold should matter at all.</li>
@@ -835,7 +835,7 @@
               <h3>One borrowed piece</h3>
               <p>
                 The trained network, the 4,685 guide dataset and the ViennaRNA
-                reference numbers aren't mine. They come from Thomas's build at
+                reference numbers are not mine. They come from Thomas's build at
                 <a href="https://tomas-1226.github.io/rna-fold-lab/" rel="noopener">rna-fold-lab</a>. The
                 folding on this page is my own code, and chapter 05 puts it up against his reference data
                 without fudging the score.
@@ -862,9 +862,6 @@
       <div class="shell footer-inner">
         <div class="footer-brand-col">
           <p class="footer-brand">RNA<em>Fold</em></p>
-          <p class="footer-note">
-            Built for the Pre-College computational biology project. Folding runs entirely in your browser.
-            Nothing you type leaves your machine.
           </p>
         </div>
         <div class="footer-col">
