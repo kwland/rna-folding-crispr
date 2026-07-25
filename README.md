@@ -8,7 +8,7 @@
 
 This project asks a simple biological question: if a CRISPR guide RNA folds back on itself, does that make its targeting sequence less available to bind DNA?
 
-The short answer, tested four different ways across two independent screens, is **no** — and the interesting part is how much work it took to be confident about that.
+Tested four ways across two independent screens, the answer is **no** in human cells. In zebrafish there is a small effect that points the opposite way to the hypothesis. The interesting part is how much work it took to be able to say that with a straight face.
 
 ![Four-step Nussinov workflow](figures/nussinov_workflow.svg)
 
@@ -61,6 +61,21 @@ Everything is then re-run on an independent screen: **CRISPRscan** (Moreno-Mateo
 ![Does structure add anything?](figures/incremental_value.svg)
 
 ## Findings
+
+**Seed accessibility barely predicts editing efficiency, and what little it predicts is redundant.** Across both screens and all five measures, correlations sit between −0.08 and +0.07. The sharpest measure — ensemble accessibility of the seed in the intact sgRNA — does give the largest value in the predicted direction (within-gene ρ = 0.069 [0.010, 0.130] in Doench, interval excluding zero), and the ordering Nussinov 0.00 → MFE 0.06 → ensemble 0.07 is what a better instrument recovering a faint real effect would look like. But it explains under half a percent of the variance, it adds **0.000 [−0.004, 0.004]** to a sequence-only model, and it does not replicate in zebrafish.
+
+**Structure adds nothing to a sequence-only model in human cells.**
+
+| | baseline ρ (held out) | + all structure features | change | 95% CI |
+|---|---:|---:|---:|---|
+| Doench (human cells) | 0.195 | 0.197 | **+0.003** | [−0.013, 0.018] |
+| CRISPRscan (zebrafish) | 0.391 | 0.407 | **+0.016** | [0.004, 0.030] |
+
+**In zebrafish there is a small, real gain — pointing the wrong way.** Folding features add +0.016 on a 0.391 baseline, with an interval excluding zero. But in that screen *more* structure goes with *higher* activity (ensemble free energy ρ = −0.181), which is the opposite of "an occluded seed blocks targeting"; its strongest positions are 3–13, the PAM-**distal** half; and nothing like it appears in human cells. It most likely reflects nucleotide composition captured nonlinearly rather than accessibility.
+
+**The canonical seed is not the right window either way.** In Doench the strongest positions are 19–20; in CRISPRscan they are 3–13. Two screens that localise an effect to opposite ends of the molecule are not describing one mechanism.
+
+**An aside worth the price of admission.** G/C content — the classic guide-design rule — correlates with Doench activity at pooled ρ = +0.134 but **−0.016** within genes. Its apparent usefulness there is entirely a between-gene effect. A feature can look predictive pooled across targets and carry no information for the choice a designer actually makes.
 
 See [ANALYSIS.md](ANALYSIS.md) for the full account and [analysis_outputs/study_summary.md](analysis_outputs/study_summary.md) for every table.
 

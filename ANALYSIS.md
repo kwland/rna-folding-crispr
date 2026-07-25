@@ -77,9 +77,24 @@ Five definitions of seed accessibility, correlated with activity.
 
 The ensemble measure is not a cosmetic upgrade. Across 4,685 guides, single-structure seed accessibility takes only **9 distinct values** (it can only be a multiple of 1/8); the ensemble measure takes **4,668**. The two agree in the aggregate (r = 0.87 in sgRNA context) but disagree by more than 0.25 for 6.1% of guides. So this is a genuine change of instrument.
 
-It changes nothing. In the Doench data, seed accessibility correlates with activity at ρ = +0.01 (Nussinov), +0.02 (MFE, spacer alone), −0.02 (ensemble, spacer alone), +0.03 (MFE, in sgRNA), and +0.04 (ensemble, in sgRNA). G/C content, for scale, reaches ρ = +0.13. CRISPRscan gives the same picture.
+It changes very little. Doench, with 95% intervals from resampling genes:
 
-**The "you measured structure wrong" objection is answered: the sharper instrument finds the same nothing.**
+| measure | pooled ρ | within-gene ρ |
+|---|---:|---:|
+| Nussinov seed, spacer alone | +0.011 | +0.000 [−0.037, 0.036] |
+| MFE seed, spacer alone | +0.021 | +0.033 [−0.025, 0.089] |
+| Ensemble seed, spacer alone | −0.023 | +0.005 [−0.056, 0.059] |
+| MFE seed, in sgRNA | +0.031 | +0.056 [0.008, 0.114] |
+| **Ensemble seed, in sgRNA** | +0.038 | **+0.069 [0.010, 0.130]** |
+| G/C percent | +0.134 | −0.016 [−0.093, 0.071] |
+
+The sharpest measure — ensemble accessibility of the seed in the intact sgRNA — does produce the largest number, in the direction the hypothesis predicts, with an interval that excludes zero. It is worth being precise rather than triumphal about that: ρ = 0.069 means accessibility explains under half a percent of the variance in activity, and the ordering across measures (Nussinov 0.00 → MFE 0.06 → ensemble 0.07) is consistent with a better instrument recovering a real but very faint effect.
+
+Experiment 4 settles what it is worth. Adding that exact feature to a sequence-only model changes held-out accuracy by 0.000 [−0.004, 0.004] — whatever the correlation reflects, the sequence baseline already had it.
+
+CRISPRscan does not reproduce even this. There, seed accessibility in context is +0.024 [−0.040, 0.091], and the ensemble measure for the *bare* spacer runs the other way at −0.081 [−0.145, −0.020].
+
+**The "you measured structure wrong" objection is answered.** The sharper instrument finds, at most, a faint association that adds nothing once sequence is accounted for — and it does not replicate.
 
 ## Experiment 2 — molecular context
 
@@ -99,11 +114,56 @@ In context there is plenty of structure, and it varies. It still does not predic
 
 ## Experiment 3 — position
 
-*(filled in from the study run)*
+With a per-base unpaired probability, accessibility can be correlated with activity at each of the 20 spacer positions instead of averaging over an assumed window.
+
+| | strongest position | ρ there | positions significant (BH) |
+|---|---:|---:|---:|
+| Doench, spacer alone | 19 | −0.054 | 3 / 20 |
+| Doench, in sgRNA | 20 | +0.061 | 1 / 20 |
+| CRISPRscan, spacer alone | 1 | +0.055 | 0 / 20 |
+| CRISPRscan, in sgRNA | 6 | −0.121 | 12 / 20 |
+
+The canonical seed does not survive as the right window. In the Doench data folded in context, the strongest positions are 19 and 20 — the extreme PAM-proximal end, narrower than the assumed 13–20 (mean |ρ| 0.026 inside the seed against 0.011 outside). In CRISPRscan the pattern is the other way round: the strongest positions are 3 through 13, the PAM-**distal** half, with mean |ρ| 0.091 outside the seed against 0.035 inside.
+
+Two screens that localise an effect to opposite ends of the molecule are not describing the same mechanism. If seed occlusion were real, both should point to the same place.
+
+*A caveat on the significance counts.* The Benjamini–Hochberg correction is applied to permutation p-values that shuffle individual guides. That shuffle breaks the gene structure, so the effective sample size is nearer the number of genes than the number of guides and those p-values are anti-conservative. The "12 of 20" for CRISPRscan should be read as "the profile is smooth and non-random-looking", not as 12 independent discoveries. The cluster-bootstrap intervals, which resample whole genes, are the trustworthy uncertainty statement, and they are what the conclusions below rest on.
 
 ## Experiment 4 — incremental value and replication
 
-*(filled in from the study run)*
+The real question: does folding add anything to a sequence-only model? Baseline is position-specific bases, position-specific dinucleotides, and G/C, evaluated by nested cross-validation holding out whole genes and scored as mean within-gene Spearman.
+
+| | baseline ρ | + all structure features | change | 95% CI |
+|---|---:|---:|---:|---|
+| Doench (human cells) | 0.195 [0.112, 0.276] | 0.197 | **+0.003** | [−0.013, 0.018] |
+| CRISPRscan (zebrafish) | 0.391 [0.327, 0.450] | 0.407 | **+0.016** | [0.004, 0.030] |
+
+**In human cells, structure adds nothing.** Every structure subset — Nussinov, MFE, ensemble, spacer-only, in-context, and the full 20-position profile — moves held-out accuracy by less than 0.004, with intervals straddling zero.
+
+**In zebrafish, structure adds a small but detectable amount**: +0.016 on a baseline of 0.391, about a 4% relative gain, with an interval that excludes zero. The ensemble-in-context features alone give +0.011 [0.003, 0.021]. This is a real result and it should not be swept into the null.
+
+But it does not support the hypothesis, for three reasons.
+
+1. **It points the wrong way.** In CRISPRscan the ensemble free energy of the full sgRNA correlates with activity at within-gene ρ = −0.181 [−0.250, −0.105] and mean unpaired probability at −0.134 [−0.190, −0.073]. Both say *more* structure goes with *higher* activity — the opposite of "an occluded seed blocks targeting".
+2. **Its position profile contradicts the mechanism**, sitting in the PAM-distal half rather than the seed.
+3. **It does not replicate.** Nothing like it appears in the human-cell data, where the same features give +0.000.
+
+### Cross-screen transfer
+
+| train → test | baseline ρ | + structure | change | 95% CI |
+|---|---:|---:|---:|---|
+| Doench2016 → Doench2014 | 0.234 | 0.284 | +0.050 | [0.014, 0.115] |
+| Doench2014 → Doench2016 | 0.153 | 0.155 | +0.002 | [−0.006, 0.010] |
+| Doench pooled → CRISPRscan | 0.085 | 0.103 | +0.017 | [−0.015, 0.051] |
+| CRISPRscan → Doench pooled | 0.018 | 0.019 | +0.001 | [−0.006, 0.007] |
+
+Transfer is weak in every direction, and essentially absent from zebrafish to human cells (ρ = 0.018 — a model trained on CRISPRscan knows almost nothing about Doench guides). The one apparently large structure gain, Doench2016 → Doench2014 at +0.050, rests on a test set of just **three genes**, so its interval is wide and it should not be leaned on.
+
+### An aside that surprised me
+
+G/C content correlates with Doench activity at pooled ρ = +0.134 — the number the earlier version of this project reported as the one feature that beat structure. Within genes it is **−0.016 [−0.093, 0.071]**: nothing at all. Its apparent usefulness there is entirely a between-gene effect, i.e. genes with higher-G/C guide sets happen to be more editable. In CRISPRscan, by contrast, within-gene G/C is a strong ρ = +0.307.
+
+The lesson generalises past this project: a feature that looks predictive pooled across targets can carry no information for the choice a designer actually makes.
 
 ## The confound worth naming
 
@@ -115,7 +175,15 @@ This is exactly why the incremental test in Experiment 4 is the one that matters
 
 ## Interpretation
 
-*(filled in from the study run)*
+**The original hypothesis is not supported.** Seed accessibility does not predict editing efficiency, under five ways of measuring it, in two screens, and it adds nothing to a sequence-only model in human cells. The three obvious objections to the earlier ρ ≈ 0.01 have each been answered rather than argued away: a sharper instrument finds the same nothing, the biologically correct molecule finds the same nothing, and no spacer position rescues it.
+
+**There is a small structure-related signal in zebrafish, and honesty requires reporting it.** Folding features add +0.016 [0.004, 0.030] there. It is small, it does not replicate to human cells, its sign is backwards for the hypothesis, and its position profile is in the wrong half of the spacer.
+
+The most likely explanation is that it is not accessibility at all. The ensemble free energy of a 96 nt sgRNA is largely a nonlinear summary of the spacer's nucleotide composition, and zebrafish activity depends on composition far more strongly than human-cell activity does (within-gene G/C ρ = 0.307 against −0.016). A feature that summarises composition in a way a linear G/C term cannot will pick up some of that. Calling it "structure" would be reading the label rather than the mechanism.
+
+**Why a genuine null is plausible here.** A bare spacer barely folds at all — ensemble free energy −0.78 kcal/mol, with 22% essentially unstructured. In the intact sgRNA there is plenty of structure, but the sgRNA does not float free: Cas9 binds it and imposes a conformation, holding the spacer in a pre-ordered A-form helix ready for target search. An equilibrium ensemble computed in solution may simply not describe the state the guide is in when it matters. That is a mechanistic reason to expect exactly what was measured, and it is more interesting than "the model was too crude".
+
+**What the project is now good for.** Not guide ranking. The verified partition-function implementation, the exhaustive-enumeration tests, and the grouped-CV harness are reusable for any question of the form "does this RNA feature add anything?", and the pipeline makes the next such question cheap to ask.
 
 ## Limitations
 

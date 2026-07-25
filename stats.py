@@ -286,7 +286,17 @@ def spearman_permutation_p(
     n_perm: int = 5000,
     seed: int = 0,
 ) -> float:
-    """Two-sided permutation p-value for a Spearman correlation."""
+    """Two-sided permutation p-value for a Spearman correlation.
+
+    CAUTION: this shuffles individual guides, which destroys the gene structure
+    in the data. Guides targeting one gene are correlated, so the effective
+    sample size is closer to the number of genes than the number of guides, and
+    a free shuffle therefore produces a null distribution that is too narrow.
+    The p-values it returns are anti-conservative and should be read as a rough
+    screen only. The cluster bootstrap intervals, which resample whole genes,
+    are the trustworthy uncertainty statement, and they are what the study's
+    conclusions rest on.
+    """
     observed = abs(spearman(x, y))
     shuffled = list(y)
     rng = random.Random(seed)
