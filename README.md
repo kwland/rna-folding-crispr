@@ -14,7 +14,7 @@ Tested four ways across two independent screens, the answer is **no** in human c
 
 ## The problem with the first answer
 
-An early version of this project folded each 20 nt spacer on its own, took the single best structure, counted how many of the last 8 bases were unpaired, and correlated that with editing efficiency. The correlation was about 0.01 — nothing.
+An early version of this project folded each 20 nt spacer on its own, took the single best structure, counted how many of the last 8 bases were unpaired, and correlated that with editing efficiency. The correlation was about 0.01.
 
 That result had three obvious holes, and a reviewer would find all of them:
 
@@ -32,7 +32,7 @@ This repository closes all four gaps.
 
 `mccaskill.py` implements the McCaskill (1990) partition function: the same O(n³) dynamic-programming family as Zuker, but with Boltzmann weights `exp(-E/RT)` instead of a minimum, plus the outside recursion that turns those into base-pair probabilities `p_ij`. Seed accessibility becomes the mean probability that each seed base is unpaired across the entire ensemble, which is what RNAplfold-style accessibility actually means.
 
-The multiloop term in the outside pass is the awkward part — written naively it is O(n⁴). The implementation factorises the enclosing-pair sum into two accumulator tables so the whole outside pass stays O(n³).
+The multiloop term in the outside pass is the awkward part; written naively it is O(n⁴). The implementation factorises the enclosing-pair sum into two accumulator tables so the whole outside pass stays O(n³).
 
 It is verified, not just written. For sequences short enough to enumerate every pseudoknot-free structure, the partition function, every pair probability, and every unpaired probability match brute force to ~1e-15. Because the shipped parameters make multiloops carry under 0.1% of the ensemble weight, the tests also re-run the comparison with multiloops made artificially cheap, pushing them past 50% of the weight — the recursions still match exactly. Stochastic Boltzmann sampling, which uses only the inside matrices, converges to the probabilities the outside pass computes independently.
 
@@ -62,7 +62,7 @@ Everything is then re-run on an independent screen: **CRISPRscan** (Moreno-Mateo
 
 ## Findings
 
-**Seed accessibility barely predicts editing efficiency, and what little it predicts is redundant.** Across both screens and all five measures, correlations sit between −0.08 and +0.07. The sharpest measure — ensemble accessibility of the seed in the intact sgRNA — does give the largest value in the predicted direction (within-gene ρ = 0.069 [0.010, 0.130] in Doench, interval excluding zero), and the ordering Nussinov 0.00 → MFE 0.06 → ensemble 0.07 is what a better instrument recovering a faint real effect would look like. But it explains under half a percent of the variance, it adds **0.000 [−0.004, 0.004]** to a sequence-only model, and it does not replicate in zebrafish.
+**Seed accessibility barely predicts editing efficiency, and what little it predicts is redundant.** Across both screens and all five measures, correlations sit between −0.08 and +0.07. The sharpest measure (ensemble accessibility of the seed in the intact sgRNA) does give the largest value in the predicted direction (within-gene ρ = 0.069 [0.010, 0.130] in Doench, interval excluding zero), and the ordering Nussinov 0.00 → MFE 0.06 → ensemble 0.07 is what a better instrument recovering a faint real effect would look like. But it explains under half a percent of the variance, it adds **0.000 [−0.004, 0.004]** to a sequence-only model, and it does not replicate in zebrafish.
 
 **Structure adds nothing to a sequence-only model in human cells.**
 
@@ -71,11 +71,11 @@ Everything is then re-run on an independent screen: **CRISPRscan** (Moreno-Mateo
 | Doench (human cells) | 0.195 | 0.197 | **+0.003** | [−0.013, 0.018] |
 | CRISPRscan (zebrafish) | 0.391 | 0.407 | **+0.016** | [0.004, 0.030] |
 
-**In zebrafish there is a small, real gain — pointing the wrong way.** Folding features add +0.016 on a 0.391 baseline, with an interval excluding zero. But in that screen *more* structure goes with *higher* activity (ensemble free energy ρ = −0.181), which is the opposite of "an occluded seed blocks targeting"; its strongest positions are 3–13, the PAM-**distal** half; and nothing like it appears in human cells. It most likely reflects nucleotide composition captured nonlinearly rather than accessibility.
+**In zebrafish there is a small, real gain that points the wrong way.** Folding features add +0.016 on a 0.391 baseline, with an interval excluding zero. But in that screen *more* structure goes with *higher* activity (ensemble free energy ρ = −0.181), which is the opposite of "an occluded seed blocks targeting"; its strongest positions are 3–13, the PAM-**distal** half; and nothing like it appears in human cells. It most likely reflects nucleotide composition captured nonlinearly rather than accessibility.
 
 **The canonical seed is not the right window either way.** In Doench the strongest positions are 19–20; in CRISPRscan they are 3–13. Two screens that localise an effect to opposite ends of the molecule are not describing one mechanism.
 
-**An aside worth the price of admission.** G/C content — the classic guide-design rule — correlates with Doench activity at pooled ρ = +0.134 but **−0.016** within genes. Its apparent usefulness there is entirely a between-gene effect. A feature can look predictive pooled across targets and carry no information for the choice a designer actually makes.
+**An aside worth the price of admission.** G/C content, the classic guide-design rule, correlates with Doench activity at pooled ρ = +0.134 but **−0.016** within genes. Its apparent usefulness there is entirely a between-gene effect. A feature can look predictive pooled across targets and carry no information for the choice a designer actually makes.
 
 See [ANALYSIS.md](ANALYSIS.md) for the full account and [analysis_outputs/study_summary.md](analysis_outputs/study_summary.md) for every table.
 
