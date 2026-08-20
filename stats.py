@@ -36,9 +36,12 @@ __all__ = [
     "cluster_bootstrap_ci",
     "paired_spearman_delta_ci",
     "spearman_permutation_p",
+    "within_group_permutation_p",
+    "partial_spearman",
     "assign_group_folds",
     "SparseDesign",
     "nested_cv_predictions",
+    "repeated_cv_predictions",
     "select_alpha",
     "fit_full",
 ]
@@ -286,16 +289,17 @@ def spearman_permutation_p(
     n_perm: int = 5000,
     seed: int = 0,
 ) -> float:
-    """Two-sided permutation p-value for a Spearman correlation.
+    """Two-sided permutation p-value for a pooled Spearman correlation.
 
-    CAUTION: this shuffles individual guides, which destroys the gene structure
-    in the data. Guides targeting one gene are correlated, so the effective
-    sample size is closer to the number of genes than the number of guides, and
-    a free shuffle therefore produces a null distribution that is too narrow.
-    The p-values it returns are anti-conservative and should be read as a rough
-    screen only. The cluster bootstrap intervals, which resample whole genes,
-    are the trustworthy uncertainty statement, and they are what the study's
-    conclusions rest on.
+    CAUTION: this shuffles individual observations, which destroys any group
+    structure in the data. When observations cluster (guides within a gene), the
+    effective sample size is closer to the number of groups than the number of
+    observations, so a free shuffle produces a null distribution that is too
+    narrow and the p-values come out anti-conservative.
+
+    ``within_group_permutation_p`` is the correct test when groups are present,
+    and it is what the study reports. This function is retained only for the
+    pooled, group-free comparison.
     """
     observed = abs(spearman(x, y))
     shuffled = list(y)
@@ -306,6 +310,87 @@ def spearman_permutation_p(
         if abs(spearman(x, shuffled)) >= observed:
             hits += 1
     return (hits + 1) / (n_perm + 1)
+
+
+def within_group_permutation_p(
+    values: list[float],
+    truth: list[float],
+    groups: list[str],
+    n_perm: int = 2000,
+    seed: int = 0,
+    min_size: int = 8,
+) -> float:
+    """Gene-blocked permutation p-value for the mean within-group Spearman.
+
+    The null being tested is "within a gene, this feature carries no information
+    about activity". The permutation therefore shuffles activity **inside each
+    gene separately**, which destroys the feature-to-activity link while leaving
+    the gene structure, the gene sizes, and every between-gene difference
+    exactly as observed.
+
+    Shuffling across the whole dataset would instead test a null that no one
+    believes ("gene identity does not matter either"), and because that null is
+    so easily rejected the resulting p-values are far too small. This is the
+    difference between a test a reviewer accepts and one they do not.
+    """
+    members: dict[str, list[int]] = {}
+    for index, group in enumerate(groups):
+        members.setdefault(group, []).append(index)
+    usable = {g: idx for g, idx in members.items() if len(idx) >= min_size}
+    if not usable:
+        return float("nan")
+
+    observed = abs(mean_within_group_spearman(values, truth, groups, min_size))
+    rng = random.Random(seed)
+    shuffled = list(truth)
+    hits = 0
+    for _ in range(n_perm):
+        for indices in usable.values():
+            block = [shuffled[i] for i in indices]
+            rng.shuffle(block)
+            for i, value in zip(indices, block):
+                shuffled[i] = value
+        stat = abs(mean_within_group_spearman(values, shuffled, groups, min_size))
+        if stat >= observed:
+            hits += 1
+    return (hits + 1) / (n_perm + 1)
+
+
+def partial_spearman(
+    x: list[float],
+    y: list[float],
+    control: list[float],
+) -> float:
+    """Spearman correlation between x and y after removing a control variable.
+
+    Ranks all three, regresses x and y on the ranked control, and correlates the
+    residuals. This answers "does x still track y once the control is accounted
+    for", which is the question behind the G/C confound: unpaired probability
+    and G/C content are strongly related, so a raw correlation between structure
+    and activity may be reporting composition rather than structure.
+    """
+    if len(x) != len(y) or len(x) != len(control):
+        raise ValueError("partial_spearman needs three equally long sequences")
+    if len(x) < 3:
+        return 0.0
+
+    rank_x = rank_average(list(x))
+    rank_y = rank_average(list(y))
+    rank_c = rank_average(list(control))
+
+    def residuals(target: list[float]) -> list[float]:
+        mean_c = sum(rank_c) / len(rank_c)
+        mean_t = sum(target) / len(target)
+        var_c = sum((v - mean_c) ** 2 for v in rank_c)
+        if var_c == 0.0:
+            return [v - mean_t for v in target]
+        covariance = sum(
+            (c - mean_c) * (t - mean_t) for c, t in zip(rank_c, target)
+        )
+        slope = covariance / var_c
+        return [t - (mean_t + slope * (c - mean_c)) for c, t in zip(rank_c, target)]
+
+    return pearson(residuals(rank_x), residuals(rank_y))
 
 
 # ------------------------------------------------------------ linear algebra
@@ -358,11 +443,20 @@ def assign_group_folds(groups: list[str], n_folds: int, seed: int = 0) -> list[i
     Groups are shuffled and then handed to whichever fold currently holds the
     fewest samples, which keeps folds close to equal size even when one gene
     contributes far more guides than another.
+
+    ``n_folds`` of 0 or less, or greater than the number of groups, means
+    leave-one-group-out: every group becomes its own fold. With 18 genes that is
+    the most thorough option and removes any dependence on a fold assignment.
     """
     counts: dict[str, int] = {}
     for group in groups:
         counts[group] = counts.get(group, 0) + 1
     names = sorted(counts)
+
+    if n_folds <= 0 or n_folds >= len(names):
+        index_of = {name: i for i, name in enumerate(names)}
+        return [index_of[group] for group in groups]
+
     random.Random(seed).shuffle(names)
     names.sort(key=lambda name: -counts[name])
 
@@ -478,6 +572,12 @@ def nested_cv_predictions(
     p = design.n_features
     outer = assign_group_folds(groups, n_outer, seed=seed)
     inner = assign_group_folds(groups, n_inner, seed=seed + 977)
+    # Derive the fold counts from the assignments rather than from the arguments.
+    # assign_group_folds falls back to leave-one-group-out when n_folds is 0 or
+    # exceeds the number of groups, so the requested count is not always what
+    # comes back, and looping over the requested count would silently skip folds.
+    n_outer_actual = max(outer) + 1
+    n_inner_actual = max(inner) + 1
 
     # One Gram per (outer, inner) cell; every training subset below is a sum of cells.
     cells: dict[tuple[int, int], tuple[list[list[float]], list[float]]] = {}
@@ -489,14 +589,16 @@ def nested_cv_predictions(
 
     predictions = [0.0] * len(design)
     chosen_alphas = []
-    for fold in range(n_outer):
+    for fold in range(n_outer_actual):
         train_keys = [key for key in cells if key[0] != fold]
+        if not train_keys:
+            continue
         train_system = _add_cells(cells, train_keys, p)
 
         # The Gram matrix does not depend on the ridge penalty, so build each
         # inner training system once and reuse it across the whole alpha grid.
         inner_systems = {}
-        for inner_fold in range(n_inner):
+        for inner_fold in range(n_inner_actual):
             held_keys = [key for key in train_keys if key[1] == inner_fold]
             held_indices = [i for key in held_keys for i in members[key]]
             if not held_indices or len(held_keys) == len(train_keys):
@@ -507,6 +609,9 @@ def nested_cv_predictions(
                 held_indices,
             )
 
+        # The penalty is selected on the SAME metric the study reports. Tuning on
+        # pooled Spearman and then reporting the within-gene number would pick a
+        # model optimised for a different objective than the one being judged.
         best_alpha, best_score = alphas[0], -2.0
         for alpha in alphas:
             scores = []
@@ -514,7 +619,11 @@ def nested_cv_predictions(
                 weights = _fit(gram, rhs, alpha, p, intercept_index)
                 predicted = design.predict(weights, held_indices)
                 truth = [y[i] for i in held_indices]
-                scores.append(spearman(predicted, truth))
+                held_groups = [groups[i] for i in held_indices]
+                score = mean_within_group_spearman(predicted, truth, held_groups)
+                if score != score:  # too few guides per gene in this inner fold
+                    score = spearman(predicted, truth)
+                scores.append(score)
             if scores:
                 mean_score = sum(scores) / len(scores)
                 if mean_score > best_score:
@@ -561,12 +670,50 @@ def select_alpha(
         scores = []
         for (gram, rhs), held in systems.values():
             weights = _fit(gram, rhs, alpha, p, intercept_index)
-            scores.append(spearman(design.predict(weights, held), [y[i] for i in held]))
+            predicted = design.predict(weights, held)
+            truth = [y[i] for i in held]
+            score = mean_within_group_spearman(predicted, truth, [groups[i] for i in held])
+            if score != score:
+                score = spearman(predicted, truth)
+            scores.append(score)
         if scores:
             mean_score = sum(scores) / len(scores)
             if mean_score > best_score:
                 best_alpha, best_score = alpha, mean_score
     return best_alpha
+
+
+def repeated_cv_predictions(
+    design: SparseDesign,
+    y: list[float],
+    groups: list[str],
+    alphas: list[float],
+    n_outer: int = 5,
+    n_inner: int = 3,
+    seeds: list[int] | None = None,
+    intercept_index: int = 0,
+) -> list[tuple[list[float], list[float]]]:
+    """Run nested grouped cross-validation once per fold assignment.
+
+    A single random assignment of genes to folds is itself a source of variation,
+    especially with only 18 genes: one unlucky split can move the reported score
+    more than the feature being tested does. Repeating over several assignments
+    and reporting the spread separates "this feature helps" from "this split was
+    favourable".
+
+    Returns one (predictions, chosen penalties) pair per seed.
+    """
+    seeds = seeds if seeds is not None else [0, 1, 2]
+    runs = []
+    for seed in seeds:
+        runs.append(
+            nested_cv_predictions(
+                design, y, groups, alphas,
+                n_outer=n_outer, n_inner=n_inner, seed=seed,
+                intercept_index=intercept_index,
+            )
+        )
+    return runs
 
 
 def fit_full(

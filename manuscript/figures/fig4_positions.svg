@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="468" height="352" viewBox="0 0 468 352">
+<rect width="468" height="352" fill="#ffffff"/>
+<text x="30.00" y="22.00" font-size="11.00" font-family="Helvetica, Arial, sans-serif" fill="#1a1a19" text-anchor="start" font-weight="700">No signal at the PAM-proximal seed</text>
+<text x="30.00" y="35.00" font-size="8.00" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="start">Correlation with activity at each spacer position, spacer folded inside the sgRNA</text>
+<text x="62.00" y="70.00" font-size="8.50" font-family="Helvetica, Arial, sans-serif" fill="#1a1a19" text-anchor="start" font-weight="700">Human cells</text>
+<line x1="62.00" y1="153.69" x2="430.00" y2="153.69" stroke="#dcdcd8" stroke-width="0.6"/>
+<text x="56.00" y="156.19" font-size="7.00" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="end">-0.15</text>
+<line x1="62.00" y1="106.38" x2="430.00" y2="106.38" stroke="#a8a8a4" stroke-width="1.0"/>
+<text x="56.00" y="108.88" font-size="7.00" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="end">0</text>
+<line x1="62.00" y1="90.62" x2="430.00" y2="90.62" stroke="#dcdcd8" stroke-width="0.6"/>
+<text x="56.00" y="93.12" font-size="7.00" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="end">0.05</text>
+<rect x="374.80" y="78.00" width="55.20" height="82.00" fill="#f1efe8"/>
+<text x="402.40" y="70.00" font-size="6.80" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="middle">positions 18-20</text>
+<text x="402.40" y="77.50" font-size="6.80" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="middle">(WU-CRISPR claim)</text>
+<rect x="63.20" y="102.64" width="16.00" height="3.75" fill="#c4c4c0"/>
+<text x="71.20" y="170.00" font-size="6.80" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="middle">1</text>
+<rect x="81.60" y="104.94" width="16.00" height="1.45" fill="#c4c4c0"/>
+<rect x="100.00" y="105.16" width="16.00" height="1.22" fill="#c4c4c0"/>
+<rect x="118.40" y="105.03" width="16.00" height="1.35" fill="#c4c4c0"/>
+<rect x="136.80" y="104.79" width="16.00" height="1.59" fill="#c4c4c0"/>
+<text x="144.80" y="170.00" font-size="6.80" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="middle">5</text>
+<rect x="155.20" y="105.34" width="16.00" height="1.04" fill="#c4c4c0"/>
+<rect x="173.60" y="106.38" width="16.00" height="7.44" fill="#c4c4c0"/>
+<rect x="192.00" y="106.38" width="16.00" height="2.66" fill="#c4c4c0"/>
+<rect x="210.40" y="106.38" width="16.00" height="0.80" fill="#c4c4c0"/>
+<rect x="228.80" y="101.26" width="16.00" height="5.12" fill="#c4c4c0"/>
+<text x="236.80" y="170.00" font-size="6.80" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="middle">10</text>
+<rect x="247.20" y="101.73" width="16.00" height="4.66" fill="#c4c4c0"/>
+<rect x="265.60" y="98.49" width="16.00" height="7.90" fill="#c4c4c0"/>
+<rect x="284.00" y="95.78" width="16.00" height="10.60" fill="#c4c4c0"/>
+<rect x="302.40" y="90.33" width="16.00" height="16.06" fill="#c4c4c0"/>
+<rect x="320.80" y="98.33" width="16.00" height="8.05" fill="#c4c4c0"/>
+<text x="328.80" y="170.00" font-size="6.80" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="middle">15</text>
+<rect x="339.20" y="101.88" width="16.00" height="4.51" fill="#c4c4c0"/>
+<rect x="357.60" y="101.29" width="16.00" height="5.09" fill="#c4c4c0"/>
+<rect x="376.00" y="99.24" width="16.00" height="7.15" fill="#c4c4c0"/>
+<rect x="394.40" y="92.00" width="16.00" height="14.39" fill="#c4c4c0"/>
+<rect x="412.80" y="91.02" width="16.00" height="15.36" fill="#c4c4c0"/>
+<text x="420.80" y="170.00" font-size="6.80" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="middle">20</text>
+<text x="436.00" y="119.00" font-size="7.50" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="start">0/20</text>
+<text x="62.00" y="208.00" font-size="8.50" font-family="Helvetica, Arial, sans-serif" fill="#1a1a19" text-anchor="start" font-weight="700">Zebrafish</text>
+<line x1="62.00" y1="291.69" x2="430.00" y2="291.69" stroke="#dcdcd8" stroke-width="0.6"/>
+<text x="56.00" y="294.19" font-size="7.00" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="end">-0.15</text>
+<line x1="62.00" y1="244.38" x2="430.00" y2="244.38" stroke="#a8a8a4" stroke-width="1.0"/>
+<text x="56.00" y="246.88" font-size="7.00" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="end">0</text>
+<line x1="62.00" y1="228.62" x2="430.00" y2="228.62" stroke="#dcdcd8" stroke-width="0.6"/>
+<text x="56.00" y="231.12" font-size="7.00" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="end">0.05</text>
+<rect x="374.80" y="216.00" width="55.20" height="82.00" fill="#f1efe8"/>
+<rect x="63.20" y="235.98" width="16.00" height="8.41" fill="#c4c4c0"/>
+<text x="71.20" y="308.00" font-size="6.80" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="middle">1</text>
+<rect x="81.60" y="244.38" width="16.00" height="7.87" fill="#c4c4c0"/>
+<rect x="100.00" y="244.38" width="16.00" height="23.71" fill="#c4c4c0"/>
+<rect x="118.40" y="244.38" width="16.00" height="34.82" fill="#eb6834"/>
+<rect x="136.80" y="244.38" width="16.00" height="34.32" fill="#eb6834"/>
+<text x="144.80" y="308.00" font-size="6.80" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="middle">5</text>
+<rect x="155.20" y="244.38" width="16.00" height="41.26" fill="#eb6834"/>
+<rect x="173.60" y="244.38" width="16.00" height="30.64" fill="#eb6834"/>
+<rect x="192.00" y="244.38" width="16.00" height="34.10" fill="#eb6834"/>
+<rect x="210.40" y="244.38" width="16.00" height="20.50" fill="#c4c4c0"/>
+<rect x="228.80" y="244.38" width="16.00" height="32.09" fill="#eb6834"/>
+<text x="236.80" y="308.00" font-size="6.80" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="middle">10</text>
+<rect x="247.20" y="244.38" width="16.00" height="37.70" fill="#eb6834"/>
+<rect x="265.60" y="244.38" width="16.00" height="35.33" fill="#eb6834"/>
+<rect x="284.00" y="244.38" width="16.00" height="18.41" fill="#c4c4c0"/>
+<rect x="302.40" y="244.38" width="16.00" height="16.03" fill="#c4c4c0"/>
+<rect x="320.80" y="244.38" width="16.00" height="13.03" fill="#c4c4c0"/>
+<text x="328.80" y="308.00" font-size="6.80" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="middle">15</text>
+<rect x="339.20" y="244.38" width="16.00" height="3.14" fill="#c4c4c0"/>
+<rect x="357.60" y="233.42" width="16.00" height="10.97" fill="#c4c4c0"/>
+<rect x="376.00" y="232.23" width="16.00" height="12.15" fill="#c4c4c0"/>
+<rect x="394.40" y="228.13" width="16.00" height="16.25" fill="#c4c4c0"/>
+<rect x="412.80" y="236.98" width="16.00" height="7.41" fill="#c4c4c0"/>
+<text x="420.80" y="308.00" font-size="6.80" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="middle">20</text>
+<text x="436.00" y="257.00" font-size="7.50" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="start">8/20</text>
+<text x="30.00" y="330.00" font-size="7.50" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="start">Filled bars survive Benjamini-Hochberg correction across the 20 positions.</text>
+<text x="30.00" y="340.00" font-size="7.50" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="start">Where signal appears it sits at the PAM-distal end, the wrong end for seed occlusion.</text>
+</svg>

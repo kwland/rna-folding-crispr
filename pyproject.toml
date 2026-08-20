@@ -16,11 +16,17 @@ classifiers = [
   "Topic :: Scientific/Engineering :: Bio-Informatics",
 ]
 
+[project.optional-dependencies]
+# ViennaRNA is used only to validate the custom folding model against a reference
+# implementation. Nothing in the analysis pipeline imports it.
+validation = ["ViennaRNA>=2.6"]
+
 [project.scripts]
 rna-fold = "nussinov:main"
 crispr-guide-features = "crispr_nussinov_analysis:main"
 crispr-fold-screen = "compute_features:main"
 crispr-run-study = "run_study:main"
+crispr-reproduce = "reproduce:main"
 
 [tool.setuptools]
 py-modules = [
@@ -38,4 +44,8 @@ py-modules = [
   "export_model",
   "export_site_data",
   "make_figures",
+  "fetch_data",
+  "vienna_reference",
+  "validate_vienna",
+  "reproduce",
 ]

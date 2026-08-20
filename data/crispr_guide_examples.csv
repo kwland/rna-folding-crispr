@@ -1,0 +1,7 @@
+name,comparison_group,spacer_dna,activity_label,source,notes
+balanced_example_1,synthetic_example,CTTAAGGGTTAAGTAAGTGT,not_measured,synthetic demonstration,Illustrative 20 nt sequence with moderate GC content
+balanced_example_2,synthetic_example,TCACCCTAAGTAACCGAATA,not_measured,synthetic demonstration,Second illustrative 20 nt sequence for exercising batch input
+mixed_example_1,synthetic_example,ATGCTAGCTACGATCGTACG,not_measured,synthetic demonstration,Illustrative mixed-composition spacer
+mixed_example_2,synthetic_example,CAGTACGTTGACCTAGATGC,not_measured,synthetic demonstration,Second mixed-composition spacer
+poly_t_stress_test,stress_test,GACTTTTACGTTAGCATGAA,not_measured,synthetic demonstration,Contains a TTTT run that can be undesirable for U6-driven sgRNA expression
+high_gc_self_pair_stress_test,stress_test,GCGCGATACGCGTATCGCGC,not_measured,synthetic demonstration,High GC and strong predicted self-pairing

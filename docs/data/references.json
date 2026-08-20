@@ -1,0 +1,26 @@
+[
+  {
+    "id": "hairpin",
+    "name": "Designed hairpin",
+    "seq": "GGGGAAAACCCC",
+    "structure": "((((....))))",
+    "note": "A simple stem-loop, small enough to verify by hand.",
+    "cite": "textbook example"
+  },
+  {
+    "id": "two-hairpin",
+    "name": "Two small hairpins",
+    "seq": "GGGAAACCCUUGGGAAACCC",
+    "structure": "(((...)))..(((...)))",
+    "note": "Two separate stem-loops side by side.",
+    "cite": "textbook example"
+  },
+  {
+    "id": "trna-phe",
+    "name": "tRNA-Phe (yeast)",
+    "seq": "GCGGAUUUAGCUCAGUUGGGAGAGCGCCAGACUGAAGAUCUGGAGGUCCUGUGUUCGAUCCACAGAAUUCGCACCA",
+    "structure": "(((((((..((((........)))).(((((.......))))).....(((((.......))))))))))))....",
+    "note": "A real transfer-RNA. Its cloverleaf shape has been known since the 1970s.",
+    "cite": "classic tRNA cloverleaf"
+  }
+]

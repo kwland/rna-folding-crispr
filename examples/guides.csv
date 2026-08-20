@@ -1,0 +1,4 @@
+name,spacer_dna,description
+balanced_example,CTTAAGGGTTAAGTAAGTGT,Synthetic 20 nt example with moderate GC content
+poly_t_warning,GACTTTTACGTTAGCATGAA,Synthetic stress test containing a TTTT run
+self_pairing_warning,GCGCGATACGCGTATCGCGC,Synthetic stress test with strong predicted self-pairing

@@ -105,9 +105,64 @@ def build(results: dict) -> dict:
     return site
 
 
+def build_validation(validation: dict) -> dict:
+    """The ViennaRNA comparison, reduced to what the site displays."""
+    out: dict = {"datasets": {}}
+    for name, block in validation["datasets"].items():
+        incremental = block["incremental"]
+        out["datasets"][name] = {
+            "label": block["label"],
+            "agreement": [
+                {
+                    "label": row["label"],
+                    "pearson": _round(row["pearson"]),
+                    "spearman": _round(row["spearman"]),
+                    "meanAbsDifference": _round(row["mean_absolute_difference"]),
+                }
+                for row in block["agreement"]
+            ],
+            "correlations": [
+                {
+                    "label": row["label"],
+                    "custom": _round(row["custom_within_gene"]),
+                    "vienna": _round(row["vienna_within_gene"]),
+                    "ciLow": _round(row["vienna_ci_low"]),
+                    "ciHigh": _round(row["vienna_ci_high"]),
+                }
+                for row in block["correlations"]
+            ],
+            "incremental": {
+                "baseline": _round(incremental["baseline_spearman"]),
+                "models": [
+                    {
+                        "name": m["name"],
+                        "spearman": _round(m["spearman"]),
+                        "delta": _round(m["delta"]),
+                        "deltaLow": _round(m["delta_ci_low"]),
+                        "deltaHigh": _round(m["delta_ci_high"]),
+                    }
+                    for m in incremental["models"]
+                ],
+            },
+            "sensitivity": [
+                {
+                    "setting": row["setting"],
+                    "seedEnsemble": _round(row["vienna_seed_ensemble_full"]["within_gene"]),
+                    "meanUnpaired": _round(row["vienna_mean_unpaired_full"]["within_gene"]),
+                    "ensembleEnergy": _round(row["vienna_ensemble_energy_full"]["within_gene"]),
+                }
+                for row in block["sensitivity"]
+                if row.get("available")
+            ],
+        }
+    return out
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Build the website's study data file.")
     parser.add_argument("--input", type=Path, default=Path("analysis_outputs/study_results.json"))
+    parser.add_argument("--validation", type=Path,
+                        default=Path("analysis_outputs/vienna_validation.json"))
     parser.add_argument("--output", type=Path, default=Path("docs/data/study.json"))
     args = parser.parse_args()
 
@@ -115,6 +170,14 @@ def main() -> None:
         raise SystemExit(f"{args.input} is missing. Run run_study.py first.")
     results = json.loads(args.input.read_text(encoding="utf-8"))
     payload = build(results)
+
+    # The ViennaRNA comparison is optional: the site hides that card without it.
+    if args.validation.exists():
+        payload["validation"] = build_validation(
+            json.loads(args.validation.read_text(encoding="utf-8"))
+        )
+    else:
+        print(f"note: {args.validation} not found, the site will omit the ViennaRNA card")
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(payload, separators=(",", ":")), encoding="utf-8")

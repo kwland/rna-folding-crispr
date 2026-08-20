@@ -1,0 +1,1335 @@
+{
+  "datasets": {
+    "doench": {
+      "label": "Doench 2014 + 2016 pooled (human cells)",
+      "n": 4685,
+      "agreement": [
+        {
+          "feature": "seed_mfe_spacer",
+          "vienna_feature": "vienna_seed_mfe_spacer",
+          "label": "MFE seed accessibility (spacer alone)",
+          "pearson": 0.6446355060321061,
+          "spearman": 0.6177172848403439,
+          "mean_difference": 0.13172358591248665,
+          "mean_absolute_difference": 0.14810565635005335,
+          "max_absolute_difference": 0.875
+        },
+        {
+          "feature": "seed_ensemble_spacer",
+          "vienna_feature": "vienna_seed_ensemble_spacer",
+          "label": "Ensemble seed accessibility (spacer alone)",
+          "pearson": 0.8413199963933111,
+          "spearman": 0.8920444060807611,
+          "mean_difference": 0.11918999679829241,
+          "mean_absolute_difference": 0.12902079594450375,
+          "max_absolute_difference": 0.6371789999999999
+        },
+        {
+          "feature": "seed_mfe_full",
+          "vienna_feature": "vienna_seed_mfe_full",
+          "label": "MFE seed accessibility (spacer + scaffold)",
+          "pearson": 0.5734124048367993,
+          "spearman": 0.5940400186125937,
+          "mean_difference": -0.030896478121664888,
+          "mean_absolute_difference": 0.1360725720384205,
+          "max_absolute_difference": 1.0
+        },
+        {
+          "feature": "seed_ensemble_full",
+          "vienna_feature": "vienna_seed_ensemble_full",
+          "label": "Ensemble seed accessibility (spacer + scaffold)",
+          "pearson": 0.8070870619254658,
+          "spearman": 0.8040192386981885,
+          "mean_difference": -0.022056847812166488,
+          "mean_absolute_difference": 0.08111099252934899,
+          "max_absolute_difference": 0.6291150000000001
+        },
+        {
+          "feature": "mean_unpaired_spacer",
+          "vienna_feature": "vienna_mean_unpaired_spacer",
+          "label": "Mean unpaired probability (spacer alone)",
+          "pearson": 0.841289160273144,
+          "spearman": 0.9119041197147444,
+          "mean_difference": 0.11785675709711846,
+          "mean_absolute_difference": 0.1239843848452508,
+          "max_absolute_difference": 0.5210440000000001
+        },
+        {
+          "feature": "mean_unpaired_full",
+          "vienna_feature": "vienna_mean_unpaired_full",
+          "label": "Mean unpaired probability (in sgRNA)",
+          "pearson": 0.7700426454409425,
+          "spearman": 0.7526951776980804,
+          "mean_difference": -0.035139410672358595,
+          "mean_absolute_difference": 0.06601491035218783,
+          "max_absolute_difference": 0.46186299999999997
+        },
+        {
+          "feature": "mfe_energy_full",
+          "vienna_feature": "vienna_mfe_energy_full",
+          "label": "MFE energy (spacer + scaffold)",
+          "pearson": 0.7992467554825587,
+          "spearman": 0.7808185605189638,
+          "mean_difference": 4.430851974386339,
+          "mean_absolute_difference": 4.440184781216649,
+          "max_absolute_difference": 12.54
+        },
+        {
+          "feature": "ensemble_energy_full",
+          "vienna_feature": "vienna_ensemble_energy_full",
+          "label": "Ensemble free energy (spacer + scaffold)",
+          "pearson": 0.8331244824855921,
+          "spearman": 0.8185868787255896,
+          "mean_difference": 4.364480021344717,
+          "mean_absolute_difference": 4.366740256136606,
+          "max_absolute_difference": 12.003
+        }
+      ],
+      "position_agreement": [
+        {
+          "context": "spacer",
+          "position": 1,
+          "pearson": 0.7597544270945878,
+          "spearman": 0.8634869032467233,
+          "mean_absolute_difference": 0.10541546125933832,
+          "mean_custom": 0.9003474271077907,
+          "mean_vienna": 0.8149283474919957
+        },
+        {
+          "context": "spacer",
+          "position": 2,
+          "pearson": 0.7718354163639289,
+          "spearman": 0.881225305030265,
+          "mean_absolute_difference": 0.15921578078975454,
+          "mean_custom": 0.8407053489861259,
+          "mean_vienna": 0.6993191383137674
+        },
+        {
+          "context": "spacer",
+          "position": 3,
+          "pearson": 0.7799371399899199,
+          "spearman": 0.8986962854167049,
+          "mean_absolute_difference": 0.17775427449306297,
+          "mean_custom": 0.8019091594450373,
+          "mean_vienna": 0.6430077472785486
+        },
+        {
+          "context": "spacer",
+          "position": 4,
+          "pearson": 0.7921214504883173,
+          "spearman": 0.903026740377673,
+          "mean_absolute_difference": 0.1759364226254002,
+          "mean_custom": 0.7831177267876201,
+          "mean_vienna": 0.6254803662753469
+        },
+        {
+          "context": "spacer",
+          "position": 5,
+          "pearson": 0.7950585804274404,
+          "spearman": 0.902446739415705,
+          "mean_absolute_difference": 0.17039762326574173,
+          "mean_custom": 0.7805536166488793,
+          "mean_vienna": 0.6299563472785485
+        },
+        {
+          "context": "spacer",
+          "position": 6,
+          "pearson": 0.7982272520642721,
+          "spearman": 0.8923944532266409,
+          "mean_absolute_difference": 0.15915538377801494,
+          "mean_custom": 0.7953586919957311,
+          "mean_vienna": 0.659087704375667
+        },
+        {
+          "context": "spacer",
+          "position": 7,
+          "pearson": 0.7951703767995862,
+          "spearman": 0.8862353978273367,
+          "mean_absolute_difference": 0.1496344399146211,
+          "mean_custom": 0.8112738132337246,
+          "mean_vienna": 0.6880250898612593
+        },
+        {
+          "context": "spacer",
+          "position": 8,
+          "pearson": 0.7984457410612414,
+          "spearman": 0.8707410920835846,
+          "mean_absolute_difference": 0.12804401814300959,
+          "mean_custom": 0.8393172036286018,
+          "mean_vienna": 0.7406003803628602
+        },
+        {
+          "context": "spacer",
+          "position": 9,
+          "pearson": 0.7829895680099649,
+          "spearman": 0.8567833321475196,
+          "mean_absolute_difference": 0.11675119786552829,
+          "mean_custom": 0.8588440548559232,
+          "mean_vienna": 0.7775903511205977
+        },
+        {
+          "context": "spacer",
+          "position": 10,
+          "pearson": 0.7654225901524169,
+          "spearman": 0.8471380095168515,
+          "mean_absolute_difference": 0.11675549839914622,
+          "mean_custom": 0.8685201391675561,
+          "mean_vienna": 0.7886925861259338
+        },
+        {
+          "context": "spacer",
+          "position": 11,
+          "pearson": 0.7496966267682569,
+          "spearman": 0.8512514879455363,
+          "mean_absolute_difference": 0.1237534826040555,
+          "mean_custom": 0.868306232230523,
+          "mean_vienna": 0.7804199632870864
+        },
+        {
+          "context": "spacer",
+          "position": 12,
+          "pearson": 0.7742971191119553,
+          "spearman": 0.8690521722149819,
+          "mean_absolute_difference": 0.13134193062966917,
+          "mean_custom": 0.854822392529349,
+          "mean_vienna": 0.7523526202774814
+        },
+        {
+          "context": "spacer",
+          "position": 13,
+          "pearson": 0.785621377289027,
+          "spearman": 0.8794229164800644,
+          "mean_absolute_difference": 0.14515599167556031,
+          "mean_custom": 0.8314204567769476,
+          "mean_vienna": 0.7116468155816434
+        },
+        {
+          "context": "spacer",
+          "position": 14,
+          "pearson": 0.7927680155045145,
+          "spearman": 0.8944317627048106,
+          "mean_absolute_difference": 0.15465586958377803,
+          "mean_custom": 0.8117300313767343,
+          "mean_vienna": 0.6793825263607257
+        },
+        {
+          "context": "spacer",
+          "position": 15,
+          "pearson": 0.7995086100792088,
+          "spearman": 0.8983574747171398,
+          "mean_absolute_difference": 0.16274801109925294,
+          "mean_custom": 0.7935090157950907,
+          "mean_vienna": 0.6510036727854855
+        },
+        {
+          "context": "spacer",
+          "position": 16,
+          "pearson": 0.8023694800446453,
+          "spearman": 0.9017277346038919,
+          "mean_absolute_difference": 0.17204879423692634,
+          "mean_custom": 0.7770499430096052,
+          "mean_vienna": 0.6216697378868731
+        },
+        {
+          "context": "spacer",
+          "position": 17,
+          "pearson": 0.7996967852632247,
+          "spearman": 0.9003245554771534,
+          "mean_absolute_difference": 0.17047315773745997,
+          "mean_custom": 0.7757751763073639,
+          "mean_vienna": 0.6247768403415155
+        },
+        {
+          "context": "spacer",
+          "position": 18,
+          "pearson": 0.7986745669322448,
+          "spearman": 0.8904360399671915,
+          "mean_absolute_difference": 0.15955963244397012,
+          "mean_custom": 0.7966557867662754,
+          "mean_vienna": 0.6602316915688368
+        },
+        {
+          "context": "spacer",
+          "position": 19,
+          "pearson": 0.801151446129229,
+          "spearman": 0.8701455864241113,
+          "mean_absolute_difference": 0.1256982204909285,
+          "mean_custom": 0.8376623144076841,
+          "mean_vienna": 0.7426700448239061
+        },
+        {
+          "context": "spacer",
+          "position": 20,
+          "pearson": 0.8139568645402017,
+          "spearman": 0.8716131160626426,
+          "mean_absolute_difference": 0.06578834770544291,
+          "mean_custom": 0.898154406189968,
+          "mean_vienna": 0.877055826254002
+        },
+        {
+          "context": "full",
+          "position": 1,
+          "pearson": 0.5808946981807698,
+          "spearman": 0.5725778807757135,
+          "mean_absolute_difference": 0.177097710565635,
+          "mean_custom": 0.738138144076841,
+          "mean_vienna": 0.7895131472785486
+        },
+        {
+          "context": "full",
+          "position": 2,
+          "pearson": 0.5688783831981986,
+          "spearman": 0.568469999360268,
+          "mean_absolute_difference": 0.228659144076841,
+          "mean_custom": 0.5864128110992529,
+          "mean_vienna": 0.6411354655282818
+        },
+        {
+          "context": "full",
+          "position": 3,
+          "pearson": 0.5901386384875572,
+          "spearman": 0.6097431544142304,
+          "mean_absolute_difference": 0.2330224424759872,
+          "mean_custom": 0.5014250755602989,
+          "mean_vienna": 0.5598270279615796
+        },
+        {
+          "context": "full",
+          "position": 4,
+          "pearson": 0.6069311705135859,
+          "spearman": 0.6368196069480118,
+          "mean_absolute_difference": 0.2279919417289221,
+          "mean_custom": 0.4565844217716115,
+          "mean_vienna": 0.5104416313767343
+        },
+        {
+          "context": "full",
+          "position": 5,
+          "pearson": 0.6163141386419687,
+          "spearman": 0.6493944470906606,
+          "mean_absolute_difference": 0.22315561088580574,
+          "mean_custom": 0.4401327050160085,
+          "mean_vienna": 0.48777927385272146
+        },
+        {
+          "context": "full",
+          "position": 6,
+          "pearson": 0.6340599138134998,
+          "spearman": 0.670460136425713,
+          "mean_absolute_difference": 0.21517051782283886,
+          "mean_custom": 0.4241452352187834,
+          "mean_vienna": 0.475341331696905
+        },
+        {
+          "context": "full",
+          "position": 7,
+          "pearson": 0.6485878319336393,
+          "spearman": 0.6837688654367766,
+          "mean_absolute_difference": 0.2097007327641409,
+          "mean_custom": 0.41415818143009603,
+          "mean_vienna": 0.4617714482390608
+        },
+        {
+          "context": "full",
+          "position": 8,
+          "pearson": 0.664208277896543,
+          "spearman": 0.7023594344268584,
+          "mean_absolute_difference": 0.2036283910352188,
+          "mean_custom": 0.4104973389541089,
+          "mean_vienna": 0.4541680168623266
+        },
+        {
+          "context": "full",
+          "position": 9,
+          "pearson": 0.6860890944866436,
+          "spearman": 0.7242470229328042,
+          "mean_absolute_difference": 0.1956122204909285,
+          "mean_custom": 0.4050537534685165,
+          "mean_vienna": 0.44368086446104593
+        },
+        {
+          "context": "full",
+          "position": 10,
+          "pearson": 0.7098160274875314,
+          "spearman": 0.7465476743677747,
+          "mean_absolute_difference": 0.18706122774813233,
+          "mean_custom": 0.40160698996798294,
+          "mean_vienna": 0.4334149250800427
+        },
+        {
+          "context": "full",
+          "position": 11,
+          "pearson": 0.7239475120954422,
+          "spearman": 0.762999255918119,
+          "mean_absolute_difference": 0.18127836606189968,
+          "mean_custom": 0.4059617820704376,
+          "mean_vienna": 0.43120338399146213
+        },
+        {
+          "context": "full",
+          "position": 12,
+          "pearson": 0.7409775413674773,
+          "spearman": 0.7808068411014727,
+          "mean_absolute_difference": 0.17500647833511207,
+          "mean_custom": 0.4165423308431163,
+          "mean_vienna": 0.438715742796158
+        },
+        {
+          "context": "full",
+          "position": 13,
+          "pearson": 0.7493117538438484,
+          "spearman": 0.7847707235638165,
+          "mean_absolute_difference": 0.16964770330843115,
+          "mean_custom": 0.41215115602988256,
+          "mean_vienna": 0.4233370288153682
+        },
+        {
+          "context": "full",
+          "position": 14,
+          "pearson": 0.7539230088345695,
+          "spearman": 0.7855317050904442,
+          "mean_absolute_difference": 0.17009717545357522,
+          "mean_custom": 0.4171264364994664,
+          "mean_vienna": 0.42765915944503735
+        },
+        {
+          "context": "full",
+          "position": 15,
+          "pearson": 0.777616198833416,
+          "spearman": 0.8076594999055265,
+          "mean_absolute_difference": 0.16076133980789756,
+          "mean_custom": 0.42057529647812164,
+          "mean_vienna": 0.4250698217716115
+        },
+        {
+          "context": "full",
+          "position": 16,
+          "pearson": 0.7870936053746234,
+          "spearman": 0.8190537097841479,
+          "mean_absolute_difference": 0.15745735816435433,
+          "mean_custom": 0.41131818826040556,
+          "mean_vienna": 0.41356699957310566
+        },
+        {
+          "context": "full",
+          "position": 17,
+          "pearson": 0.7845212575646708,
+          "spearman": 0.8223424536308386,
+          "mean_absolute_difference": 0.15788272849519744,
+          "mean_custom": 0.40936603180362857,
+          "mean_vienna": 0.42391597267876197
+        },
+        {
+          "context": "full",
+          "position": 18,
+          "pearson": 0.8067427632759814,
+          "spearman": 0.8432642388624852,
+          "mean_absolute_difference": 0.15291960576307365,
+          "mean_custom": 0.4254452552828175,
+          "mean_vienna": 0.45645965080042694
+        },
+        {
+          "context": "full",
+          "position": 19,
+          "pearson": 0.8048946247106615,
+          "spearman": 0.8392927506328031,
+          "mean_absolute_difference": 0.15959700512273212,
+          "mean_custom": 0.4795855993596585,
+          "mean_vienna": 0.5455435090715048
+        },
+        {
+          "context": "full",
+          "position": 20,
+          "pearson": 0.81656845657084,
+          "spearman": 0.8403171298783025,
+          "mean_absolute_difference": 0.14862229690501602,
+          "mean_custom": 0.486553636072572,
+          "mean_vienna": 0.5230242194236927
+        }
+      ],
+      "correlations": [
+        {
+          "feature": "vienna_seed_mfe_spacer",
+          "label": "MFE seed accessibility (spacer alone)",
+          "vienna_within_gene": 0.0004223684847031841,
+          "vienna_ci_low": -0.05128206274945138,
+          "vienna_ci_high": 0.060980954496503044,
+          "custom_within_gene": 0.03303973964952662,
+          "difference": -0.03261737116482343,
+          "vienna_pooled": -0.037071765342666735,
+          "vienna_partial_gc": 0.008710244004006218,
+          "n_groups": 18
+        },
+        {
+          "feature": "vienna_seed_ensemble_spacer",
+          "label": "Ensemble seed accessibility (spacer alone)",
+          "vienna_within_gene": -0.007145223339442799,
+          "vienna_ci_low": -0.061201576258855424,
+          "vienna_ci_high": 0.053142887364919,
+          "custom_within_gene": 0.004782586381822971,
+          "difference": -0.01192780972126577,
+          "vienna_pooled": -0.04754052285037899,
+          "vienna_partial_gc": -0.0006190085202021268,
+          "n_groups": 18
+        },
+        {
+          "feature": "vienna_seed_mfe_full",
+          "label": "MFE seed accessibility (spacer + scaffold)",
+          "vienna_within_gene": 0.06588866976548785,
+          "vienna_ci_low": 0.014335142880833877,
+          "vienna_ci_high": 0.11841594251895533,
+          "custom_within_gene": 0.05639319003836153,
+          "difference": 0.009495479727126319,
+          "vienna_pooled": 0.038980213690479305,
+          "vienna_partial_gc": 0.04873773997982903,
+          "n_groups": 18
+        },
+        {
+          "feature": "vienna_seed_ensemble_full",
+          "label": "Ensemble seed accessibility (spacer + scaffold)",
+          "vienna_within_gene": 0.07525793952485442,
+          "vienna_ci_low": 0.020092136496745516,
+          "vienna_ci_high": 0.13227542136928952,
+          "custom_within_gene": 0.06851700146277301,
+          "difference": 0.006740938062081411,
+          "vienna_pooled": 0.0379288878781297,
+          "vienna_partial_gc": 0.054869090607404095,
+          "n_groups": 18
+        },
+        {
+          "feature": "vienna_mean_unpaired_spacer",
+          "label": "Mean unpaired probability (spacer alone)",
+          "vienna_within_gene": 0.015098931116573674,
+          "vienna_ci_low": -0.04175230869309655,
+          "vienna_ci_high": 0.07327906864942774,
+          "custom_within_gene": 0.0248016246169485,
+          "difference": -0.009702693500374827,
+          "vienna_pooled": -0.028131475545287568,
+          "vienna_partial_gc": 0.03094367309711273,
+          "n_groups": 18
+        },
+        {
+          "feature": "vienna_mean_unpaired_full",
+          "label": "Mean unpaired probability (in sgRNA)",
+          "vienna_within_gene": 0.06618276723158,
+          "vienna_ci_low": 0.03052594166010226,
+          "vienna_ci_high": 0.10775297510581663,
+          "custom_within_gene": 0.047449616129097476,
+          "difference": 0.01873315110248252,
+          "vienna_pooled": 0.028348459642625487,
+          "vienna_partial_gc": 0.07050339120040129,
+          "n_groups": 18
+        },
+        {
+          "feature": "vienna_mfe_energy_full",
+          "label": "MFE energy (spacer + scaffold)",
+          "vienna_within_gene": 0.04034499934344122,
+          "vienna_ci_low": -0.013247865194055939,
+          "vienna_ci_high": 0.09465881762177493,
+          "custom_within_gene": 0.04988996851689401,
+          "difference": -0.009544969173452787,
+          "vienna_pooled": -0.0057067529158132835,
+          "vienna_partial_gc": 0.0716672311106651,
+          "n_groups": 18
+        },
+        {
+          "feature": "vienna_ensemble_energy_full",
+          "label": "Ensemble free energy (spacer + scaffold)",
+          "vienna_within_gene": 0.04483437966477469,
+          "vienna_ci_low": -0.008565532385496564,
+          "vienna_ci_high": 0.10070051363620137,
+          "custom_within_gene": 0.055147716609198205,
+          "difference": -0.010313336944423518,
+          "vienna_pooled": -0.0060963503305449624,
+          "vienna_partial_gc": 0.07527876278979062,
+          "n_groups": 18
+        }
+      ],
+      "incremental": {
+        "baseline_spearman": 0.19556649302620197,
+        "models": [
+          {
+            "name": "vienna_structure_all",
+            "spearman": 0.19707925368340348,
+            "delta": 0.0015127606572015065,
+            "delta_ci_low": -0.003632292340350911,
+            "delta_ci_high": 0.006584459234158664
+          },
+          {
+            "name": "vienna_ensemble_only",
+            "spearman": 0.19663321146097573,
+            "delta": 0.001066718434773763,
+            "delta_ci_low": -0.0029856827369973797,
+            "delta_ci_high": 0.005496553691411579
+          }
+        ]
+      },
+      "sensitivity": [
+        {
+          "setting": "37 C, global folding",
+          "available": true,
+          "temperature": 37.0,
+          "max_span": null,
+          "vienna_seed_ensemble_full": {
+            "within_gene": 0.07525793952485442,
+            "ci_low": 0.020092136496745516,
+            "ci_high": 0.13227542136928952,
+            "mean": 0.45482205229455713
+          },
+          "vienna_mean_unpaired_full": {
+            "within_gene": 0.06618276723158,
+            "ci_low": 0.03052594166010226,
+            "ci_high": 0.10775297510581663,
+            "mean": 0.4882784309498399
+          },
+          "vienna_ensemble_energy_full": {
+            "within_gene": 0.04483437966477469,
+            "ci_low": -0.008565532385496564,
+            "ci_high": 0.10070051363620137,
+            "mean": -24.315217289220918
+          }
+        },
+        {
+          "setting": "25 C, global folding",
+          "available": true,
+          "temperature": 25.0,
+          "max_span": null,
+          "vienna_seed_ensemble_full": {
+            "within_gene": 0.08234925242938283,
+            "ci_low": 0.022507166396796594,
+            "ci_high": 0.14033825875677136,
+            "mean": 0.4425111588046959
+          },
+          "vienna_mean_unpaired_full": {
+            "within_gene": 0.07287118945844295,
+            "ci_low": 0.03527721285962586,
+            "ci_high": 0.11300929464733261,
+            "mean": 0.4662661099252935
+          },
+          "vienna_ensemble_energy_full": {
+            "within_gene": 0.04069203052237957,
+            "ci_low": -0.012868222421842653,
+            "ci_high": 0.09533692968280451,
+            "mean": -32.13705551760939
+          }
+        },
+        {
+          "setting": "42 C, global folding",
+          "available": true,
+          "temperature": 42.0,
+          "max_span": null,
+          "vienna_seed_ensemble_full": {
+            "within_gene": 0.07153096515528123,
+            "ci_low": 0.016965005972555753,
+            "ci_high": 0.12854198447352527,
+            "mean": 0.4618279743863394
+          },
+          "vienna_mean_unpaired_full": {
+            "within_gene": 0.06647566009894575,
+            "ci_low": 0.030709290137594752,
+            "ci_high": 0.10978507518941823,
+            "mean": 0.5000099248665956
+          },
+          "vienna_ensemble_energy_full": {
+            "within_gene": 0.047665281530128015,
+            "ci_low": -0.006101681563265611,
+            "ci_high": 0.10370832823991297,
+            "mean": -21.286895560298827
+          }
+        },
+        {
+          "setting": "37 C, local folding (max span 40)",
+          "available": true,
+          "temperature": 37.0,
+          "max_span": 40,
+          "vienna_seed_ensemble_full": {
+            "within_gene": 0.046182753506372826,
+            "ci_low": -0.007172247798976564,
+            "ci_high": 0.09979954825951973,
+            "mean": 0.5386478900747065
+          },
+          "vienna_mean_unpaired_full": {
+            "within_gene": 0.006086073415098149,
+            "ci_low": -0.04232449148478689,
+            "ci_high": 0.05055627446024372,
+            "mean": 0.572340540448239
+          },
+          "vienna_ensemble_energy_full": {
+            "within_gene": 0.050671648905156186,
+            "ci_low": -0.016551377476867933,
+            "ci_high": 0.11941211322573331,
+            "mean": -21.323520640341513
+          }
+        }
+      ]
+    },
+    "crisprscan": {
+      "label": "CRISPRscan / Moreno-Mateos 2015 (zebrafish, in vivo)",
+      "n": 1020,
+      "agreement": [
+        {
+          "feature": "seed_mfe_spacer",
+          "vienna_feature": "vienna_seed_mfe_spacer",
+          "label": "MFE seed accessibility (spacer alone)",
+          "pearson": 0.568832212811795,
+          "spearman": 0.5279937554786446,
+          "mean_difference": 0.15269607843137256,
+          "mean_absolute_difference": 0.18112745098039215,
+          "max_absolute_difference": 0.875
+        },
+        {
+          "feature": "seed_ensemble_spacer",
+          "vienna_feature": "vienna_seed_ensemble_spacer",
+          "label": "Ensemble seed accessibility (spacer alone)",
+          "pearson": 0.7821958481844506,
+          "spearman": 0.8239678524914318,
+          "mean_difference": 0.12923402549019608,
+          "mean_absolute_difference": 0.14370712941176472,
+          "max_absolute_difference": 0.668137
+        },
+        {
+          "feature": "seed_mfe_full",
+          "vienna_feature": "vienna_seed_mfe_full",
+          "label": "MFE seed accessibility (spacer + scaffold)",
+          "pearson": 0.5554352193130274,
+          "spearman": 0.5649312335653314,
+          "mean_difference": -0.031985294117647056,
+          "mean_absolute_difference": 0.1471813725490196,
+          "max_absolute_difference": 0.875
+        },
+        {
+          "feature": "seed_ensemble_full",
+          "vienna_feature": "vienna_seed_ensemble_full",
+          "label": "Ensemble seed accessibility (spacer + scaffold)",
+          "pearson": 0.7847493087241997,
+          "spearman": 0.7789587421832415,
+          "mean_difference": -0.0374145294117647,
+          "mean_absolute_difference": 0.0902421725490196,
+          "max_absolute_difference": 0.5539470000000001
+        },
+        {
+          "feature": "mean_unpaired_spacer",
+          "vienna_feature": "vienna_mean_unpaired_spacer",
+          "label": "Mean unpaired probability (spacer alone)",
+          "pearson": 0.7884546758778429,
+          "spearman": 0.8478751093160933,
+          "mean_difference": 0.14141869215686273,
+          "mean_absolute_difference": 0.14899709019607843,
+          "max_absolute_difference": 0.497889
+        },
+        {
+          "feature": "mean_unpaired_full",
+          "vienna_feature": "vienna_mean_unpaired_full",
+          "label": "Mean unpaired probability (in sgRNA)",
+          "pearson": 0.7586756106268431,
+          "spearman": 0.7410319452189125,
+          "mean_difference": -0.01688042450980392,
+          "mean_absolute_difference": 0.056653891176470586,
+          "max_absolute_difference": 0.25602500000000006
+        },
+        {
+          "feature": "mfe_energy_full",
+          "vienna_feature": "vienna_mfe_energy_full",
+          "label": "MFE energy (spacer + scaffold)",
+          "pearson": 0.7524737849254459,
+          "spearman": 0.7050311052632612,
+          "mean_difference": 5.259055392156863,
+          "mean_absolute_difference": 5.260369117647059,
+          "max_absolute_difference": 11.820000000000002
+        },
+        {
+          "feature": "ensemble_energy_full",
+          "vienna_feature": "vienna_ensemble_energy_full",
+          "label": "Ensemble free energy (spacer + scaffold)",
+          "pearson": 0.8022492388844799,
+          "spearman": 0.7615620865901238,
+          "mean_difference": 5.2039897058823525,
+          "mean_absolute_difference": 5.2039897058823525,
+          "max_absolute_difference": 10.8469
+        }
+      ],
+      "position_agreement": [
+        {
+          "context": "spacer",
+          "position": 1,
+          "pearson": 0.718192224106639,
+          "spearman": 0.8126025045190284,
+          "mean_absolute_difference": 0.21776751176470588,
+          "mean_custom": 0.8268620823529411,
+          "mean_vienna": 0.6214424784313725
+        },
+        {
+          "context": "spacer",
+          "position": 2,
+          "pearson": 0.7254817927668196,
+          "spearman": 0.8627056427971802,
+          "mean_absolute_difference": 0.2521511774509804,
+          "mean_custom": 0.7532442196078432,
+          "mean_vienna": 0.5140536088235295
+        },
+        {
+          "context": "spacer",
+          "position": 3,
+          "pearson": 0.7448827264835793,
+          "spearman": 0.8702489553887527,
+          "mean_absolute_difference": 0.2266023137254902,
+          "mean_custom": 0.7318408294117648,
+          "mean_vienna": 0.5261888
+        },
+        {
+          "context": "spacer",
+          "position": 4,
+          "pearson": 0.773253642362031,
+          "spearman": 0.8817695215107206,
+          "mean_absolute_difference": 0.19678208725490196,
+          "mean_custom": 0.7381028225490196,
+          "mean_vienna": 0.5647894568627451
+        },
+        {
+          "context": "spacer",
+          "position": 5,
+          "pearson": 0.7395971772610885,
+          "spearman": 0.8624172001565235,
+          "mean_absolute_difference": 0.19647096274509804,
+          "mean_custom": 0.7538095323529411,
+          "mean_vienna": 0.593468781372549
+        },
+        {
+          "context": "spacer",
+          "position": 6,
+          "pearson": 0.7648412584650317,
+          "spearman": 0.8554801736665054,
+          "mean_absolute_difference": 0.17184188725490196,
+          "mean_custom": 0.781270024509804,
+          "mean_vienna": 0.6404203274509804
+        },
+        {
+          "context": "spacer",
+          "position": 7,
+          "pearson": 0.7479535004228105,
+          "spearman": 0.8438791673373772,
+          "mean_absolute_difference": 0.1599204431372549,
+          "mean_custom": 0.8053614166666667,
+          "mean_vienna": 0.6834610323529412
+        },
+        {
+          "context": "spacer",
+          "position": 8,
+          "pearson": 0.7353355485875539,
+          "spearman": 0.8576948563369579,
+          "mean_absolute_difference": 0.14679544411764708,
+          "mean_custom": 0.8294447225490197,
+          "mean_vienna": 0.724985968627451
+        },
+        {
+          "context": "spacer",
+          "position": 9,
+          "pearson": 0.6916780359259611,
+          "spearman": 0.8104683428170498,
+          "mean_absolute_difference": 0.1471791049019608,
+          "mean_custom": 0.8507152980392156,
+          "mean_vienna": 0.7560172794117647
+        },
+        {
+          "context": "spacer",
+          "position": 10,
+          "pearson": 0.7181558969948304,
+          "spearman": 0.8219313030430934,
+          "mean_absolute_difference": 0.14161079901960785,
+          "mean_custom": 0.8551150421568627,
+          "mean_vienna": 0.7606803333333334
+        },
+        {
+          "context": "spacer",
+          "position": 11,
+          "pearson": 0.719921668640459,
+          "spearman": 0.8269610960321131,
+          "mean_absolute_difference": 0.16052681764705884,
+          "mean_custom": 0.8392931401960784,
+          "mean_vienna": 0.7198789911764706
+        },
+        {
+          "context": "spacer",
+          "position": 12,
+          "pearson": 0.7400214208188558,
+          "spearman": 0.8508717682198427,
+          "mean_absolute_difference": 0.16823446274509804,
+          "mean_custom": 0.8222252196078431,
+          "mean_vienna": 0.6873954490196079
+        },
+        {
+          "context": "spacer",
+          "position": 13,
+          "pearson": 0.7570027765002242,
+          "spearman": 0.8788048708359457,
+          "mean_absolute_difference": 0.17761693039215684,
+          "mean_custom": 0.7975101401960784,
+          "mean_vienna": 0.6441266156862745
+        },
+        {
+          "context": "spacer",
+          "position": 14,
+          "pearson": 0.74654798476187,
+          "spearman": 0.859077225875354,
+          "mean_absolute_difference": 0.19107515588235294,
+          "mean_custom": 0.7876786843137256,
+          "mean_vienna": 0.6216177676470588
+        },
+        {
+          "context": "spacer",
+          "position": 15,
+          "pearson": 0.7528071548672418,
+          "spearman": 0.8551936794273689,
+          "mean_absolute_difference": 0.18642692745098038,
+          "mean_custom": 0.777535087254902,
+          "mean_vienna": 0.6179921539215686
+        },
+        {
+          "context": "spacer",
+          "position": 16,
+          "pearson": 0.7573446823021938,
+          "spearman": 0.8665159078236808,
+          "mean_absolute_difference": 0.18621389803921568,
+          "mean_custom": 0.7696605156862745,
+          "mean_vienna": 0.6107930196078432
+        },
+        {
+          "context": "spacer",
+          "position": 17,
+          "pearson": 0.7579109336626955,
+          "spearman": 0.860317978214096,
+          "mean_absolute_difference": 0.1834455862745098,
+          "mean_custom": 0.7723783823529412,
+          "mean_vienna": 0.6217432490196079
+        },
+        {
+          "context": "spacer",
+          "position": 18,
+          "pearson": 0.7500471256057002,
+          "spearman": 0.8522765495471054,
+          "mean_absolute_difference": 0.17540434411764705,
+          "mean_custom": 0.7883379039215686,
+          "mean_vienna": 0.6509939225490197
+        },
+        {
+          "context": "spacer",
+          "position": 19,
+          "pearson": 0.7734798584045781,
+          "spearman": 0.8266730319290873,
+          "mean_absolute_difference": 0.12769772941176472,
+          "mean_custom": 0.840324887254902,
+          "mean_vienna": 0.7526166892156864
+        },
+        {
+          "context": "spacer",
+          "position": 20,
+          "pearson": 0.7763740699929625,
+          "spearman": 0.8429222435190136,
+          "mean_absolute_difference": 0.07066791078431373,
+          "mean_custom": 0.9012941833333333,
+          "mean_vienna": 0.8809641705882353
+        },
+        {
+          "context": "full",
+          "position": 1,
+          "pearson": 0.6052700396940203,
+          "spearman": 0.6134282635812561,
+          "mean_absolute_difference": 0.2344053794117647,
+          "mean_custom": 0.6857008284313726,
+          "mean_vienna": 0.5452785450980392
+        },
+        {
+          "context": "full",
+          "position": 2,
+          "pearson": 0.5461095122263148,
+          "spearman": 0.58208589759984,
+          "mean_absolute_difference": 0.25811367647058825,
+          "mean_custom": 0.5226253284313725,
+          "mean_vienna": 0.3829571264705882
+        },
+        {
+          "context": "full",
+          "position": 3,
+          "pearson": 0.5436157696709831,
+          "spearman": 0.5808967400761638,
+          "mean_absolute_difference": 0.2366423617647059,
+          "mean_custom": 0.4508507549019608,
+          "mean_vienna": 0.3959167029411765
+        },
+        {
+          "context": "full",
+          "position": 4,
+          "pearson": 0.6283386216297832,
+          "spearman": 0.6656137109027329,
+          "mean_absolute_difference": 0.2146420137254902,
+          "mean_custom": 0.42342949019607845,
+          "mean_vienna": 0.4449011137254902
+        },
+        {
+          "context": "full",
+          "position": 5,
+          "pearson": 0.6145342334339464,
+          "spearman": 0.6623889526003058,
+          "mean_absolute_difference": 0.22348444607843138,
+          "mean_custom": 0.40379712843137255,
+          "mean_vienna": 0.45704631176470584
+        },
+        {
+          "context": "full",
+          "position": 6,
+          "pearson": 0.6337328254583224,
+          "spearman": 0.6728388801560967,
+          "mean_absolute_difference": 0.21961615686274508,
+          "mean_custom": 0.3856617794117647,
+          "mean_vienna": 0.4606979715686274
+        },
+        {
+          "context": "full",
+          "position": 7,
+          "pearson": 0.6143643558540912,
+          "spearman": 0.6490715014347564,
+          "mean_absolute_difference": 0.22230608039215688,
+          "mean_custom": 0.3660766156862745,
+          "mean_vienna": 0.43854426274509806
+        },
+        {
+          "context": "full",
+          "position": 8,
+          "pearson": 0.619060817465508,
+          "spearman": 0.6468195562947189,
+          "mean_absolute_difference": 0.21731310882352942,
+          "mean_custom": 0.391022344117647,
+          "mean_vienna": 0.4418430137254902
+        },
+        {
+          "context": "full",
+          "position": 9,
+          "pearson": 0.6551324806116723,
+          "spearman": 0.6772258000633908,
+          "mean_absolute_difference": 0.2050248294117647,
+          "mean_custom": 0.4075483705882353,
+          "mean_vienna": 0.44792050784313725
+        },
+        {
+          "context": "full",
+          "position": 10,
+          "pearson": 0.6960422171095048,
+          "spearman": 0.7101015224478684,
+          "mean_absolute_difference": 0.18912136176470587,
+          "mean_custom": 0.39782475098039216,
+          "mean_vienna": 0.413255818627451
+        },
+        {
+          "context": "full",
+          "position": 11,
+          "pearson": 0.6968518855758308,
+          "spearman": 0.7183550810748204,
+          "mean_absolute_difference": 0.1892765950980392,
+          "mean_custom": 0.39173791078431375,
+          "mean_vienna": 0.41011252745098037
+        },
+        {
+          "context": "full",
+          "position": 12,
+          "pearson": 0.6781078010058241,
+          "spearman": 0.7176353176200424,
+          "mean_absolute_difference": 0.19654880196078434,
+          "mean_custom": 0.3888706019607843,
+          "mean_vienna": 0.414964068627451
+        },
+        {
+          "context": "full",
+          "position": 13,
+          "pearson": 0.7087855927443629,
+          "spearman": 0.7474996145285415,
+          "mean_absolute_difference": 0.1882863137254902,
+          "mean_custom": 0.4057771666666667,
+          "mean_vienna": 0.4389000450980392
+        },
+        {
+          "context": "full",
+          "position": 14,
+          "pearson": 0.7152653543575105,
+          "spearman": 0.7537605991294245,
+          "mean_absolute_difference": 0.18622908333333332,
+          "mean_custom": 0.4276823990196078,
+          "mean_vienna": 0.45251917450980395
+        },
+        {
+          "context": "full",
+          "position": 15,
+          "pearson": 0.738906461934585,
+          "spearman": 0.770349116290386,
+          "mean_absolute_difference": 0.1765207911764706,
+          "mean_custom": 0.4282513990196078,
+          "mean_vienna": 0.4369631549019608
+        },
+        {
+          "context": "full",
+          "position": 16,
+          "pearson": 0.7756136370306429,
+          "spearman": 0.7985691315131044,
+          "mean_absolute_difference": 0.16571097352941178,
+          "mean_custom": 0.41891677254901966,
+          "mean_vienna": 0.42915663627450984
+        },
+        {
+          "context": "full",
+          "position": 17,
+          "pearson": 0.7430054282335031,
+          "spearman": 0.7683785565806195,
+          "mean_absolute_difference": 0.1757340431372549,
+          "mean_custom": 0.4048228843137255,
+          "mean_vienna": 0.4393063568627451
+        },
+        {
+          "context": "full",
+          "position": 18,
+          "pearson": 0.7791458057375586,
+          "spearman": 0.8111839429294514,
+          "mean_absolute_difference": 0.17003554509803923,
+          "mean_custom": 0.42411381078431376,
+          "mean_vienna": 0.4771050794117647
+        },
+        {
+          "context": "full",
+          "position": 19,
+          "pearson": 0.804758728612323,
+          "spearman": 0.8397759983787215,
+          "mean_absolute_difference": 0.1671522745098039,
+          "mean_custom": 0.4858113333333333,
+          "mean_vienna": 0.5692875372549019
+        },
+        {
+          "context": "full",
+          "position": 20,
+          "pearson": 0.8056718118244603,
+          "spearman": 0.8247311117110884,
+          "mean_absolute_difference": 0.15621397450980393,
+          "mean_custom": 0.4655517254901961,
+          "mean_vienna": 0.5170058803921569
+        }
+      ],
+      "correlations": [
+        {
+          "feature": "vienna_seed_mfe_spacer",
+          "label": "MFE seed accessibility (spacer alone)",
+          "vienna_within_gene": -0.037901688184009116,
+          "vienna_ci_low": -0.10411074159129169,
+          "vienna_ci_high": 0.02715582687521358,
+          "custom_within_gene": -0.05238112794746209,
+          "difference": 0.014479439763452971,
+          "vienna_pooled": -0.03407195426389767,
+          "vienna_partial_gc": 0.02519487498619319,
+          "n_groups": 104
+        },
+        {
+          "feature": "vienna_seed_ensemble_spacer",
+          "label": "Ensemble seed accessibility (spacer alone)",
+          "vienna_within_gene": -0.06969873098491779,
+          "vienna_ci_low": -0.13624644631881994,
+          "vienna_ci_high": -0.0008904559266427353,
+          "custom_within_gene": -0.08137426057767312,
+          "difference": 0.011675529592755335,
+          "vienna_pooled": -0.05269311865972325,
+          "vienna_partial_gc": 0.011112974755113685,
+          "n_groups": 104
+        },
+        {
+          "feature": "vienna_seed_mfe_full",
+          "label": "MFE seed accessibility (spacer + scaffold)",
+          "vienna_within_gene": 0.051491339569375676,
+          "vienna_ci_low": -0.010851858440896497,
+          "vienna_ci_high": 0.12205815888543668,
+          "custom_within_gene": 0.032213954543989,
+          "difference": 0.019277385025386673,
+          "vienna_pooled": 0.04780470137620833,
+          "vienna_partial_gc": 0.07715599894756972,
+          "n_groups": 104
+        },
+        {
+          "feature": "vienna_seed_ensemble_full",
+          "label": "Ensemble seed accessibility (spacer + scaffold)",
+          "vienna_within_gene": 0.023141229662030978,
+          "vienna_ci_low": -0.04455378776218514,
+          "vienna_ci_high": 0.0872479562687576,
+          "custom_within_gene": 0.024399287952537454,
+          "difference": -0.001258058290506476,
+          "vienna_pooled": 0.029374953567019753,
+          "vienna_partial_gc": 0.07319142888937621,
+          "n_groups": 104
+        },
+        {
+          "feature": "vienna_mean_unpaired_spacer",
+          "label": "Mean unpaired probability (spacer alone)",
+          "vienna_within_gene": -0.07296804858993308,
+          "vienna_ci_low": -0.1436292873792874,
+          "vienna_ci_high": -0.003284215784215789,
+          "custom_within_gene": -0.06336487904499785,
+          "difference": -0.00960316954493523,
+          "vienna_pooled": -0.05765429815795301,
+          "vienna_partial_gc": 0.021180340994380015,
+          "n_groups": 104
+        },
+        {
+          "feature": "vienna_mean_unpaired_full",
+          "label": "Mean unpaired probability (in sgRNA)",
+          "vienna_within_gene": -0.13381845515664526,
+          "vienna_ci_low": -0.1948407661789563,
+          "vienna_ci_high": -0.06644208153027163,
+          "custom_within_gene": -0.1344548811441544,
+          "difference": 0.0006364259875091538,
+          "vienna_pooled": -0.1384454055532699,
+          "vienna_partial_gc": -0.0942742415443467,
+          "n_groups": 104
+        },
+        {
+          "feature": "vienna_mfe_energy_full",
+          "label": "MFE energy (spacer + scaffold)",
+          "vienna_within_gene": -0.28445159375431045,
+          "vienna_ci_low": -0.3447035349584254,
+          "vienna_ci_high": -0.21974473265177727,
+          "custom_within_gene": -0.17010669446443968,
+          "difference": -0.11434489928987077,
+          "vienna_pooled": -0.3033087260503027,
+          "vienna_partial_gc": -0.2136531174587333,
+          "n_groups": 104
+        },
+        {
+          "feature": "vienna_ensemble_energy_full",
+          "label": "Ensemble free energy (spacer + scaffold)",
+          "vienna_within_gene": -0.2932530559735312,
+          "vienna_ci_low": -0.3514656766861519,
+          "vienna_ci_high": -0.2317037129537131,
+          "custom_within_gene": -0.1813669302933105,
+          "difference": -0.11188612568022069,
+          "vienna_pooled": -0.3051895116385732,
+          "vienna_partial_gc": -0.20938927522754305,
+          "n_groups": 104
+        }
+      ],
+      "incremental": {
+        "baseline_spearman": 0.3868476937998601,
+        "models": [
+          {
+            "name": "vienna_structure_all",
+            "spearman": 0.4266640577031679,
+            "delta": 0.0398163639033078,
+            "delta_ci_low": 0.01164044289044289,
+            "delta_ci_high": 0.07242750276444666
+          },
+          {
+            "name": "vienna_ensemble_only",
+            "spearman": 0.42918392178002013,
+            "delta": 0.04233622798016,
+            "delta_ci_low": 0.01455775645168846,
+            "delta_ci_high": 0.0691579254079254
+          }
+        ]
+      },
+      "sensitivity": [
+        {
+          "setting": "37 C, global folding",
+          "available": true,
+          "temperature": 37.0,
+          "max_span": null,
+          "vienna_seed_ensemble_full": {
+            "within_gene": 0.023141229662030978,
+            "ci_low": -0.04455378776218514,
+            "ci_high": 0.0872479562687576,
+            "mean": 0.47003046568627455
+          },
+          "vienna_mean_unpaired_full": {
+            "within_gene": -0.13381845515664526,
+            "ci_low": -0.1948407661789563,
+            "ci_high": -0.06644208153027163,
+            "mean": 0.45068409411764704
+          },
+          "vienna_ensemble_energy_full": {
+            "within_gene": -0.2932530559735312,
+            "ci_low": -0.3514656766861519,
+            "ci_high": -0.2317037129537131,
+            "mean": -25.281787647058824
+          }
+        },
+        {
+          "setting": "25 C, global folding",
+          "available": true,
+          "temperature": 25.0,
+          "max_span": null,
+          "vienna_seed_ensemble_full": {
+            "within_gene": 0.02095958011889761,
+            "ci_low": -0.04656801531801534,
+            "ci_high": 0.08995237702101201,
+            "mean": 0.4570999862745098
+          },
+          "vienna_mean_unpaired_full": {
+            "within_gene": -0.13266818482500992,
+            "ci_low": -0.19489554080236585,
+            "ci_high": -0.06535755910755912,
+            "mean": 0.4293832794117647
+          },
+          "vienna_ensemble_energy_full": {
+            "within_gene": -0.30802542845056247,
+            "ci_low": -0.36475619768133166,
+            "ci_high": -0.2482455044955045,
+            "mean": -33.404771764705885
+          }
+        },
+        {
+          "setting": "42 C, global folding",
+          "available": true,
+          "temperature": 42.0,
+          "max_span": null,
+          "vienna_seed_ensemble_full": {
+            "within_gene": 0.018004699525500843,
+            "ci_low": -0.05497440470360338,
+            "ci_high": 0.08995129049289317,
+            "mean": 0.47586983725490195
+          },
+          "vienna_mean_unpaired_full": {
+            "within_gene": -0.14249763113116248,
+            "ci_low": -0.20254329004329014,
+            "ci_high": -0.0763153513153513,
+            "mean": 0.46176926764705883
+          },
+          "vienna_ensemble_energy_full": {
+            "within_gene": -0.28419385033528993,
+            "ci_low": -0.3446782384282384,
+            "ci_high": -0.21820246923534842,
+            "mean": -22.129483235294117
+          }
+        },
+        {
+          "setting": "37 C, local folding (max span 40)",
+          "available": true,
+          "temperature": 37.0,
+          "max_span": 40,
+          "vienna_seed_ensemble_full": {
+            "within_gene": -0.03504397052733883,
+            "ci_low": -0.09386832733506398,
+            "ci_high": 0.03554570429570429,
+            "mean": 0.5387021333333334
+          },
+          "vienna_mean_unpaired_full": {
+            "within_gene": -0.0547788272205929,
+            "ci_low": -0.11583832833832831,
+            "ci_high": 0.01549075924075925,
+            "mean": 0.5464777294117648
+          },
+          "vienna_ensemble_energy_full": {
+            "within_gene": -0.0857739102922192,
+            "ci_low": -0.14446938148769045,
+            "ci_high": -0.015918765437074347,
+            "mean": -21.597271274509804
+          }
+        }
+      ]
+    }
+  },
+  "settings": {
+    "bootstrap": 400,
+    "seed": 20260724,
+    "note": "ViennaRNA uses standard Turner parameters; the custom model uses published stacking values with simplified loop terms."
+  }
+}

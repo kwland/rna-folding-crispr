@@ -156,8 +156,8 @@ def write_position_figure(path: Path, results: dict, dataset: str) -> None:
     elements = _header(
         width, height,
         "Does any spacer position matter?",
-        f"{block['label']} — Spearman correlation between unpaired probability and editing "
-        f"efficiency, computed separately at every position.",
+        f"{block['label']} — mean within-gene Spearman between unpaired probability and "
+        f"editing efficiency, computed separately at every position.",
         "Line chart of per-position Spearman correlation with 95% confidence intervals, "
         "for the spacer folded alone and folded with the sgRNA scaffold.",
     )
@@ -227,8 +227,8 @@ def write_position_figure(path: Path, results: dict, dataset: str) -> None:
 
     elements.append(_svg_text(
         45, height - 22,
-        "Filled markers are significant after Benjamini-Hochberg correction across the 20 "
-        "positions; bars are 95% intervals from resampling whole genes.",
+        "Filled markers are significant after Benjamini-Hochberg correction of gene-blocked "
+        "permutation p-values; bars are 95% intervals from resampling whole genes.",
         fill=MUTED, font_size=12, font_family=FONT,
     ))
     elements.append("</svg>")

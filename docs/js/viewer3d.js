@@ -18,10 +18,10 @@ window.Viewer3D = (function () {
   "use strict";
 
   var BASE_COLORS = {
-    A: "#5ee6c5",
-    U: "#ffb454",
-    G: "#7aa2ff",
-    C: "#ff6fa5"
+    A: "#67c39a",
+    U: "#e0a458",
+    G: "#7fa9dc",
+    C: "#d98ba0"
   };
 
   var BOND_LENGTH = 13;
@@ -202,7 +202,7 @@ window.Viewer3D = (function () {
       var h = Math.max(1, rect.height);
 
       // Assigning canvas.width reallocates the backing store and is far too
-      // expensive to do on every animation frame — only touch it on a resize.
+      // expensive to do on every animation frame, so only touch it on a resize.
       var wantW = Math.floor(w * ratio);
       var wantH = Math.floor(h * ratio);
       if (canvas.width !== wantW || canvas.height !== wantH) {
@@ -213,10 +213,10 @@ window.Viewer3D = (function () {
       ctx.clearRect(0, 0, w, h);
 
       if (!model) {
-        ctx.fillStyle = "rgba(226, 238, 234, 0.45)";
-        ctx.font = "13px 'Inter', system-ui, sans-serif";
+        ctx.fillStyle = "rgba(175, 188, 198, 0.6)";
+        ctx.font = "13px Inter, system-ui, sans-serif";
         ctx.textAlign = "center";
-        ctx.fillText("Fold a sequence to build the 3D model", w / 2, h / 2);
+        ctx.fillText("Type a strand to build the 3D model", w / 2, h / 2);
         return;
       }
 
@@ -253,7 +253,7 @@ window.Viewer3D = (function () {
           var p1 = pts[item.a];
           var p2 = pts[item.b];
           var depth = clamp((p1.f + p2.f) / 2, 0.35, 1.4);
-          ctx.strokeStyle = "rgba(150, 214, 198, " + (0.22 * depth).toFixed(3) + ")";
+          ctx.strokeStyle = "rgba(132, 150, 163, " + (0.22 * depth).toFixed(3) + ")";
           ctx.lineWidth = 3.4 * depth;
           ctx.lineCap = "round";
           ctx.beginPath();
@@ -264,7 +264,7 @@ window.Viewer3D = (function () {
           var q1 = pts[item.a];
           var q2 = pts[item.b];
           var pd = clamp((q1.f + q2.f) / 2, 0.35, 1.4);
-          ctx.strokeStyle = "rgba(232, 91, 176, " + (0.5 * pd).toFixed(3) + ")";
+          ctx.strokeStyle = "rgba(227, 164, 79, " + (0.5 * pd).toFixed(3) + ")";
           ctx.lineWidth = 1.8 * pd;
           ctx.setLineDash([4 * pd, 3 * pd]);
           ctx.beginPath();
@@ -277,10 +277,10 @@ window.Viewer3D = (function () {
           var pt = pts[item.a];
           var d = clamp(pt.f, 0.3, 1.5);
           var r = 6.2 * d;
-          var color = BASE_COLORS[node.base] || "#9fb6ad";
+          var color = BASE_COLORS[node.base] || "#8496a3";
 
           var grad = ctx.createRadialGradient(pt.x - r * 0.35, pt.y - r * 0.35, r * 0.15, pt.x, pt.y, r);
-          grad.addColorStop(0, "#ffffff");
+          grad.addColorStop(0, "#e9eef2");
           grad.addColorStop(0.35, color);
           grad.addColorStop(1, shade(color, -0.45));
           ctx.fillStyle = grad;
@@ -290,7 +290,7 @@ window.Viewer3D = (function () {
           ctx.fill();
 
           if (node.isSeed) {
-            ctx.strokeStyle = "rgba(255, 214, 102, " + (0.9 * d).toFixed(3) + ")";
+            ctx.strokeStyle = "rgba(227, 164, 79, " + (0.9 * d).toFixed(3) + ")";
             ctx.lineWidth = 1.8 * d;
             ctx.beginPath();
             ctx.arc(pt.x, pt.y, r + 2.2, 0, Math.PI * 2);
@@ -299,8 +299,8 @@ window.Viewer3D = (function () {
           ctx.globalAlpha = 1;
 
           if (r > 6 && model.nodes.length <= 80) {
-            ctx.fillStyle = "rgba(6, 20, 17, 0.85)";
-            ctx.font = "700 " + Math.round(7.5 * d) + "px 'Inter', system-ui, sans-serif";
+            ctx.fillStyle = "rgba(9, 13, 17, 0.88)";
+            ctx.font = "600 " + Math.round(8.5 * d) + "px Inter, system-ui, sans-serif";
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
             ctx.fillText(node.base, pt.x, pt.y + 0.5);
@@ -352,6 +352,14 @@ window.Viewer3D = (function () {
       },
       { passive: false }
     );
+
+    // The spin loop re-measures every frame, but a paused viewer would keep a
+    // stale 1px backing store if it was first drawn before layout settled.
+    if ("ResizeObserver" in window) {
+      new ResizeObserver(function () {
+        draw();
+      }).observe(canvas);
+    }
 
     tick();
 

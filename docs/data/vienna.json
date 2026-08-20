@@ -1,0 +1,228 @@
+{
+  "references": {
+    "hairpin": {
+      "structure": "((((....))))",
+      "energy": -5.4
+    },
+    "two-hairpin": {
+      "structure": "(((...)))..(((...)))",
+      "energy": -3.6
+    },
+    "trna-phe": {
+      "structure": "(((((((..((((........)))).(((((.......))))).....(((((.......))))))))))))....",
+      "energy": -22.4
+    }
+  },
+  "guideSample": [
+    {
+      "id": "CD13-1",
+      "spacer": "AAGAGAGACAGTACATGCCC",
+      "full": "AAGAGAGACAGUACAUGCCCGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC",
+      "structure": "..((..(((.(.((..(((.(((((((.((((....))))...)))))))..)))..))).))).)).((((....)))).((((((...))))))",
+      "energy": -22.9
+    },
+    {
+      "id": "CD13-125",
+      "spacer": "GTTCGACTACGTGGAGAAGC",
+      "full": "GUUCGACUACGUGGAGAAGCGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC",
+      "structure": "....((..((..(((..((((((((((.((((....))))...)))))))...)))..)))))..)).((((....)))).((((((...))))))",
+      "energy": -23.2
+    },
+    {
+      "id": "CD13-151",
+      "spacer": "TGCAACGCTATCGCCCAGGG",
+      "full": "UGCAACGCUAUCGCCCAGGGGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC",
+      "structure": "...((((.....(((.....(((((((.((((....))))...)))))))..))).....))))....((((....)))).((((((...))))))",
+      "energy": -21.3
+    },
+    {
+      "id": "CD13-178",
+      "spacer": "AGCGGGCTGCACCTTGCTGT",
+      "full": "AGCGGGCUGCACCUUGCUGUGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC",
+      "structure": "(((((((((......(((.((((((((.((((....))))...)))))))).))))))))))))....((((....)))).((((((...))))))",
+      "energy": -30.9
+    },
+    {
+      "id": "CD13-203",
+      "spacer": "TGAAGTAGCTCAGGCTGCTC",
+      "full": "UGAAGUAGCUCAGGCUGCUCGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC",
+      "structure": "....(((((...(((((((.(((((((.((((....))))...)))))))..))).)))).)))))..((((....)))).((((((...))))))",
+      "energy": -25.0
+    },
+    {
+      "id": "CD13-23",
+      "spacer": "TCAGCTGCAGAGAGACCACT",
+      "full": "UCAGCUGCAGAGAGACCACUGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC",
+      "structure": "......((.((.((.((..((((((((.((((....))))...)))))))).))))..)).)).....((((....)))).((((((...))))))",
+      "energy": -19.9
+    },
+    {
+      "id": "CD13-256",
+      "spacer": "GGAGGATCCCCAGGATGCCC",
+      "full": "GGAGGAUCCCCAGGAUGCCCGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC",
+      "structure": "...((....)).(((((((.(((((((.((((....))))...)))))))..)))..)))).......((((....)))).((((((...))))))",
+      "energy": -24.7
+    },
+    {
+      "id": "CD13-282",
+      "spacer": "AACTCAGTGACATTCCAGTT",
+      "full": "AACUCAGUGACAUUCCAGUUGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC",
+      "structure": "......(.(((...((..(((((((((.((((....))))...)))))))))))...)))).......((((....)))).((((((...))))))",
+      "energy": -20.5
+    },
+    {
+      "id": "CD13-309",
+      "spacer": "GGTGGCTGAGGCGGACGGGG",
+      "full": "GGUGGCUGAGGCGGACGGGGGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC",
+      "structure": "......(((.((((((((..(((((((.((((....))))...)))))))....)).))))))..)))((((....)))).((((((...))))))",
+      "energy": -27.9
+    },
+    {
+      "id": "CD13-335",
+      "spacer": "CAGTGCGATGATTGTGCACA",
+      "full": "CAGUGCGAUGAUUGUGCACAGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC",
+      "structure": "....(((..(((((.((...(((((((.((((....))))...)))))))...)))))))))).....((((....)))).((((((...))))))",
+      "energy": -22.4
+    },
+    {
+      "id": "CD13-361",
+      "spacer": "GGTGCACCTCAAGGGCTCCC",
+      "full": "GGUGCACCUCAAGGGCUCCCGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC",
+      "structure": "............(((((((.(((((((.((((....))))...)))))))..))..))))).......((((....)))).((((((...))))))",
+      "energy": -22.9
+    },
+    {
+      "id": "CD13-388",
+      "spacer": "AACGATTCCACGCTTTACTT",
+      "full": "AACGAUUCCACGCUUUACUUGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC",
+      "structure": "...(((.....(((...((((((((((.((((....))))...))))))))))...))).....))).((((....)))).((((((...))))))",
+      "energy": -24.3
+    },
+    {
+      "id": "CD13-413",
+      "spacer": "TACGTCCTCGGACAGGAAGC",
+      "full": "UACGUCCUCGGACAGGAAGCGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC",
+      "structure": "...(((....))).(((((((((((((.((((....))))...)))))))...)))..))).......((((....)))).((((((...))))))",
+      "energy": -23.8
+    },
+    {
+      "id": "CD13-44",
+      "spacer": "TCAGTCTTGTCAATGTCGGG",
+      "full": "UCAGUCUUGUCAAUGUCGGGGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC",
+      "structure": "....((..((..(((.((((((((((..((((....)))).........)))))))...))).)))..))..)).......((((((...))))))",
+      "energy": -19.0
+    },
+    {
+      "id": "CD13-56",
+      "spacer": "GGTAATAGCCCGTCACATTG",
+      "full": "GGUAAUAGCCCGUCACAUUGGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC",
+      "structure": "((...(((((..........(((((((.((((....))))...)))))))..)))))..)).......((((....)))).((((((...))))))",
+      "energy": -22.7
+    },
+    {
+      "id": "CD13-82",
+      "spacer": "ATCGCCGTGGCCCGCCGCAA",
+      "full": "AUCGCCGUGGCCCGCCGCAAGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC",
+      "structure": ".....((.(((..(((....(((((((.((((....))))...)))))))..)))..)))))......((((....)))).((((((...))))))",
+      "energy": -24.6
+    },
+    {
+      "id": "CD15-108",
+      "spacer": "GGCGATAGACCGCGGGGTTG",
+      "full": "GGCGAUAGACCGCGGGGUUGGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC",
+      "structure": ".(((......))).((((((((((((..((((....)))).........)))))))))))).......((((....)))).((((((...))))))",
+      "energy": -24.9
+    },
+    {
+      "id": "CD15-134",
+      "spacer": "AGTGGCGGGGCCAGGCCTGA",
+      "full": "AGUGGCGGGGCCAGGCCUGAGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC",
+      "structure": ".((((((((....(((((..(((((((.((((....))))...))))))).)))))..))))))))..((((....)))).((((((...))))))",
+      "energy": -32.6
+    },
+    {
+      "id": "CD15-160",
+      "spacer": "CCAGGGCGGGGGCCAGTCGG",
+      "full": "CCAGGGCGGGGGCCAGUCGGGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC",
+      "structure": "((.....))((((.((((..(((((((.((((....))))...)))))))..)))).)))).......((((....)))).((((((...))))))",
+      "energy": -28.0
+    },
+    {
+      "id": "CD15-187",
+      "spacer": "CCCCCGACTGGCCCCCGCCC",
+      "full": "CCCCCGACUGGCCCCCGCCCGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC",
+      "structure": ".....((((((((.......(((((((.((((....))))...)))))))..))))))))........((((....)))).((((((...))))))",
+      "energy": -26.6
+    },
+    {
+      "id": "CD15-212",
+      "spacer": "GAAGTCGTCCACGTGGATGA",
+      "full": "GAAGUCGUCCACGUGGAUGAGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC",
+      "structure": "(((.((((((....)))))).)))....((((....))))(((((...((((.(......).)))).))))).........((((((...))))))",
+      "energy": -23.9
+    },
+    {
+      "id": "CD15-239",
+      "spacer": "CTGGCCCGGGGGCCTGGGGC",
+      "full": "CUGGCCCGGGGGCCUGGGGCGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC",
+      "structure": "..((((....))))..(((((((((((.((((....))))...))))))).......)))).......((((....)))).((((((...))))))",
+      "energy": -25.5
+    },
+    {
+      "id": "CD15-265",
+      "spacer": "CCTCCTTCTGGGACGAGCCT",
+      "full": "CCUCCUUCUGGGACGAGCCUGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC",
+      "structure": "..........((((.((((((((((((.((((....))))...))))))).))))).)))).......((((....)))).((((((...))))))",
+      "energy": -31.5
+    },
+    {
+      "id": "CD15-45",
+      "spacer": "CCACCACCGCGACCTCGTGA",
+      "full": "CCACCACCGCGACCUCGUGAGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC",
+      "structure": "...((((((((....)))).........((((....))))(((((...((((.(......).)))).)))))......))))(((((...))))).",
+      "energy": -20.0
+    },
+    {
+      "id": "CD15-71",
+      "spacer": "AGTAGCGGCGATAGACCGCG",
+      "full": "AGUAGCGGCGAUAGACCGCGGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC",
+      "structure": ".(((((((...(((.((...(((((((.((((....))))...)))))))..)))))..)))))))..((((....)))).((((((...))))))",
+      "energy": -29.2
+    },
+    {
+      "id": "CD15-98",
+      "spacer": "TTCGCGCCATGGGGGCACCG",
+      "full": "UUCGCGCCAUGGGGGCACCGGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC",
+      "structure": "............((((.((.(((((((.((((....))))...)))))))..))...)))).......((((....)))).((((((...))))))",
+      "energy": -23.1
+    },
+    {
+      "id": "CD33-123",
+      "spacer": "AATGACACCCACCCTACCAC",
+      "full": "AAUGACACCCACCCUACCACGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC",
+      "structure": ".............(((((..(((((((.((((....))))...)))))))..)).)))..........((((....)))).((((((...))))))",
+      "energy": -19.2
+    },
+    {
+      "id": "CD33-15",
+      "spacer": "GGCCGGGTTCTAGAGTGCCA",
+      "full": "GGCCGGGUUCUAGAGUGCCAGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC",
+      "structure": ".(((((.((...(.((((((.((((...((((....))))(((((...((((.(......).)))).)))))..)))).))))))))).)))))..",
+      "energy": -24.8
+    },
+    {
+      "id": "CD33-37",
+      "spacer": "ACAGGTGACGTTGAGCTGGA",
+      "full": "ACAGGUGACGUUGAGCUGGAGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC",
+      "structure": "...(((((((...((((...(((((((.((((....))))...)))))))..))))....))))))).((((....)))).((((((...))))))",
+      "energy": -28.5
+    },
+    {
+      "id": "CD33-63",
+      "spacer": "TCCAGCGAACTTCACCTGAC",
+      "full": "UCCAGCGAACUUCACCUGACGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGC",
+      "structure": "...((((.(((...(((...(((((((.((((....))))...))))))).)))..))).))))....((((....)))).((((((...))))))",
+      "energy": -22.7
+    }
+  ]
+}

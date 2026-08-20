@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="468" height="226" viewBox="0 0 468 226">
+<rect width="468" height="226" fill="#ffffff"/>
+<text x="30.00" y="22.00" font-size="11.00" font-family="Helvetica, Arial, sans-serif" fill="#1a1a19" text-anchor="start" font-weight="700">Folding context changes what is measured</text>
+<text x="30.00" y="35.00" font-size="8.00" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="start">Mean accessibility of the same 4,685 spacers, folded alone and inside the full sgRNA</text>
+<line x1="176.00" y1="158.00" x2="176.00" y2="54.00" stroke="#dcdcd8" stroke-width="0.6"/>
+<text x="176.00" y="169.00" font-size="7.50" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="middle">0</text>
+<line x1="221.00" y1="158.00" x2="221.00" y2="54.00" stroke="#dcdcd8" stroke-width="0.6"/>
+<text x="221.00" y="169.00" font-size="7.50" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="middle">0.25</text>
+<line x1="266.00" y1="158.00" x2="266.00" y2="54.00" stroke="#dcdcd8" stroke-width="0.6"/>
+<text x="266.00" y="169.00" font-size="7.50" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="middle">0.5</text>
+<line x1="311.00" y1="158.00" x2="311.00" y2="54.00" stroke="#dcdcd8" stroke-width="0.6"/>
+<text x="311.00" y="169.00" font-size="7.50" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="middle">0.75</text>
+<line x1="356.00" y1="158.00" x2="356.00" y2="54.00" stroke="#dcdcd8" stroke-width="0.6"/>
+<text x="356.00" y="169.00" font-size="7.50" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="middle">1</text>
+<text x="266.00" y="181.00" font-size="8.00" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="middle">mean accessibility (fraction unpaired)</text>
+<text x="164.00" y="68.50" font-size="8.00" font-family="Helvetica, Arial, sans-serif" fill="#1a1a19" text-anchor="end">MFE seed accessibility</text>
+<line x1="250.81" y1="66.00" x2="327.68" y2="66.00" stroke="#c8c8c4" stroke-width="1.6"/>
+<circle cx="327.68" cy="66.00" r="5.00" fill="#ffffff"/>
+<circle cx="327.68" cy="66.00" r="3.60" fill="#a9c8ef"/>
+<circle cx="250.81" cy="66.00" r="5.00" fill="#ffffff"/>
+<circle cx="250.81" cy="66.00" r="3.60" fill="#2a78d6"/>
+<text x="370.00" y="68.50" font-size="7.50" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="start">r = 0.17</text>
+<text x="164.00" y="111.50" font-size="8.00" font-family="Helvetica, Arial, sans-serif" fill="#1a1a19" text-anchor="end">Ensemble seed accessibility</text>
+<line x1="253.90" y1="109.00" x2="322.74" y2="109.00" stroke="#c8c8c4" stroke-width="1.6"/>
+<circle cx="322.74" cy="109.00" r="5.00" fill="#ffffff"/>
+<circle cx="322.74" cy="109.00" r="3.60" fill="#a9c8ef"/>
+<circle cx="253.90" cy="109.00" r="5.00" fill="#ffffff"/>
+<circle cx="253.90" cy="109.00" r="3.60" fill="#2a78d6"/>
+<text x="370.00" y="111.50" font-size="7.50" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="start">r = 0.25</text>
+<text x="164.00" y="154.50" font-size="8.00" font-family="Helvetica, Arial, sans-serif" fill="#1a1a19" text-anchor="end">Mean unpaired probability</text>
+<line x1="257.57" y1="152.00" x2="324.73" y2="152.00" stroke="#c8c8c4" stroke-width="1.6"/>
+<circle cx="324.73" cy="152.00" r="5.00" fill="#ffffff"/>
+<circle cx="324.73" cy="152.00" r="3.60" fill="#a9c8ef"/>
+<circle cx="257.57" cy="152.00" r="5.00" fill="#ffffff"/>
+<circle cx="257.57" cy="152.00" r="3.60" fill="#2a78d6"/>
+<text x="370.00" y="154.50" font-size="7.50" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="start">r = 0.39</text>
+<circle cx="180.00" cy="195.50" r="3.60" fill="#a9c8ef"/>
+<text x="188.00" y="198.00" font-size="7.50" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="start">spacer alone</text>
+<circle cx="272.00" cy="195.50" r="3.60" fill="#2a78d6"/>
+<text x="280.00" y="198.00" font-size="7.50" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="start">inside the sgRNA</text>
+<text x="30.00" y="206.00" font-size="7.50" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="start">r is the correlation between the two contexts across guides.</text>
+</svg>

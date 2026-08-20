@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="468" height="214" viewBox="0 0 468 214">
+<rect width="468" height="214" fill="#ffffff"/>
+<text x="30.00" y="22.00" font-size="11.00" font-family="Helvetica, Arial, sans-serif" fill="#1a1a19" text-anchor="start" font-weight="700">Does folding add anything to a sequence-only model?</text>
+<text x="30.00" y="35.00" font-size="8.00" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="start">Change in held-out Spearman when structure features join the baseline</text>
+<line x1="214.00" y1="154.00" x2="214.00" y2="54.00" stroke="#dcdcd8" stroke-width="0.6"/>
+<text x="214.00" y="165.00" font-size="7.50" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="middle">-0.02</text>
+<line x1="248.18" y1="154.00" x2="248.18" y2="54.00" stroke="#a8a8a4" stroke-width="1.0"/>
+<text x="248.18" y="165.00" font-size="7.50" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="middle">0</text>
+<line x1="282.36" y1="154.00" x2="282.36" y2="54.00" stroke="#dcdcd8" stroke-width="0.6"/>
+<text x="282.36" y="165.00" font-size="7.50" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="middle">0.02</text>
+<line x1="316.55" y1="154.00" x2="316.55" y2="54.00" stroke="#dcdcd8" stroke-width="0.6"/>
+<text x="316.55" y="165.00" font-size="7.50" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="middle">0.04</text>
+<line x1="350.73" y1="154.00" x2="350.73" y2="54.00" stroke="#dcdcd8" stroke-width="0.6"/>
+<text x="350.73" y="165.00" font-size="7.50" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="middle">0.06</text>
+<line x1="384.91" y1="154.00" x2="384.91" y2="54.00" stroke="#dcdcd8" stroke-width="0.6"/>
+<text x="384.91" y="165.00" font-size="7.50" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="middle">0.08</text>
+<text x="308.00" y="177.00" font-size="8.00" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="middle">change in held-out Spearman rho</text>
+<text x="202.00" y="68.50" font-size="7.50" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="end">Human cells, this implementation</text>
+<line x1="237.20" y1="66.00" x2="291.07" y2="66.00" stroke="#767674" stroke-width="1.2"/>
+<line x1="237.20" y1="68.00" x2="237.20" y2="64.00" stroke="#767674" stroke-width="1.2"/>
+<line x1="291.07" y1="68.00" x2="291.07" y2="64.00" stroke="#767674" stroke-width="1.2"/>
+<circle cx="263.48" cy="66.00" r="4.40" fill="#ffffff"/>
+<circle cx="263.48" cy="66.00" r="3.00" fill="#767674"/>
+<text x="299.07" y="68.50" font-size="7.00" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="start">+0.009 [-0.006, +0.025]</text>
+<text x="202.00" y="95.83" font-size="7.50" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="end">Human cells, ViennaRNA features</text>
+<line x1="241.35" y1="93.33" x2="260.15" y2="93.33" stroke="#767674" stroke-width="1.2"/>
+<line x1="241.35" y1="95.33" x2="241.35" y2="91.33" stroke="#767674" stroke-width="1.2"/>
+<line x1="260.15" y1="95.33" x2="260.15" y2="91.33" stroke="#767674" stroke-width="1.2"/>
+<circle cx="251.60" cy="93.33" r="4.40" fill="#ffffff"/>
+<circle cx="251.60" cy="93.33" r="3.00" fill="#767674"/>
+<text x="268.15" y="95.83" font-size="7.00" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="start">+0.002 [-0.004, +0.007]</text>
+<text x="202.00" y="123.17" font-size="7.50" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="end">Zebrafish, this implementation</text>
+<line x1="233.02" y1="120.67" x2="293.13" y2="120.67" stroke="#767674" stroke-width="1.2"/>
+<line x1="233.02" y1="122.67" x2="233.02" y2="118.67" stroke="#767674" stroke-width="1.2"/>
+<line x1="293.13" y1="122.67" x2="293.13" y2="118.67" stroke="#767674" stroke-width="1.2"/>
+<circle cx="262.99" cy="120.67" r="4.40" fill="#ffffff"/>
+<circle cx="262.99" cy="120.67" r="3.00" fill="#767674"/>
+<text x="301.13" y="123.17" font-size="7.00" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="start">+0.009 [-0.009, +0.026]</text>
+<text x="202.00" y="150.50" font-size="7.50" font-family="Helvetica, Arial, sans-serif" fill="#1a1a19" text-anchor="end" font-weight="700">Zebrafish, ViennaRNA features</text>
+<line x1="268.69" y1="148.00" x2="371.24" y2="148.00" stroke="#eb6834" stroke-width="1.2"/>
+<line x1="268.69" y1="150.00" x2="268.69" y2="146.00" stroke="#eb6834" stroke-width="1.2"/>
+<line x1="371.24" y1="150.00" x2="371.24" y2="146.00" stroke="#eb6834" stroke-width="1.2"/>
+<circle cx="316.55" cy="148.00" r="4.40" fill="#ffffff"/>
+<circle cx="316.55" cy="148.00" r="3.00" fill="#eb6834"/>
+<text x="379.24" y="150.50" font-size="7.00" font-family="Helvetica, Arial, sans-serif" fill="#1a1a19" text-anchor="start">+0.040 [+0.012, +0.072]</text>
+<text x="30.00" y="188.00" font-size="7.50" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="start">Intervals crossing zero are shown in grey. Only the zebrafish result with reference</text>
+<text x="30.00" y="198.00" font-size="7.50" font-family="Helvetica, Arial, sans-serif" fill="#5c5c58" text-anchor="start">Turner parameters excludes zero, and it runs opposite to the accessibility hypothesis.</text>
+</svg>

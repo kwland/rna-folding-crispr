@@ -20,6 +20,8 @@ from model_features import FeatureSpec, build_design_rows
 from stats import (
     SparseDesign,
     mean_within_group_spearman,
+    partial_spearman,
+    within_group_permutation_p,
     within_group_spearman_ci,
     assign_group_folds,
     benjamini_hochberg,
@@ -115,6 +117,73 @@ class TestCorrelation(unittest.TestCase):
         median = pvalues[len(pvalues) // 2]
         self.assertGreater(median, 0.2)
         self.assertLess(median, 0.8)
+
+    def test_within_group_permutation_rejects_a_real_within_gene_signal(self):
+        rng = random.Random(41)
+        values, truth, groups = [], [], []
+        for gene in range(12):
+            offset = rng.uniform(0, 5)
+            for _ in range(20):
+                v = rng.random()
+                values.append(v)
+                truth.append(offset + v)  # real signal inside every gene
+                groups.append(f"g{gene}")
+        p = within_group_permutation_p(values, truth, groups, n_perm=300, seed=1)
+        self.assertLess(p, 0.01)
+
+    def test_within_group_permutation_is_calibrated_under_the_null(self):
+        """The reason this test exists.
+
+        Guides cluster within genes. A permutation that shuffles freely across
+        the whole dataset ignores that and rejects far too often. Shuffling
+        inside each gene keeps the clustering intact, so p-values stay uniform
+        when there is no within-gene signal. Both are measured here on the same
+        data, and the free shuffle is expected to be the badly behaved one.
+        """
+        blocked, pooled = [], []
+        for trial in range(30):
+            rng = random.Random(900 + trial)
+            values, truth, groups = [], [], []
+            for gene in range(10):
+                # A strong gene-level offset shared by the feature and the label,
+                # but no relationship at all between them inside a gene.
+                offset = rng.uniform(0, 10)
+                for _ in range(20):
+                    values.append(offset + rng.random())
+                    truth.append(offset + rng.random())
+                    groups.append(f"g{gene}")
+            blocked.append(
+                within_group_permutation_p(values, truth, groups, n_perm=200, seed=trial)
+            )
+            pooled.append(spearman_permutation_p(values, truth, n_perm=200, seed=trial))
+
+        blocked_hits = sum(1 for p in blocked if p < 0.05) / len(blocked)
+        pooled_hits = sum(1 for p in pooled if p < 0.05) / len(pooled)
+        # The gene-blocked test must stay near its nominal rate.
+        self.assertLess(blocked_hits, 0.25)
+        # The free shuffle should be visibly worse on this same data.
+        self.assertGreater(pooled_hits, blocked_hits)
+
+    def test_partial_spearman_removes_a_pure_confound(self):
+        """x and y are related only through c, so the partial correlation is ~0."""
+        rng = random.Random(7)
+        c = [rng.random() for _ in range(400)]
+        x = [v * 2 + rng.gauss(0, 0.01) for v in c]
+        y = [v * -3 + rng.gauss(0, 0.01) for v in c]
+        self.assertLess(abs(spearman(x, y)), 1.01)
+        self.assertGreater(abs(spearman(x, y)), 0.9)  # strong raw correlation
+        self.assertLess(abs(partial_spearman(x, y, c)), 0.2)  # gone once c is removed
+
+    def test_partial_spearman_keeps_a_genuine_relationship(self):
+        rng = random.Random(8)
+        c = [rng.random() for _ in range(400)]
+        x = [rng.random() for _ in range(400)]
+        y = [xi * 3 + ci * 0.2 + rng.gauss(0, 0.05) for xi, ci in zip(x, c)]
+        self.assertGreater(partial_spearman(x, y, c), 0.8)
+
+    def test_partial_spearman_validates_input(self):
+        with self.assertRaises(ValueError):
+            partial_spearman([1.0, 2.0], [1.0, 2.0], [1.0])
 
     def test_cluster_bootstrap_brackets_the_estimate(self):
         rng = random.Random(5)
@@ -228,6 +297,31 @@ class TestRidge(unittest.TestCase):
         )
         self.assertEqual(len(alphas), 4)
         self.assertGreater(spearman(predictions, targets), 0.9)
+
+    def test_leave_one_group_out_actually_predicts(self):
+        """Regression test.
+
+        assign_group_folds treats n_folds <= 0 as leave-one-group-out, so the
+        number of folds it returns is not the number requested. An earlier
+        version looped over the requested count, which for n_outer=0 meant
+        looping zero times: every prediction stayed at its initial 0.0 and every
+        score came back as exactly 0.000 without any error being raised.
+        """
+        design, targets, groups = self._linear_problem()
+        predictions, alphas = nested_cv_predictions(
+            design, targets, groups, [0.01, 1.0, 100.0],
+            n_outer=0, n_inner=3, seed=1, intercept_index=0,
+        )
+        self.assertEqual(len(alphas), len(set(groups)))  # one fold per group
+        self.assertNotEqual(predictions, [0.0] * len(predictions))
+        self.assertGreater(spearman(predictions, targets), 0.9)
+
+    def test_leave_one_group_out_holds_out_the_whole_group(self):
+        """No sample may be predicted by a model that saw its own group."""
+        folds = assign_group_folds([f"g{i % 7}" for i in range(70)], 0)
+        self.assertEqual(len(set(folds)), 7)
+        # Requesting more folds than groups also degrades to one fold per group.
+        self.assertEqual(len(set(assign_group_folds(["a", "b", "c"], 99))), 3)
 
     def test_nested_cv_finds_nothing_in_pure_noise(self):
         """The critical guard: out-of-fold predictions must not learn noise.

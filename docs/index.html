@@ -3,47 +3,59 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>RNA Folding for CRISPR — Nussinov &amp; Zuker Fold Lab</title>
+
+    <title>RNA Fold Lab — RNA folding and CRISPR guide activity</title>
     <meta
       name="description"
-      content="Interactive Nussinov and Zuker RNA secondary-structure folding, with a 3D structure viewer and CRISPR guide RNA seed-accessibility analysis."
+      content="Nussinov, Zuker and McCaskill folding implemented from scratch, run in the browser, and tested against 5,705 measured CRISPR guides from two independent screens."
     />
-    <meta name="color-scheme" content="light" />
-    <link
-      rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b1f1c'/%3E%3Cpath d='M20 12c0 10 24 14 24 24S20 50 20 52' stroke='%234fd8e8' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3Cpath d='M44 12c0 10-24 14-24 24s24 14 24 16' stroke='%23e85bb0' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"
+    <meta name="author" content="Linus Tan" />
+    <link rel="canonical" href="https://kwland.github.io/nussinov-zuker-crispr/" />
+
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0d1216" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="RNA Fold Lab" />
+    <meta property="og:title" content="RNA Fold Lab — RNA folding and CRISPR guide activity" />
+    <meta
+      property="og:description"
+      content="Nussinov, Zuker and McCaskill folding implemented from scratch, run in the browser, and tested against 5,705 measured CRISPR guides from two independent screens."
     />
+    <meta property="og:url" content="https://kwland.github.io/nussinov-zuker-crispr/" />
+    <meta property="og:image" content="https://kwland.github.io/nussinov-zuker-crispr/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="RNA Fold Lab: an arc diagram of a predicted RNA secondary structure." />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="RNA Fold Lab — RNA folding and CRISPR guide activity" />
+    <meta
+      name="twitter:description"
+      content="Three folding models implemented from scratch, tested against 5,705 measured CRISPR guides."
+    />
+    <meta name="twitter:image" content="https://kwland.github.io/nussinov-zuker-crispr/og.png" />
+
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="favicon.svg" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=3677de2f" />
   </head>
   <body>
     <a class="skip-link" href="#lab">Skip to the Fold Lab</a>
 
-    <div class="utility-bar">
-      <div class="wrap utility-inner">
-        <span class="utility-note">Computational Biology Final Project · Nussinov · Zuker · CRISPR</span>
-        <div class="utility-links">
-          <span class="utility-team">Yu · Tan · Zhang · Lambert</span>
-          <a href="https://github.com/kwland/nussinov-zuker-crispr" rel="noopener">Source on GitHub</a>
-        </div>
-      </div>
-    </div>
+    <div class="page-wash" aria-hidden="true"></div>
 
     <header class="masthead">
-      <div class="wrap masthead-inner">
-        <a class="brand" href="#lab" data-tab-link="lab">
-          <span class="brand-mark" aria-hidden="true">
-            <svg viewBox="0 0 32 32" width="30" height="30">
-              <path d="M9 4c0 6 14 8 14 12S9 22 9 28" stroke="#4fd8e8" stroke-width="2.4" fill="none" stroke-linecap="round" />
-              <path d="M23 4c0 6-14 8-14 12s14 8 14 12" stroke="#e85bb0" stroke-width="2.4" fill="none" stroke-linecap="round" />
-            </svg>
-          </span>
-          <span class="brand-text">RNA Fold Lab</span>
+      <div class="shell masthead-inner">
+        <a class="brand" href="#top">
+          <span class="brand-text">RNA<em>Fold</em></span>
         </a>
 
         <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mainnav">
@@ -51,70 +63,93 @@
           <span class="nav-toggle-bar" aria-hidden="true"></span>
         </button>
 
-        <nav class="mainnav" id="mainnav" aria-label="Project sections">
-          <div class="tablist" role="tablist">
-            <button class="tab-button is-active" type="button" role="tab" aria-selected="true" data-tab="lab" id="tab-lab" aria-controls="lab">
-              Fold Lab
-            </button>
-            <button class="tab-button" type="button" role="tab" aria-selected="false" data-tab="data" id="tab-data" aria-controls="data">
-              Guide Data
-            </button>
-            <button class="tab-button" type="button" role="tab" aria-selected="false" data-tab="method" id="tab-method" aria-controls="method">
-              Method
-            </button>
-            <button class="tab-button" type="button" role="tab" aria-selected="false" data-tab="about" id="tab-about" aria-controls="about">
-              About
-            </button>
+        <nav class="mainnav" id="mainnav" aria-label="Sections"><div class="tabstrip" role="tablist" aria-label="Sections">
+          <a class="navlink" href="#lab" data-nav="lab" role="tab" id="tab-lab" aria-controls="lab" aria-selected="true">Fold Lab</a>
+          <a class="navlink" href="#analyzer" data-nav="analyzer" role="tab" id="tab-analyzer" aria-controls="analyzer" aria-selected="false">Analyzer</a>
+          <a class="navlink" href="#designer" data-nav="designer" role="tab" id="tab-designer" aria-controls="designer" aria-selected="false">Designer</a>
+          <a class="navlink" href="#dataset" data-nav="dataset" role="tab" id="tab-dataset" aria-controls="dataset" aria-selected="false">Dataset</a>
+          <a class="navlink" href="#findings" data-nav="findings" role="tab" id="tab-findings" aria-controls="findings" aria-selected="false">Findings</a>
+          <a class="navlink" href="#check" data-nav="check" role="tab" id="tab-check" aria-controls="check" aria-selected="false">Check</a>
+          <a class="navlink" href="#learn" data-nav="learn" role="tab" id="tab-learn" aria-controls="learn" aria-selected="false">Learn</a>
+          <a class="navlink" href="#method" data-nav="method" role="tab" id="tab-method" aria-controls="method" aria-selected="false">Method</a>
+          <a class="navlink" href="#about" data-nav="about" role="tab" id="tab-about" aria-controls="about" aria-selected="false">About</a>
           </div>
-          <button class="cta-pill" type="button" data-tab-link="lab" data-focus-input="true">Fold a sequence</button>
+          <a class="nav-cta" href="https://github.com/kwland/nussinov-zuker-crispr" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.4 7.4 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+            <span>GitHub</span>
+          </a>
         </nav>
       </div>
     </header>
 
-    <section class="hero">
+    <div class="rail rail-left" aria-hidden="true">
+      <span class="rail-word">Nussinov · Zuker · McCaskill</span>
+      <span class="rail-line"></span>
+    </div>
+
+    <nav class="rail rail-right" aria-label="Chapters">
+      <span class="rail-start">Start</span>
+      <a class="chapter-dot is-active" href="#lab" data-nav="lab"><span>01</span></a>
+      <a class="chapter-dot" href="#analyzer" data-nav="analyzer"><span>02</span></a>
+      <a class="chapter-dot" href="#designer" data-nav="designer"><span>03</span></a>
+      <a class="chapter-dot" href="#dataset" data-nav="dataset"><span>04</span></a>
+      <a class="chapter-dot" href="#findings" data-nav="findings"><span>05</span></a>
+      <a class="chapter-dot" href="#check" data-nav="check"><span>06</span></a>
+      <a class="chapter-dot" href="#learn" data-nav="learn"><span>07</span></a>
+      <a class="chapter-dot" href="#method" data-nav="method"><span>08</span></a>
+      <a class="chapter-dot" href="#about" data-nav="about"><span>09</span></a>
+    </nav>
+
+    <!-- ================================================== HERO -->
+    <section class="hero" id="top">
       <canvas id="heroCanvas" aria-hidden="true"></canvas>
       <div class="hero-veil" aria-hidden="true"></div>
-      <div class="wrap hero-content">
-        <h1 class="hero-title">
-          <span class="hero-line-a">RNA Folding</span>
-          <span class="hero-line-b">for CRISPR</span>
-        </h1>
-        <p class="hero-sub">Nussinov &amp; Zuker dynamic programming · Guide RNA seed accessibility</p>
+
+      <div class="shell hero-content">
+        <p class="eyebrow"><span class="eyebrow-dash" aria-hidden="true"></span>Computational biology project</p>
+        <h1 class="hero-title">RNA Folding for CRISPR Guides</h1>
+        <p class="hero-sub">
+          This project asks whether RNA secondary structure helps explain how well a CRISPR guide works.
+          Three folding models are implemented from scratch, then tested against known structures and
+          5,705 measured guides drawn from two independent screens.
+        </p>
+
         <div class="hero-actions">
-          <button class="btn btn-solid" type="button" data-tab-link="lab" data-focus-input="true">Fold a sequence</button>
-          <button class="btn btn-hollow" type="button" data-tab-link="data">View guide data</button>
+          <a class="btn btn-solid" href="#lab">Fold a sequence</a>
+          <a class="btn btn-ghost" href="#findings">Read the findings</a>
         </div>
+
       </div>
-      <div class="hero-curve" aria-hidden="true"></div>
     </section>
 
     <main>
-      <!-- ================================================== FOLD LAB -->
-      <section class="panel is-active" id="lab" data-tab-panel="lab" role="tabpanel" aria-labelledby="tab-lab">
-        <div class="wrap">
-          <div class="section-head">
-            <p class="eyebrow">Interactive tool</p>
-            <h2>Fold Lab</h2>
-            <p class="section-lead">
-              Both algorithms run in your browser — nothing is uploaded. Nussinov maximizes base-pair
-              count; Zuker minimizes free energy. Fold the same sequence with each and see where they
-              disagree.
-            </p>
+      <!-- ================================================== 01 FOLD LAB -->
+      <section class="chapter is-active" id="lab" role="tabpanel" aria-labelledby="tab-lab">
+        <div class="shell">
+          <div class="chapter-head">
+<div class="chapter-intro">
+              <p class="eyebrow"><span class="chapter-num">01</span>Get started</p>
+              <h2>Explore an RNA structure</h2>
+              <p class="lead">
+                The field below takes an RNA sequence and folds it with both models for comparison. DNA
+                input works as well, since T is read as U. All folding happens locally in the browser.
+              </p>
+            </div>
           </div>
 
           <div class="lab-grid">
             <form class="card input-card" id="foldForm">
               <div class="card-head">
                 <div>
-                  <p class="eyebrow">Input</p>
+                  <p class="kicker">Input</p>
                   <h3>Sequence</h3>
                 </div>
-                <span class="status-pill" id="inputStatus">ready</span>
+                <span class="status-pill" id="inputStatus" role="status" aria-live="polite">ready</span>
               </div>
 
               <label class="field-label" for="sequenceInput">RNA or DNA sequence</label>
               <textarea id="sequenceInput" spellcheck="false" rows="4" aria-describedby="errorText">GGGAAACCC</textarea>
-              <p class="field-hint"><span id="charCount">9</span> nt · T is read as U · up to 300 nt</p>
+              <p class="field-hint"><span id="charCount">9</span> letters · T is read as U · up to 300</p>
 
               <fieldset class="model-select">
                 <legend class="field-label">Folding model</legend>
@@ -126,30 +161,30 @@
               </fieldset>
 
               <div class="control-row">
-                <label class="field-label" for="loopLength">Minimum hairpin loop</label>
+                <label class="field-label" for="loopLength">Smallest loop allowed</label>
                 <input id="loopLength" type="range" min="0" max="6" step="1" value="3" />
                 <output id="loopLengthValue" for="loopLength">3</output>
               </div>
-              <p class="field-hint subtle">Applies to Nussinov. Zuker fixes this at 3 to match its loop tables.</p>
+              <p class="field-hint subtle">Nussinov only. Zuker keeps this at 3 to match its loop tables.</p>
 
               <label class="toggle-row">
                 <input id="allowWobble" type="checkbox" checked />
-                <span>Allow G·U wobble pairs</span>
+                <span>Allow G·U pairs</span>
               </label>
 
               <div class="button-row">
-                <button class="btn btn-solid btn-sm" type="submit">Fold</button>
-                <button class="btn btn-ghost btn-sm" type="button" id="clearSequence">Clear</button>
+                <button class="btn btn-solid" type="submit" id="foldButton">Fold</button>
+                <button class="btn btn-ghost" type="button" id="clearSequence">Clear</button>
               </div>
 
               <p class="field-label examples-label">Examples</p>
               <div class="chip-row">
-                <button class="chip" type="button" data-example="GGGAAACCC">Simple hairpin</button>
-                <button class="chip" type="button" data-example="GGGCUAUUAGCUCAGUUGGUUAGAGCGCACCCCUGAUAAGGGUGAGGUCGCUGAUUCGAAUUCAGCAUAGCCCA">tRNA-Phe</button>
-                <button class="chip" type="button" data-example="CTTAAGGGTTAAGTAAGTGT">Random guide</button>
-                <button class="chip" type="button" data-example="GCGCGATACGCGTATCGCGC">Self-pairing guide</button>
-                <button class="chip" type="button" data-example="GACTTTTACGTTAGCATGAA">Poly-T guide</button>
-                <button class="chip" type="button" id="randomGuide">Random 20-mer</button>
+                <button class="chip" type="button" data-example="GGGAAACCC">Hairpin</button>
+                <button class="chip" type="button" data-example="GGGGAAAACCCCUUUUGGGGAAAACCCC">Two stems</button>
+                <button class="chip" type="button" data-example="GCGGAUUUAGCUCAGUUGGGAGAGCGCCAGACUGAAGAUCUGGAGGUCCUGUGUUCGAUCCACAGAAUUCGCACCA">tRNA-Phe</button>
+                <button class="chip" type="button" data-example="GCGCGATACGCGTATCGCGC">Folds up</button>
+                <button class="chip" type="button" data-example="CTTAAGGGTTAAGTAAGTGT">Stays open</button>
+                <button class="chip" type="button" id="randomGuide">Random 20</button>
               </div>
 
               <p class="error-text" id="errorText" role="alert"></p>
@@ -158,7 +193,7 @@
             <div class="card result-card">
               <div class="card-head">
                 <div>
-                  <p class="eyebrow">Output</p>
+                  <p class="kicker">Output</p>
                   <h3>Predicted fold</h3>
                 </div>
                 <button class="btn btn-ghost btn-sm" type="button" id="copyStructure">Copy</button>
@@ -168,27 +203,27 @@
                 <div class="metric">
                   <span class="metric-label">Nussinov pairs</span>
                   <strong id="pairCount">0</strong>
-                  <span class="metric-foot">max base pairs</span>
+                  <span class="metric-foot">most pairs</span>
                 </div>
                 <div class="metric">
-                  <span class="metric-label">Zuker MFE</span>
+                  <span class="metric-label">Zuker energy</span>
                   <strong id="mfeValue">0.0</strong>
                   <span class="metric-foot">kcal/mol</span>
                 </div>
                 <div class="metric">
-                  <span class="metric-label">GC content</span>
+                  <span class="metric-label">G / C</span>
                   <strong id="gcPercent">0%</strong>
-                  <span class="metric-foot">of spacer</span>
+                  <span class="metric-foot">of the strand</span>
                 </div>
                 <div class="metric" id="seedMetric">
                   <span class="metric-label">Seed open</span>
                   <strong id="seedOpen">n/a</strong>
-                  <span class="metric-foot">last 8 nt unpaired</span>
+                  <span class="metric-foot">last 8 free</span>
                 </div>
               </div>
 
               <div class="arc-wrap">
-                <canvas id="rnaCanvas" aria-label="Base-pair arc diagram of the predicted structure"></canvas>
+                <canvas id="rnaCanvas" aria-label="Arc diagram of the predicted structure"></canvas>
               </div>
               <div class="arc-legend" id="arcLegend"></div>
 
@@ -214,29 +249,29 @@
             <div class="card matrix-card">
               <div class="card-head">
                 <div>
-                  <p class="eyebrow">Dynamic programming</p>
-                  <h3 id="matrixTitle">Nussinov score matrix</h3>
+                  <p class="kicker">Dynamic programming</p>
+                  <h3 id="matrixTitle">Nussinov grid</h3>
                 </div>
                 <span class="matrix-hint" id="matrixHover">hover a cell</span>
               </div>
               <div class="matrix-wrap">
-                <canvas id="matrixCanvas" aria-label="Dynamic-programming matrix heatmap"></canvas>
+                <canvas id="matrixCanvas" aria-label="Dynamic programming grid"></canvas>
               </div>
               <div class="matrix-legend">
                 <span>fewer pairs</span>
                 <span class="legend-ramp" aria-hidden="true"></span>
                 <span>more pairs</span>
               </div>
-              <p class="viewer-note">
-                Cell (i, j) holds the best score for the subsequence from i to j. The answer for the whole
-                molecule is the top-right corner — every other cell is a subproblem it was built from.
+              <p class="note">
+                Cell (i, j) holds the best answer for the piece of the strand from i to j. The answer for the
+                whole molecule sits in the gold corner. Every other cell is a smaller piece it was built from.
               </p>
             </div>
 
             <div class="card viewer-card">
               <div class="card-head">
                 <div>
-                  <p class="eyebrow">3D model</p>
+                  <p class="kicker">3D model</p>
                   <h3>Structure viewer</h3>
                 </div>
                 <div class="viewer-controls">
@@ -245,19 +280,19 @@
                 </div>
               </div>
               <div class="viewer-wrap">
-                <canvas id="viewerCanvas" aria-label="Rotatable 3D model of the predicted RNA structure"></canvas>
+                <canvas id="viewerCanvas" aria-label="Rotatable 3D model of the predicted structure"></canvas>
                 <p class="viewer-hint">Drag to rotate · scroll to zoom</p>
               </div>
               <div class="base-legend">
-                <span><i style="background:#5ee6c5"></i>A</span>
-                <span><i style="background:#ffb454"></i>U</span>
-                <span><i style="background:#7aa2ff"></i>G</span>
-                <span><i style="background:#ff6fa5"></i>C</span>
-                <span class="legend-seed"><i></i>seed (last 8 nt)</span>
+                <span><i style="background:#67c39a"></i>A</span>
+                <span><i style="background:#e0a458"></i>U</span>
+                <span><i style="background:#7fa9dc"></i>G</span>
+                <span><i style="background:#d98ba0"></i>C</span>
+                <span class="legend-seed"><i></i>seed (last 8)</span>
               </div>
-              <p class="viewer-note">
-                Schematic layout of the predicted secondary structure, relaxed in 3D. Shows which stems
-                and loops the model predicts — not an atomic tertiary structure.
+              <p class="note">
+                This view arranges the predicted base pairs in three dimensions to make stems and loops easier
+                to inspect. It is a visual aid, not a physical model of the molecule.
               </p>
             </div>
           </div>
@@ -265,101 +300,772 @@
           <div class="card compare-card" id="compareCard">
             <div class="card-head">
               <div>
-                <p class="eyebrow">Model comparison</p>
-                <h3>Where Nussinov and Zuker disagree</h3>
+                <p class="kicker">Model comparison</p>
+                <h3>Where the models agree</h3>
               </div>
-              <span class="status-pill" id="agreementPill">—</span>
+              <span class="status-pill" id="agreementPill" role="status" aria-live="polite">compare</span>
             </div>
             <div class="compare-stats" id="compareStats"></div>
-            <p class="viewer-note" id="compareNote"></p>
+            <p class="note" id="compareNote"></p>
           </div>
         </div>
       </section>
 
-      <!-- ================================================== GUIDE DATA -->
-      <section class="panel band" id="data" data-tab-panel="data" role="tabpanel" aria-labelledby="tab-data" hidden>
-        <div class="wrap">
-          <div class="section-head">
-            <p class="eyebrow">Algorithm application</p>
-            <h2>Guide RNA comparison set</h2>
-            <p class="section-lead">
-              A compact control scaffold: known guides, length-matched random controls, and deliberately
-              bad controls. Every card is folded with the same code running in the Fold Lab.
-            </p>
-          </div>
-
-          <div class="data-toolbar">
-            <div class="segmented small" role="radiogroup" aria-label="Model for guide table">
-              <label><input type="radio" name="dataModel" value="nussinov" checked /><span>Nussinov</span></label>
-              <label><input type="radio" name="dataModel" value="zuker" /><span>Zuker</span></label>
+      <!-- ================================================== 02 ANALYZER -->
+      <section class="chapter" id="analyzer" role="tabpanel" aria-labelledby="tab-analyzer" hidden>
+        <div class="shell">
+          <div class="chapter-head">
+<div class="chapter-intro">
+              <p class="eyebrow"><span class="chapter-num">02</span>Guide analyzer</p>
+              <h2>Analyze a CRISPR guide</h2>
+              <p class="lead">
+                A 20-letter guide spacer can be inspected here for its predicted fold, G/C content, and
+                PAM-proximal seed. The scaffold can be folded along with it, since the two can pair and
+                change the answer.
+              </p>
             </div>
-            <button class="btn btn-ghost btn-sm" type="button" id="downloadCsv">Download CSV</button>
           </div>
 
-          <div class="summary-panel" id="guideSummary"></div>
+          <div class="lab-grid">
+            <form class="card input-card" id="analyzerForm">
+              <div class="card-head">
+                <div>
+                  <p class="kicker">Input</p>
+                  <h3>Guide spacer</h3>
+                </div>
+                <span class="status-pill" id="analyzerStatus" role="status" aria-live="polite">ready</span>
+              </div>
+
+              <label class="field-label" for="spacerInput">Spacer (20 letters)</label>
+              <textarea id="spacerInput" spellcheck="false" rows="2">CTTAAGGGTTAAGTAAGTGT</textarea>
+              <p class="field-hint"><span id="spacerCount">20</span> letters</p>
+
+              <fieldset class="model-select">
+                <legend class="field-label">Folding model</legend>
+                <div class="segmented" role="radiogroup" aria-label="Folding model for the analyzer">
+                  <label><input type="radio" name="analyzerModel" value="zuker" checked /><span>Zuker</span></label>
+                  <label><input type="radio" name="analyzerModel" value="nussinov" /><span>Nussinov</span></label>
+                </div>
+              </fieldset>
+
+              <label class="toggle-row">
+                <input id="withScaffold" type="checkbox" checked />
+                <span>Add the scaffold tail</span>
+              </label>
+              <p class="field-hint subtle">
+                This standard scaffold is the 76-letter tail that binds Cas9. It can pair with the spacer,
+                so including it may change the predicted structure.
+              </p>
+
+              <div class="button-row">
+                <button class="btn btn-solid" type="submit" id="analyzeButton">Analyze</button>
+                <button class="btn btn-ghost" type="button" id="analyzerClear">Clear</button>
+              </div>
+
+              <p class="field-label examples-label">Examples</p>
+              <div class="chip-row">
+                <button class="chip" type="button" data-spacer="CTTAAGGGTTAAGTAAGTGT">More open seed</button>
+                <button class="chip" type="button" data-spacer="GCGCGATACGCGTATCGCGC">More paired seed</button>
+                <button class="chip" type="button" data-spacer="ATTAAATTAAATAAATTAAA">Low G/C</button>
+                <button class="chip" type="button" data-spacer="GACTTTTACGTTAGCATGAA">Has TTTT</button>
+                <button class="chip" type="button" data-spacer="TCCCTGGCCAGGCTTTGGGG">Best from EMX1</button>
+              </div>
+
+              <p class="error-text" id="analyzerError" role="alert"></p>
+            </form>
+
+            <div class="card result-card">
+              <div class="card-head">
+                <div>
+                  <p class="kicker">Structure summary</p>
+                  <h3>Seed check</h3>
+                </div>
+              </div>
+
+              <div class="metric-grid">
+                <div class="metric accent-a">
+                  <span class="metric-label">Seed open</span>
+                  <strong id="seedOpennessValue">0%</strong>
+                  <span class="metric-foot">of the last 8</span>
+                </div>
+                <div class="metric">
+                  <span class="metric-label">G / C</span>
+                  <strong id="analyzerGc">0%</strong>
+                  <span class="metric-foot">of the spacer</span>
+                </div>
+                <div class="metric">
+                  <span class="metric-label">Energy</span>
+                  <strong id="analyzerEnergy">0.0</strong>
+                  <span class="metric-foot">kcal/mol</span>
+                </div>
+                <div class="metric accent-b">
+                  <span class="metric-label">Predicted</span>
+                  <strong id="predEfficiency">n/a</strong>
+                  <span class="metric-foot">editing efficiency</span>
+                </div>
+              </div>
+
+              <div class="arc-wrap">
+                <canvas id="analyzerCanvas" aria-label="Arc diagram of the guide fold, seed bases marked"></canvas>
+              </div>
+              <div class="arc-legend" id="analyzerLegend"></div>
+
+              <div class="dot-output">
+                <div class="dot-row">
+                  <span class="dot-tag">Spacer</span>
+                  <code id="analyzerSpacerSeq"></code>
+                </div>
+                <div class="dot-row">
+                  <span class="dot-tag tag-a">Fold</span>
+                  <code id="analyzerSpacerStruct"></code>
+                </div>
+              </div>
+
+              <p class="interpretation" id="analyzerInterpretation"></p>
+              <div class="warning-list" id="analyzerFlags"></div>
+              <p class="note">
+                Openness counts how many of the eight seed positions are unpaired in this predicted structure.
+                A higher value means a more exposed seed in the model, not a guarantee of stronger editing.
+              </p>
+            </div>
+          </div>
+
+          <div class="card model-note-card">
+            <div class="card-head">
+              <div>
+                <p class="kicker">Ensemble view</p>
+                <h3>Unpaired probability per position</h3>
+              </div>
+              <span class="status-pill" id="ensembleStatus" role="status" aria-live="polite">ready</span>
+            </div>
+
+            <p class="note">
+              The fold above is one structure, so every base is scored either paired or unpaired. A real
+              RNA moves through many structures at once. The McCaskill partition function sums over all of
+              them, weighted by energy, and reports the probability that each base is left unpaired. The
+              two views often disagree, and the difference is largest exactly where a single structure is
+              close to a tie.
+            </p>
+
+            <div class="metric-grid">
+              <div class="metric accent-a">
+                <span class="metric-label">Seed open, ensemble</span>
+                <strong id="ensembleSeed">0%</strong>
+                <span class="metric-foot">mean over the last 8</span>
+              </div>
+              <div class="metric">
+                <span class="metric-label">Seed open, one structure</span>
+                <strong id="ensembleSingle">0%</strong>
+                <span class="metric-foot">for comparison</span>
+              </div>
+              <div class="metric">
+                <span class="metric-label">Spacer open</span>
+                <strong id="ensembleMean">0%</strong>
+                <span class="metric-foot">mean over all 20</span>
+              </div>
+              <div class="metric accent-b">
+                <span class="metric-label">Ensemble energy</span>
+                <strong id="ensembleEnergy">0.0</strong>
+                <span class="metric-foot">kcal/mol</span>
+              </div>
+            </div>
+
+            <div class="arc-wrap">
+              <canvas id="ensembleCanvas" aria-label="Probability that each spacer position is unpaired"></canvas>
+            </div>
+            <div class="arc-legend" id="ensembleLegend"></div>
+            <p class="interpretation" id="ensembleInterpretation"></p>
+          </div>
+
+          <div class="card model-note-card">
+            <div class="card-head">
+              <div>
+                <p class="kicker">Efficiency estimate</p>
+                <h3>About the prediction</h3>
+              </div>
+              <span class="status-pill" id="modelStatus" role="status" aria-live="polite">loading</span>
+            </div>
+            <div class="compare-stats" id="modelStats"></div>
+            <p class="note" id="modelNote"></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================== 03 DESIGNER -->
+      <section class="chapter" id="designer" role="tabpanel" aria-labelledby="tab-designer" hidden>
+        <div class="shell">
+          <div class="chapter-head">
+<div class="chapter-intro">
+              <p class="eyebrow"><span class="chapter-num">03</span>Guide designer</p>
+              <h2>Find guide candidates</h2>
+              <p class="lead">
+                A target DNA sequence yields every 20-letter spacer that sits next to an NGG PAM on either
+                strand. Each candidate is folded together with the scaffold and given a preliminary ranking.
+              </p>
+            </div>
+          </div>
+
+          <div class="designer-grid">
+            <form class="card input-card" id="designerForm">
+              <div class="card-head">
+                <div>
+                  <p class="kicker">Input</p>
+                  <h3>Target DNA</h3>
+                </div>
+                <span class="status-pill" id="designerStatus" role="status" aria-live="polite">ready</span>
+              </div>
+
+              <label class="field-label" for="targetInput">Target sequence</label>
+              <textarea id="targetInput" spellcheck="false" rows="6"></textarea>
+              <p class="field-hint"><span id="targetCount">0</span> bp · up to 5,000</p>
+
+              <div class="button-row">
+                <button class="btn btn-solid" type="submit" id="designerButton">Find guides</button>
+                <button class="btn btn-ghost" type="button" id="designerExample">Load EMX1 example</button>
+                <button class="btn btn-ghost" type="button" id="designerClear">Clear</button>
+              </div>
+              <p class="error-text" id="designerError" role="alert"></p>
+            </form>
+
+            <div class="card">
+              <div class="card-head">
+                <div>
+                  <p class="kicker">Results</p>
+                  <h3>Candidate guides</h3>
+                </div>
+                <button class="btn btn-ghost btn-sm" type="button" id="designerCsv">CSV</button>
+              </div>
+              <div class="compare-stats" id="designerStats"></div>
+              <div class="table-wrap">
+                <table class="data-table" id="designerTable">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Spacer (DNA)</th>
+                      <th>Strand</th>
+                      <th>Pos</th>
+                      <th>G/C</th>
+                      <th>Seed open</th>
+                      <th>Pred. eff</th>
+                      <th>Flags</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody id="designerBody">
+                    <tr>
+                      <td colspan="9" class="table-empty">No target sequence entered yet.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="note">
+                The efficiency score comes from a small exploratory model. Use it to compare candidates, not
+                as a substitute for established design tools or experimental validation.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================== 04 DATASET -->
+      <section class="chapter" id="dataset" role="tabpanel" aria-labelledby="tab-dataset" hidden>
+        <div class="shell">
+          <div class="chapter-head">
+<div class="chapter-intro">
+              <p class="eyebrow"><span class="chapter-num">04</span>Measured guide data</p>
+              <h2>What the guide data shows</h2>
+              <p class="lead">
+                This chapter tests whether guides with a more open predicted seed also show higher measured
+                editing efficiency. Across the pooled dataset, seed openness on its own has almost no
+                relationship with activity.
+              </p>
+            </div>
+          </div>
+
+          <div class="summary-panel" id="datasetStats"></div>
 
           <div class="card chart-card">
             <div class="card-head">
               <div>
-                <p class="eyebrow">Comparison</p>
-                <h3>Seed accessibility by guide group</h3>
+                <p class="kicker">The result</p>
+                <h3>Editing efficiency by seed openness</h3>
               </div>
+              <span class="matrix-hint" id="datasetCount">loading</span>
             </div>
             <div class="chart-wrap">
-              <canvas id="guideChart" aria-label="Chart of seed accessibility and self-pairing by guide"></canvas>
+              <canvas id="datasetChart" aria-label="Mean editing efficiency at each level of seed openness"></canvas>
             </div>
-            <p class="viewer-note">
-              The project hypothesis: guides with an accessible seed should out-perform guides whose seed
-              is locked up in self-structure. With placeholder known-guide rows, this is a scaffold — the
-              comparison only becomes evidence once real spacers and activity labels are filled in.
-            </p>
+            <p class="note" id="datasetFinding"></p>
           </div>
 
-          <div class="data-grid" id="guideCards"></div>
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <p class="kicker">Every guide</p>
+                <h3>The raw table</h3>
+              </div>
+              <button class="btn btn-ghost btn-sm" type="button" id="datasetCsv">CSV</button>
+            </div>
+            <div class="table-wrap tall">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Guide</th>
+                    <th>Gene</th>
+                    <th>G/C</th>
+                    <th>Seed open</th>
+                    <th>Efficiency</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="datasetBody">
+                  <tr>
+                    <td colspan="6" class="table-empty">
+                      <span class="sr-only">Loading the guide dataset</span>
+                      <span class="skeleton-row" aria-hidden="true">
+                        <span class="skeleton skeleton-line" style="width: 100%"></span>
+                        <span class="skeleton skeleton-line" style="width: 88%"></span>
+                        <span class="skeleton skeleton-line" style="width: 94%"></span>
+                        <span class="skeleton skeleton-line" style="width: 76%"></span>
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="note" id="datasetSource"></p>
+          </div>
         </div>
       </section>
 
-      <!-- ================================================== METHOD -->
-      <section class="panel" id="method" data-tab-panel="method" role="tabpanel" aria-labelledby="tab-method" hidden>
-        <div class="wrap">
-          <div class="section-head">
-            <p class="eyebrow">Topic review</p>
-            <h2>How the two models work</h2>
+      <!-- ================================================== 05 FINDINGS -->
+      <section class="chapter" id="findings" role="tabpanel" aria-labelledby="tab-findings" hidden>
+        <div class="shell">
+          <div class="chapter-head">
+<div class="chapter-intro">
+              <p class="eyebrow"><span class="chapter-num">05</span>The study</p>
+              <h2>Four tests of the same idea</h2>
+              <p class="lead">
+                A flat correlation is easy to dismiss. Chapter 04 measured seed openness one way, on one
+                molecule, at one assumed position, and found nothing. Four objections to that result are
+                answered below, each with a different measurement, and both screens are analyzed the same
+                way so that a result appearing in only one of them is visible as such.
+              </p>
+            </div>
           </div>
 
-          <div class="three-col">
-            <article class="card soft">
-              <h3>Biology</h3>
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <p class="kicker">Experiment 01</p>
+                <h3>Five ways to measure accessibility</h3>
+              </div>
+              <span class="status-pill" id="findingsStatus" role="status" aria-live="polite">loading</span>
+            </div>
+            <p class="note">
+              Counting unpaired bases in one predicted structure gives a value that can only be a multiple
+              of one eighth. Across 4,685 guides that produces 9 distinct numbers. The partition function
+              produces 4,668. The table reports the correlation with measured editing efficiency under both
+              instruments, folded both as a bare spacer and as the full sgRNA.
+            </p>
+            <p class="note subtle">
+              Two correlations are given for each measure. The pooled value compares every guide against
+              every other, including guides targeting different genes. The within-gene value compares
+              guides only against others aimed at the same gene, which is the comparison a designer makes.
+              Genes differ widely in how editable they are, so the two can disagree sharply.
+            </p>
+            <div class="table-wrap">
+              <table class="data-table" id="measuresTable">
+                <thead>
+                  <tr>
+                    <th scope="col">Accessibility measure</th>
+                    <th scope="col">Pooled</th>
+                    <th scope="col">Within gene</th>
+                    <th scope="col">95% interval</th>
+                  </tr>
+                </thead>
+                <tbody id="measuresBody">
+                  <tr>
+                    <td colspan="4" class="table-empty">
+                      <span class="sr-only">Loading results</span>
+                      <span class="skeleton-row" aria-hidden="true">
+                        <span class="skeleton skeleton-line" style="width: 100%"></span>
+                        <span class="skeleton skeleton-line" style="width: 88%"></span>
+                        <span class="skeleton skeleton-line" style="width: 94%"></span>
+                        <span class="skeleton skeleton-line" style="width: 76%"></span>
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="interpretation" id="measuresFinding"></p>
+          </div>
+
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <p class="kicker">Experiment 02</p>
+                <h3>Every position, not an assumed window</h3>
+              </div>
+            </div>
+            <p class="note">
+              The seed is conventionally the last eight bases. That is an assumption rather than a
+              measurement. Per-base unpaired probabilities allow the correlation with efficiency to be
+              computed separately at each of the 20 spacer positions, so the assumption can be tested
+              instead of imposed. The shaded band marks the conventional seed.
+            </p>
+            <div class="segmented-wrap">
+              <div class="segmented" role="radiogroup" aria-label="Screen for the position chart">
+                <label><input type="radio" name="positionScreen" value="doench" checked /><span>Human cells</span></label>
+                <label><input type="radio" name="positionScreen" value="crisprscan" /><span>Zebrafish</span></label>
+              </div>
+            </div>
+            <div class="arc-wrap tall">
+              <canvas id="positionCanvas" aria-label="Correlation between unpaired probability and editing efficiency at each spacer position"></canvas>
+            </div>
+            <div class="arc-legend" id="positionLegend"></div>
+            <p class="interpretation" id="positionFinding"></p>
+          </div>
+
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <p class="kicker">Experiment 03</p>
+                <h3>Whether structure adds anything</h3>
+              </div>
+            </div>
+            <p class="note">
+              Whether a feature correlates with activity on its own is the wrong question, because sequence
+              composition already predicts a great deal. The useful question is whether folding adds
+              anything on top. A sequence-only model using position-specific bases, neighbouring pairs, and
+              G/C content sets the baseline. Folding features are then added and the change in accuracy is
+              measured on guides the model never saw, holding out whole genes at a time.
+            </p>
+            <div class="table-wrap">
+              <table class="data-table" id="incrementalTable">
+                <thead>
+                  <tr>
+                    <th scope="col">Screen</th>
+                    <th scope="col">Sequence only</th>
+                    <th scope="col">With folding</th>
+                    <th scope="col">Change</th>
+                    <th scope="col">95% interval</th>
+                  </tr>
+                </thead>
+                <tbody id="incrementalBody">
+                  <tr>
+                    <td colspan="5" class="table-empty">
+                      <span class="sr-only">Loading results</span>
+                      <span class="skeleton-row" aria-hidden="true">
+                        <span class="skeleton skeleton-line" style="width: 100%"></span>
+                        <span class="skeleton skeleton-line" style="width: 88%"></span>
+                        <span class="skeleton skeleton-line" style="width: 94%"></span>
+                        <span class="skeleton skeleton-line" style="width: 76%"></span>
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="interpretation" id="incrementalFinding"></p>
+          </div>
+
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <p class="kicker">Experiment 04</p>
+                <h3>Whether it holds in another laboratory</h3>
+              </div>
+            </div>
+            <p class="note">
+              A result that appears in only the screen it was found in is not a result. Each model is
+              trained on one screen and applied unchanged to another. The two Doench screens share no
+              genes, and CRISPRscan differs in organism, delivery, and readout, so both directions are
+              genuine tests rather than reshuffles of one experiment.
+            </p>
+            <div class="table-wrap">
+              <table class="data-table" id="transferTable">
+                <thead>
+                  <tr>
+                    <th scope="col">Trained on</th>
+                    <th scope="col">Applied to</th>
+                    <th scope="col">Sequence only</th>
+                    <th scope="col">With folding</th>
+                    <th scope="col">Change</th>
+                  </tr>
+                </thead>
+                <tbody id="transferBody">
+                  <tr>
+                    <td colspan="5" class="table-empty">
+                      <span class="sr-only">Loading results</span>
+                      <span class="skeleton-row" aria-hidden="true">
+                        <span class="skeleton skeleton-line" style="width: 100%"></span>
+                        <span class="skeleton skeleton-line" style="width: 88%"></span>
+                        <span class="skeleton skeleton-line" style="width: 94%"></span>
+                        <span class="skeleton skeleton-line" style="width: 76%"></span>
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="interpretation" id="transferFinding"></p>
+          </div>
+
+          <div class="card" id="viennaCard" hidden>
+            <div class="card-head">
+              <div>
+                <p class="kicker">Experiment 05</p>
+                <h3>Checked against a reference implementation</h3>
+              </div>
+              <span class="status-pill" id="viennaValidationStatus" role="status" aria-live="polite">loading</span>
+            </div>
+            <p class="note">
+              The folding code on this site uses the published Watson-Crick stacking
+              energies, but its wobble, loop, and multiloop terms are simplified. Documenting
+              an approximation is not the same as measuring what it costs. Every number above
+              was therefore recomputed with ViennaRNA under the standard Turner parameters.
+              ViennaRNA is the physical reference; the implementation here is the transparent
+              one, verified against exhaustive enumeration and small enough to run in a
+              browser.
+            </p>
+            <div class="table-wrap">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Measure</th>
+                    <th scope="col">Agreement (r)</th>
+                    <th scope="col">This model</th>
+                    <th scope="col">ViennaRNA</th>
+                  </tr>
+                </thead>
+                <tbody id="viennaBody">
+                  <tr>
+                    <td colspan="4" class="table-empty">
+                      <span class="sr-only">Loading results</span>
+                      <span class="skeleton-row" aria-hidden="true">
+                        <span class="skeleton skeleton-line" style="width: 100%"></span>
+                        <span class="skeleton skeleton-line" style="width: 88%"></span>
+                        <span class="skeleton skeleton-line" style="width: 94%"></span>
+                        <span class="skeleton skeleton-line" style="width: 76%"></span>
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="interpretation" id="viennaValidationFinding"></p>
+            <div class="table-wrap">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Temperature and folding context</th>
+                    <th scope="col">Seed accessibility</th>
+                    <th scope="col">Mean unpaired</th>
+                    <th scope="col">Ensemble energy</th>
+                  </tr>
+                </thead>
+                <tbody id="viennaSensitivityBody"></tbody>
+              </table>
+            </div>
+            <p class="note" id="viennaSensitivityFinding"></p>
+          </div>
+
+          <div class="card soft">
+            <div class="card-head">
+              <div>
+                <p class="kicker">Summary</p>
+                <h3>What the five experiments settle</h3>
+              </div>
+            </div>
+            <div class="finding-grid">
+              <div class="finding">
+                <span class="finding-tag">Measurement</span>
+                <p>
+                  The sharper instrument recovers slightly more than the coarse one, in the direction the
+                  hypothesis predicts, but the largest value found anywhere accounts for under half a
+                  percent of the variation in activity.
+                </p>
+              </div>
+              <div class="finding">
+                <span class="finding-tag">Context</span>
+                <p>
+                  Folding a spacer alone and folding it inside the sgRNA give different answers, correlated
+                  at only 0.17. A bare 20-letter spacer has almost no structure to speak of, so the original
+                  premise rested on a quantity that barely varies.
+                </p>
+              </div>
+              <div class="finding">
+                <span class="finding-tag">Position</span>
+                <p>
+                  The two screens place their strongest positions at opposite ends of the spacer. Effects
+                  localized to different places in different experiments are not describing one mechanism.
+                </p>
+              </div>
+              <div class="finding">
+                <span class="finding-tag">Value</span>
+                <p>
+                  In human cells folding adds nothing to a sequence-only model, under either energy model.
+                  In zebrafish it adds a small amount once standard Turner parameters are used, carried by
+                  overall folding stability rather than seed accessibility, running opposite to the
+                  hypothesis, and not transferring to human cells.
+                </p>
+              </div>
+            </div>
+            <p class="note" id="studySource"></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================== 06 CHECK THE MODELS -->
+      <section class="chapter" id="check" role="tabpanel" aria-labelledby="tab-check" hidden>
+        <div class="shell">
+          <div class="chapter-head">
+<div class="chapter-intro">
+              <p class="eyebrow"><span class="chapter-num">06</span>Reference checks</p>
+              <h2>Compare with reference results</h2>
+              <p class="lead">
+                A model is only useful if its output can be checked. This chapter measures the folding
+                models against a small set of known structures and precomputed ViennaRNA results.
+                Agreement is encouraging, though the reference set is deliberately small and reads as a
+                smoke test rather than broad validation.
+              </p>
+            </div>
+          </div>
+
+          <div class="summary-panel" id="checkStats"></div>
+
+          <div class="data-grid" id="checkCards"></div>
+
+          <div class="card chart-card">
+            <div class="card-head">
+              <div>
+                <p class="kicker">Zuker-style model and ViennaRNA</p>
+                <h3>Energy comparison across 30 guides</h3>
+              </div>
+              <span class="matrix-hint" id="viennaCorr">computing</span>
+            </div>
+            <div class="chart-wrap">
+              <canvas id="viennaScatter" aria-label="Scatter plot comparing predicted energy with ViennaRNA"></canvas>
+            </div>
+            <p class="note" id="viennaNote"></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================== 07 LEARN -->
+      <section class="chapter" id="learn" role="tabpanel" aria-labelledby="tab-learn" hidden>
+        <div class="shell">
+          <div class="chapter-head">
+<div class="chapter-intro">
+              <p class="eyebrow"><span class="chapter-num">07</span>Learn</p>
+              <h2>RNA folding, explained</h2>
+              <p class="lead">A short introduction to the biology, the algorithms, and the site.</p>
+            </div>
+          </div>
+
+          <div class="learn-list">
+            <article class="card soft learn-step">
+              <span class="step-num">1</span>
+              <h3>The molecule</h3>
+              <p>RNA is a sequence built from four bases: A, C, G, and U.</p>
+              <p>Complementary bases can pair, causing the strand to form stems, loops, and other structures.</p>
+            </article>
+
+            <article class="card soft learn-step">
+              <span class="step-num">2</span>
+              <h3>Base pairing</h3>
+              <p>A pairs with U, G pairs with C, and G can also form a weaker wobble pair with U.</p>
               <p>
-                RNA is single-stranded, so it folds back and pairs with itself. Stems, loops, and bulges
-                decide how the molecule behaves — including whether a CRISPR guide can reach its DNA
-                target.
+                Pairing between distant positions brings the strand together. The models predict this
+                secondary structure: which bases pair, rather than the full molecular shape.
               </p>
             </article>
-            <article class="card soft">
-              <h3>Computation</h3>
+
+            <article class="card soft learn-step">
+              <span class="step-num">3</span>
+              <h3>Two models, two objectives</h3>
+              <p>A sequence can support many possible folds. The two models choose among them differently:</p>
+              <ul class="tick-list">
+                <li><strong>Nussinov:</strong> maximizes the number of allowed base pairs.</li>
+                <li><strong>Zuker-style:</strong> searches for a lower-energy structure.</li>
+              </ul>
+            </article>
+
+            <article class="card soft learn-step">
+              <span class="step-num">4</span>
+              <h3>The value of two models</h3>
+              <p>The models make different assumptions, so comparing them shows when a result depends on the scoring method.</p>
               <p>
-                Both algorithms are dynamic programming. They solve every short subsequence first, store
-                the answers, and combine them into the answer for the whole molecule. Nothing is
-                recomputed.
+                Agreement can be a useful consistency check, but it is not proof of the true structure. The
+                reference section also compares selected outputs with known structures and ViennaRNA results.
               </p>
             </article>
-            <article class="card soft">
-              <h3>CRISPR</h3>
+
+            <article class="card soft learn-step">
+              <span class="step-num">5</span>
+              <h3>How this connects to CRISPR</h3>
+              <p>CRISPR uses a short piece of RNA, the guide, to find one exact spot in a whole genome of DNA.</p>
+              <p>That guide has to be free to stick to the DNA. The tip that touches first is the seed.</p>
               <p>
-                For SpCas9 the spacer is 20 nt, and the PAM-proximal seed drives target recognition. If
-                that seed is paired inside the guide's own fold, it may be less available to bind DNA.
+                The motivating idea was that folding might hide the seed and weaken targeting. The larger
+                dataset on this page does not show that relationship when seed openness is used alone, so the
+                feature should not be used as a standalone filter.
               </p>
             </article>
+
+            <article class="card soft learn-step">
+              <span class="step-num">6</span>
+              <h3>What this model predicts</h3>
+              <p>This project predicts RNA secondary structure, not an atom-level 3D structure.</p>
+              <p>
+                Secondary structure records which bases pair. Dynamic programming can compute that
+                representation quickly for the sequence lengths used here.
+              </p>
+              <p>
+                The 3D viewer simply lays out the predicted base pairs in space. It should be read as a
+                diagram, not as a molecular structure prediction.
+              </p>
+            </article>
+
+            <article class="card soft learn-step">
+              <span class="step-num">7</span>
+              <h3>What each chapter covers</h3>
+              <ul class="tick-list">
+                <li><strong>Fold Lab:</strong> any strand folded by both models side by side.</li>
+                <li><strong>Analyzer:</strong> one guide, with the seed measured as a single structure and across the ensemble.</li>
+                <li><strong>Designer:</strong> target DNA turned into a ranked list of guide candidates.</li>
+                <li><strong>Dataset:</strong> the open seed idea set against thousands of measured guides.</li>
+                <li><strong>Findings:</strong> the four experiments that test the idea properly.</li>
+                <li><strong>Check:</strong> the models measured against selected reference structures.</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================== 08 METHOD -->
+      <section class="chapter" id="method" role="tabpanel" aria-labelledby="tab-method" hidden>
+        <div class="shell">
+          <div class="chapter-head">
+<div class="chapter-intro">
+              <p class="eyebrow"><span class="chapter-num">08</span>How it works</p>
+              <h2>How the models work</h2>
+              <p class="lead">
+                Both methods use dynamic programming: solve smaller intervals, store those results, and combine
+                them to solve the full sequence. Their main difference is how they score a structure.
+              </p>
+            </div>
           </div>
 
           <div class="model-compare">
             <article class="card model-card">
               <div class="model-head">
                 <span class="model-badge badge-a">Model 1</span>
-                <h3>Nussinov (1978)</h3>
+                <h3>Nussinov, 1978</h3>
               </div>
-              <p class="model-goal">Goal: <strong>maximize the number of base pairs</strong></p>
+              <p class="model-goal">Goal: <strong>the most base pairs</strong></p>
               <div class="recurrence">
                 <span class="rec-lhs">N[i,j] = max</span>
                 <code>N[i+1, j]</code>
@@ -369,18 +1075,18 @@
               </div>
               <ul class="tick-list">
                 <li>Every allowed pair is worth exactly +1</li>
-                <li>O(n³) time, easy to trace by hand</li>
-                <li>Ignores physics — a stack and a lone pair count the same</li>
-                <li>Tends to over-pair, producing unrealistic isolated pairs</li>
+                <li>Runs in O(n<sup>3</sup>) time and is easy to trace by hand</li>
+                <li>Ignores physics, so a stack and a lone pair count the same</li>
+                <li>Over pairs in practice, inventing pairs that would not hold</li>
               </ul>
             </article>
 
             <article class="card model-card">
               <div class="model-head">
                 <span class="model-badge badge-b">Model 2</span>
-                <h3>Zuker (1981)</h3>
+                <h3>Zuker, 1981</h3>
               </div>
-              <p class="model-goal">Goal: <strong>minimize free energy (kcal/mol)</strong></p>
+              <p class="model-goal">Goal: <strong>the lowest free energy</strong></p>
               <div class="recurrence">
                 <span class="rec-lhs">V[i,j] = min</span>
                 <code>eH(i,j) <em>hairpin</em></code>
@@ -389,10 +1095,10 @@
                 <code>WM[i+1,k] + WM[k+1,j-1] + a <em>multiloop</em></code>
               </div>
               <ul class="tick-list">
-                <li>Stacking stabilizes; loops cost energy</li>
-                <li>Uses measured nearest-neighbour thermodynamics</li>
-                <li>Isolated pairs are penalized away naturally</li>
-                <li>This is what ViennaRNA / RNAfold implements</li>
+                <li>Stacking holds the strand together, loops cost energy</li>
+                <li>Uses nearest neighbour energies measured in a lab</li>
+                <li>Lone pairs get penalised away on their own</li>
+                <li>This is the idea behind ViennaRNA and RNAfold</li>
               </ul>
             </article>
           </div>
@@ -400,49 +1106,63 @@
           <div class="card energy-card">
             <div class="card-head">
               <div>
-                <p class="eyebrow">Energy model</p>
-                <h3>Watson-Crick nearest-neighbour stacking</h3>
+                <p class="kicker">Energy model</p>
+                <h3>Nearest-neighbor stacking energies</h3>
               </div>
             </div>
             <p class="card-lead">
-              Zuker's stabilizing term. Each value is the free energy of stacking one pair directly on
-              another, in kcal/mol at 37&nbsp;°C. G·C-rich stacks are the most stabilizing — this is why
-              GC content predicts guide behaviour at all.
+              These values describe the energy of stacking one base pair above another, in kcal/mol at
+              37&nbsp;°C. More negative values are more stabilizing. G/C-rich stacks are often among the
+              strongest.
             </p>
             <div class="stack-table" id="stackTable"></div>
-            <p class="viewer-note">
-              These ten values are the published Turner/Xia nearest-neighbour parameters. G·U wobble
-              stacks, loop initiation, and the multiloop term in this demo are documented simplifications
-              of the Turner rules — good enough to rank structures, not to quote absolute energies.
-              ViennaRNA remains the reference.
+            <p class="note">
+              These ten values come from published Turner and Xia nearest-neighbor parameters. The G·U wobble,
+              loop, and multiloop terms in this project are simplified. Treat the reported energies as
+              approximate rankings; ViennaRNA remains the reference implementation.
             </p>
           </div>
 
           <div class="card honest-card">
-            <h3>What this project does and does not show</h3>
+            <h3>Main results and limitations</h3>
             <div class="honest-grid">
               <div>
-                <p class="honest-tag good">Supported</p>
+                <p class="honest-tag good">What worked</p>
                 <ul>
                   <li>
-                    Both recurrences are implemented in full. On <strong>GGGAAACCC</strong> the Zuker code
-                    returns −1.12 kcal/mol, matching the value derived by hand from the stacking table.
+                    Both recurrences are implemented from scratch. On <strong>GGGAAACCC</strong> the
+                    Zuker-style model returns
+                    −1.12 kcal/mol, the same value obtained by working the stacking table through by hand.
                   </li>
                   <li>
-                    <strong>The tRNA-Phe test:</strong> Zuker recovers the accepted cloverleaf — stems of
-                    7, 4, 5 and 5 bp, about 86% positional agreement with the published structure. Nussinov
-                    over-pairs the same molecule (29 pairs vs 23) and never forms the four-way junction.
-                    Load the tRNA-Phe example in Compare mode to see it.
+                    On three selected reference shapes, the Zuker-style model reaches F1 = 1.00, including
+                    the tRNA cloverleaf. Nussinov misses that branched structure, as a pair-counting model can.
                   </li>
-                  <li>Folding features (self-pairing, seed accessibility, GC) are computed identically for every sequence.</li>
+                  <li>
+                    Against precomputed ViennaRNA results for 30 guides, the energy ranking correlates at
+                    about r = 0.87, while the absolute values remain systematically different.
+                  </li>
                 </ul>
               </div>
               <div>
-                <p class="honest-tag warn">Not yet supported</p>
+                <p class="honest-tag warn">Important limits</p>
                 <ul>
-                  <li>No claim that these features predict guide activity — the known-guide rows are still placeholders.</li>
-                  <li>Absolute kcal/mol will not match ViennaRNA, because loop and wobble terms are simplified.</li>
-                  <li>Real guide activity also depends on chromatin, repair, off-targets, and Cas9/tracrRNA effects.</li>
+                  <li>
+                    Seed openness does not predict editing efficiency in the pooled dataset
+                    (Spearman ρ ≈ 0.01). Chapters 04 and 05 show the result.
+                  </li>
+                  <li>
+                    The reported energies do not match ViennaRNA exactly because the loop and wobble terms are
+                    simplified. They are systematically less negative.
+                  </li>
+                  <li>
+                    Real editing also depends on chromatin, repair, target context, off-target effects, and
+                    Cas9 behavior. None of those factors is modeled here.
+                  </li>
+                  <li>
+                    The models exclude pseudoknots, folding kinetics, alternative conformations, tertiary
+                    interactions, and RNA-protein binding. The 3D view is a schematic, not a molecular model.
+                  </li>
                 </ul>
               </div>
             </div>
@@ -450,67 +1170,59 @@
         </div>
       </section>
 
-      <!-- ================================================== ABOUT -->
-      <section class="panel band" id="about" data-tab-panel="about" role="tabpanel" aria-labelledby="tab-about" hidden>
-        <div class="wrap">
-          <div class="section-head">
-            <p class="eyebrow">Project</p>
-            <h2>About this work</h2>
-          </div>
-
-          <div class="timeline">
-            <article class="card soft">
-              <span class="step-num">01</span>
-              <h3>Research</h3>
-              <p>Nussinov as a base-pair-count model, Zuker/ViennaRNA as energy-based folding, and CRISPR guide design as the application.</p>
-            </article>
-            <article class="card soft">
-              <span class="step-num">02</span>
-              <h3>Build</h3>
-              <p>Written from scratch, no folding libraries: Nussinov in Python (<code>nussinov.py</code>), and both Nussinov and Zuker in the JavaScript running this page.</p>
-            </article>
-            <article class="card soft">
-              <span class="step-num">03</span>
-              <h3>Apply</h3>
-              <p>Fold guide spacers, extract seed accessibility and self-pairing, and compare known guides against random and bad controls.</p>
-            </article>
-            <article class="card soft">
-              <span class="step-num">04</span>
-              <h3>Communicate</h3>
-              <p>Make the algorithm visible: sequence in, DP matrix and 3D structure out, with the model's limits stated plainly.</p>
-            </article>
+      <!-- ================================================== 09 ABOUT -->
+      <section class="chapter" id="about" role="tabpanel" aria-labelledby="tab-about" hidden>
+        <div class="shell">
+          <div class="chapter-head">
+<div class="chapter-intro">
+              <p class="eyebrow"><span class="chapter-num">09</span>Project background</p>
+              <h2>About the project</h2>
+              <p class="lead">
+                Linus Tan built the folding algorithms and this interface in order to follow every step from
+                the recurrence to the result, then tested the idea against published guide-activity
+                measurements to establish where it holds up and where it does not.
+              </p>
+            </div>
           </div>
 
           <div class="about-grid">
             <div class="card soft">
-              <h3>Team</h3>
+              <h3>What this project contains</h3>
               <ul class="team-list">
-                <li><strong>Thomas Yu</strong> — Nussinov and Zuker recurrences, how they translate into code</li>
-                <li><strong>Linus Tan</strong> — Python implementation, CRISPR guide features, this site</li>
-                <li><strong>Henry Zhang</strong> — ViennaRNA/RNAfold comparison methodology</li>
-                <li><strong>Brady Lambert</strong> — CRISPR application, control design rationale</li>
+                <li><strong>Folding algorithms</strong> · Nussinov base-pair maximization, Zuker minimum free energy, and the McCaskill partition function, in both Python and JavaScript.</li>
+                <li><strong>Ensemble accessibility</strong> · base-pair probabilities from the inside and outside recursions, checked against exhaustive enumeration of every structure for short sequences.</li>
+                <li><strong>The study</strong> · folding features for 5,705 measured guides across two screens, a sequence-only baseline, and cross-validation that holds out whole genes.</li>
+                <li><strong>This site</strong> · the guide tools, arc diagrams, dynamic-programming grids, 3D view, and accuracy scoring.</li>
               </ul>
             </div>
             <div class="card soft">
-              <h3>Next step</h3>
+              <h3>Where the data comes from</h3>
               <p>
-                Replace the two known-guide placeholders with exact 20-nt spacers carrying measured
-                activity from Doench 2016 (Rule Set 2), then test whether seed accessibility separates
-                high- from low-activity guides. Until then the comparison set is a scaffold, not a result.
+                Guide activity is from Doench et al. 2014 and 2016, pooled through
+                <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1012-2" rel="noopener">CRISPOR</a>,
+                and from
+                <a href="https://www.nature.com/articles/nmeth.3543" rel="noopener">CRISPRscan</a>
+                (Moreno-Mateos et al. 2015) for the zebrafish replication. Every accessibility value, energy,
+                and model weight on this page is computed by this project's own code. The ViennaRNA
+                comparison values in chapter 06 are output of the
+                <a href="https://www.tbi.univie.ac.at/RNA/" rel="noopener">ViennaRNA package</a>,
+                precomputed because it does not run in a browser.
               </p>
             </div>
           </div>
 
           <div class="ref-block">
-            <h3>References</h3>
+            <h3>Reading list</h3>
             <div class="ref-row">
               <a href="https://www.pnas.org/doi/10.1073/pnas.77.11.6309" rel="noopener">Nussinov &amp; Jacobson 1980</a>
               <a href="https://academic.oup.com/nar/article-lookup/doi/10.1093/nar/9.1.133" rel="noopener">Zuker &amp; Stiegler 1981</a>
-              <a href="https://pubs.acs.org/doi/10.1021/bi9809425" rel="noopener">Xia et al. 1998 (NN parameters)</a>
+              <a href="https://pubs.acs.org/doi/10.1021/bi9809425" rel="noopener">Xia et al. 1998</a>
               <a href="https://www.tbi.univie.ac.at/RNA/" rel="noopener">ViennaRNA</a>
               <a href="https://www.nature.com/articles/nbt.3437" rel="noopener">Doench et al. 2016</a>
-              <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-015-0784-0" rel="noopener">WU-CRISPR 2015</a>
-              <a href="https://www.nature.com/articles/nmeth.3543" rel="noopener">CRISPRscan 2015</a>
+              <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1012-2" rel="noopener">CRISPOR / Haeussler 2016</a>
+              <a href="https://www.nature.com/articles/nmeth.3543" rel="noopener">CRISPRscan / Moreno-Mateos 2015</a>
+              <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4629399/" rel="noopener">WU-CRISPR / Wong 2015</a>
+              <a href="https://www.nature.com/articles/s41467-022-28137-7" rel="noopener">Riesenberg et al. 2022</a>
             </div>
           </div>
         </div>
@@ -518,20 +1230,55 @@
     </main>
 
     <footer>
-      <div class="wrap footer-inner">
-        <div>
-          <p class="footer-brand">RNA Fold Lab</p>
-          <p class="footer-note">Thomas Yu · Linus Tan · Henry Zhang · Brady Lambert</p>
+      <div class="shell footer-inner">
+        <div class="footer-brand-col">
+          <p class="footer-brand">RNA<em>Fold</em></p>
+          <p class="footer-note">
+            A Pre-College computational biology project. Every fold on this page is computed in your
+            browser from this project&rsquo;s own code. No sequence you enter is sent anywhere.
+          </p>
         </div>
-        <p class="footer-note">
-          Static site · algorithms run client-side · no data leaves your browser
-        </p>
+        <div class="footer-col">
+          <p class="footer-head">Papers</p>
+          <a href="https://www.pnas.org/doi/10.1073/pnas.77.11.6309" target="_blank" rel="noopener noreferrer">Nussinov 1980</a>
+          <a href="https://academic.oup.com/nar/article-lookup/doi/10.1093/nar/9.1.133" target="_blank" rel="noopener noreferrer">Zuker 1981</a>
+          <a href="https://pubs.acs.org/doi/10.1021/bi9809425" target="_blank" rel="noopener noreferrer">Xia 1998</a>
+          <a href="https://www.tbi.univie.ac.at/RNA/" target="_blank" rel="noopener noreferrer">ViennaRNA</a>
+        </div>
+        <div class="footer-col">
+          <p class="footer-head">Data</p>
+          <a href="https://www.nature.com/articles/nbt.3437" target="_blank" rel="noopener noreferrer">Doench 2016</a>
+          <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1012-2" target="_blank" rel="noopener noreferrer">CRISPOR</a>
+          <a href="https://www.nature.com/articles/nmeth.3543" target="_blank" rel="noopener noreferrer">CRISPRscan</a>
+          <a href="https://github.com/kwland/nussinov-zuker-crispr" target="_blank" rel="noopener noreferrer">Source code</a>
+        </div>
+        <div class="footer-col">
+          <p class="footer-head">Sections</p>
+          <a href="#lab">Fold Lab</a>
+          <a href="#findings">Findings</a>
+          <a href="#method">How it works</a>
+          <a href="#about">About</a>
+        </div>
+      </div>
+
+      <div class="shell footer-base">
+        <span>&copy; 2026 Linus Tan &middot; Code released under the MIT licence</span>
+        <div class="footer-social">
+          <a href="https://github.com/kwland/nussinov-zuker-crispr" target="_blank" rel="noopener noreferrer" aria-label="Project source on GitHub">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.4 7.4 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+          </a>
+        </div>
       </div>
     </footer>
 
-    <script src="js/rna-fold.js"></script>
-    <script src="js/viewer3d.js"></script>
-    <script src="js/hero.js"></script>
-    <script src="js/app.js"></script>
+    <script src="js/rna-fold.js?v=9011580f"></script>
+    <script src="js/guide-tools.js?v=caed3b4a"></script>
+    <script src="js/viewer3d.js?v=6f1cb960"></script>
+    <script src="js/hero.js?v=3a8e069e"></script>
+    <!-- app.js defines window.FoldUI, which chapters.js captures at parse time,
+         so app.js must come first. app.js then calls Chapters.init() on
+         DOMContentLoaded, by which point both have loaded. -->
+    <script src="js/app.js?v=763b52de"></script>
+    <script src="js/chapters.js?v=7249c54c"></script>
   </body>
 </html>
