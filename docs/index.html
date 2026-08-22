@@ -45,7 +45,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=3677de2f" />
+    <link rel="stylesheet" href="styles.css?v=15b220cb" />
   </head>
   <body>
     <a class="skip-link" href="#lab">Skip to the Fold Lab</a>
@@ -54,7 +54,7 @@
 
     <header class="masthead">
       <div class="shell masthead-inner">
-        <a class="brand" href="#top">
+        <a class="brand" href="#home">
           <span class="brand-text">RNA<em>Fold</em></span>
         </a>
 
@@ -64,7 +64,8 @@
         </button>
 
         <nav class="mainnav" id="mainnav" aria-label="Sections"><div class="tabstrip" role="tablist" aria-label="Sections">
-          <a class="navlink" href="#lab" data-nav="lab" role="tab" id="tab-lab" aria-controls="lab" aria-selected="true">Fold Lab</a>
+          <a class="navlink" href="#home" data-nav="home" role="tab" id="tab-home" aria-controls="home" aria-selected="true">Home</a>
+          <a class="navlink" href="#lab" data-nav="lab" role="tab" id="tab-lab" aria-controls="lab" aria-selected="false">Fold Lab</a>
           <a class="navlink" href="#analyzer" data-nav="analyzer" role="tab" id="tab-analyzer" aria-controls="analyzer" aria-selected="false">Analyzer</a>
           <a class="navlink" href="#designer" data-nav="designer" role="tab" id="tab-designer" aria-controls="designer" aria-selected="false">Designer</a>
           <a class="navlink" href="#dataset" data-nav="dataset" role="tab" id="tab-dataset" aria-controls="dataset" aria-selected="false">Dataset</a>
@@ -101,30 +102,30 @@
     </nav>
 
     <!-- ================================================== HERO -->
-    <section class="hero" id="top">
-      <canvas id="heroCanvas" aria-hidden="true"></canvas>
-      <div class="hero-veil" aria-hidden="true"></div>
-
-      <div class="shell hero-content">
-        <p class="eyebrow"><span class="eyebrow-dash" aria-hidden="true"></span>Computational biology project</p>
-        <h1 class="hero-title">RNA Folding for CRISPR Guides</h1>
-        <p class="hero-sub">
-          This project asks whether RNA secondary structure helps explain how well a CRISPR guide works.
-          Three folding models are implemented from scratch, then tested against known structures and
-          5,705 measured guides drawn from two independent screens.
-        </p>
-
-        <div class="hero-actions">
-          <a class="btn btn-solid" href="#lab">Fold a sequence</a>
-          <a class="btn btn-ghost" href="#findings">Read the findings</a>
-        </div>
-
-      </div>
-    </section>
-
     <main>
+      <section class="chapter hero is-active" id="home" role="tabpanel" aria-labelledby="tab-home">
+        <canvas id="heroCanvas" aria-hidden="true"></canvas>
+        <div class="hero-veil" aria-hidden="true"></div>
+
+        <div class="shell hero-content">
+          <p class="eyebrow"><span class="eyebrow-dash" aria-hidden="true"></span>Computational biology project</p>
+          <h1 class="hero-title">RNA Folding for CRISPR Guides</h1>
+          <p class="hero-sub">
+            This project asks whether RNA secondary structure helps explain how well a CRISPR guide works.
+            Three folding models are implemented from scratch, then tested against known structures and
+            5,705 measured guides drawn from two independent screens.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-solid" href="#lab">Fold a sequence</a>
+            <a class="btn btn-ghost" href="#findings">Read the findings</a>
+          </div>
+
+        </div>
+        </section>
+
       <!-- ================================================== 01 FOLD LAB -->
-      <section class="chapter is-active" id="lab" role="tabpanel" aria-labelledby="tab-lab">
+      <section class="chapter" id="lab" role="tabpanel" aria-labelledby="tab-lab" hidden>
         <div class="shell">
           <div class="chapter-head">
 <div class="chapter-intro">
@@ -1278,7 +1279,7 @@
     <!-- app.js defines window.FoldUI, which chapters.js captures at parse time,
          so app.js must come first. app.js then calls Chapters.init() on
          DOMContentLoaded, by which point both have loaded. -->
-    <script src="js/app.js?v=763b52de"></script>
+    <script src="js/app.js?v=a2d611c9"></script>
     <script src="js/chapters.js?v=7249c54c"></script>
   </body>
 </html>

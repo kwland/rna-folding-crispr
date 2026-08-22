@@ -237,8 +237,32 @@ main {
   padding-block: var(--sp-16) var(--sp-24);
   scroll-margin-top: var(--header-h);
 }
+
+/* Panels now sit directly beneath the fixed header, so they need to clear
+   it themselves. The hero is exempt because its own content block already
+   offsets by the header height. */
+.chapter:not(.hero) {
+  padding-top: calc(var(--header-h) + var(--sp-10));
+}
 .chapter.is-active {
   display: block;
+}
+
+/* The hero is its own tab and lays out with flex, so it overrides the
+   block display every other panel uses. Full height, because nothing
+   else shares the view with it any more. */
+.chapter.hero {
+  padding-block: 0;
+}
+.chapter.hero.is-active {
+  display: flex;
+}
+
+/* Hiding a panel has to beat any display set by its own component rule.
+   .chapter is a single class, so a later single-class rule such as .hero
+   would otherwise win and the panel would keep its box on every tab. */
+.chapter[hidden] {
+  display: none;
 }
 
 .chapter + .chapter {
@@ -599,12 +623,11 @@ main {
 
 .hero {
   position: relative;
-  min-height: min(46svh, 380px);
+  min-height: min(76svh, 660px);
   display: flex;
   align-items: center;
   overflow: hidden;
   isolation: isolate;
-  border-bottom: 1px solid var(--border-soft);
 }
 
 #heroCanvas {

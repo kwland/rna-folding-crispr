@@ -24,10 +24,11 @@
 
   var BASE_COLORS = { A: "#67c39a", U: "#e0a458", G: "#7fa9dc", C: "#d98ba0" };
 
-  var CHAPTERS = ["lab", "analyzer", "designer", "dataset", "findings", "check", "learn", "method", "about"];
+  var CHAPTERS = ["home", "lab", "analyzer", "designer", "dataset", "findings", "check", "learn", "method", "about"];
 
   var state = { model: "both", nussinov: null, zuker: null, matrixCells: null };
   var viewer = null;
+  var hero = null;
   var foldTimer = null;
 
   // ------------------------------------------------------- shared helpers
@@ -420,6 +421,7 @@
   /* Repaint whatever charts live in the panel that just appeared. */
   function redrawPanel(id) {
     requestAnimationFrame(function () {
+      if (id === "home" && hero) hero.resize();
       if (id === "lab") {
         drawArcs();
         drawMatrix();
@@ -1032,7 +1034,7 @@
   }
 
   function init() {
-    Hero.create($("#heroCanvas"));
+    hero = Hero.create($("#heroCanvas"));
     viewer = Viewer3D.create($("#viewerCanvas"));
 
     bindEvents();
