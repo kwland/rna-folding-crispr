@@ -1,10 +1,10 @@
 # RNA folding for CRISPR guide exploration
 
-[![tests](https://github.com/kwland/nussinov-zuker-crispr/actions/workflows/tests.yml/badge.svg)](https://github.com/kwland/nussinov-zuker-crispr/actions/workflows/tests.yml)
+[![tests](https://github.com/kwland/rna-folding-crispr/actions/workflows/tests.yml/badge.svg)](https://github.com/kwland/rna-folding-crispr/actions/workflows/tests.yml)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-2f7d62)](https://www.python.org/)
 [![MIT License](https://img.shields.io/badge/license-MIT-d6a84a)](LICENSE)
 
-**Live interactive demo:** <https://kwland.github.io/nussinov-zuker-crispr/>
+**Live interactive demo:** <https://kwland.github.io/rna-folding-crispr/>
 
 If a CRISPR guide RNA folds back on itself, does that make its targeting sequence less available to bind DNA?
 
@@ -161,8 +161,8 @@ folders agree to the last decimal on the same sequences.
 Python 3.10 or newer. No dependencies.
 
 ```bash
-git clone https://github.com/kwland/nussinov-zuker-crispr.git
-cd nussinov-zuker-crispr
+git clone https://github.com/kwland/rna-folding-crispr.git
+cd rna-folding-crispr
 python nussinov.py --sequence GGGAAACCC
 ```
 

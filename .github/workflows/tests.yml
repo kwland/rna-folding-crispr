@@ -1,0 +1,30 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Run unit and integration tests
+        run: python -m unittest discover -v
+      - name: Exercise the documented examples
+        run: |
+          python nussinov.py --fasta examples/sequences.fasta
+          python crispr_nussinov_analysis.py --input examples/guides.csv --output /tmp/guide_features.csv
+          python crispr_nussinov_analysis.py --input examples/guides.csv --context sgrna --output /tmp/guide_features_sgrna.csv
+      - name: Fold a small slice of a real screen end to end
+        run: |
+          python compute_features.py --dataset crisprscan --limit 24 --workers 2 --output /tmp/features_slice.csv

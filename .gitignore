@@ -6,6 +6,9 @@ __pycache__/
 venv/
 env/
 
+# Local tooling config (machine-specific paths)
+.claude/
+
 # OS / editor
 .DS_Store
 Thumbs.db
