@@ -1,0 +1,42 @@
+<!doctype html>
+<!--
+  Root redirect.
+
+  GitHub Pages serves this repository from the root, while the site itself
+  lives in docs/. Without a root index.html, Pages falls back to rendering
+  README.md through Jekyll, which is what a visitor would otherwise see.
+
+  To retire this file: set Settings > Pages > source folder to /docs, then
+  delete this file and the sibling .nojekyll. The site then serves from
+  kwland.github.io/rna-folding-crispr/ with no redirect hop.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>RNA Fold Lab</title>
+    <link rel="canonical" href="https://kwland.github.io/rna-folding-crispr/docs/" />
+    <meta http-equiv="refresh" content="0; url=./docs/" />
+    <meta name="robots" content="noindex" />
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background: #10161c;
+        color: #eef3f7;
+        font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      }
+      a {
+        color: #58c4d4;
+      }
+    </style>
+  </head>
+  <body>
+    <p>Opening the RNA Fold Lab. <a href="./docs/">Continue if this does not redirect.</a></p>
+    <script>
+      location.replace("./docs/" + location.hash);
+    </script>
+  </body>
+</html>
